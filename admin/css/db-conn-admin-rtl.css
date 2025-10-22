@@ -7,6 +7,15 @@
  * @subpackage Db_Conn/admin/css
  */
 
+/* Import Vazir font from Google Fonts for Persian text */
+@import url('https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;600;700&display=swap');
+
+/* Apply Vazir font to RTL interface */
+.rtl .db-conn-settings,
+.rtl .db-conn-settings * {
+  font-family: 'Vazirmatn', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen-Sans, Ubuntu, Cantarell, 'Helvetica Neue', sans-serif;
+}
+
 /* RTL Navigation Tabs */
 .rtl .db-conn-settings .nav-tab-wrapper {
   text-align: right;
@@ -47,11 +56,6 @@
 
 .rtl .db-conn-settings .form-table td {
   text-align: right;
-}
-
-/* RTL Submit Button */
-.rtl .db-conn-settings .submit {
-  text-align: left;
 }
 
 /* RTL Tab Content */
