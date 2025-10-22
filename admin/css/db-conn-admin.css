@@ -2,3 +2,29 @@
  * All of the CSS for your admin-specific functionality should be
  * included in this file.
  */
+
+/* Database Connector Settings Page Styles */
+.db-conn-settings .nav-tab-wrapper {
+	margin-bottom: 20px;
+}
+
+.db-conn-settings .tab-content {
+	background: #fff;
+	padding: 20px;
+	border: 1px solid #ccd0d4;
+	border-top: none;
+	box-shadow: 0 1px 1px rgba(0,0,0,.04);
+}
+
+.db-conn-settings .form-table th {
+	width: 200px;
+}
+
+.db-conn-settings .regular-text {
+	width: 350px;
+}
+
+.db-conn-settings .description {
+	margin-top: 5px;
+	color: #666;
+}

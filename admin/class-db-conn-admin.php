@@ -20,7 +20,8 @@
  * @subpackage Db_Conn/admin
  * @author     Majid Barkhordari <info@arsamnet.com>
  */
-class Db_Conn_Admin {
+class Db_Conn_Admin
+{
 
 	/**
 	 * The ID of this plugin.
@@ -41,17 +42,67 @@ class Db_Conn_Admin {
 	private $version;
 
 	/**
+	 * The settings instance.
+	 *
+	 * @since    1.0.0
+	 * @access   private
+	 * @var      Db_Conn_Settings    $settings    The settings instance.
+	 */
+	private $settings;
+
+	/**
 	 * Initialize the class and set its properties.
 	 *
 	 * @since    1.0.0
 	 * @param      string    $plugin_name       The name of this plugin.
 	 * @param      string    $version    The version of this plugin.
 	 */
-	public function __construct( $plugin_name, $version ) {
+	public function __construct($plugin_name, $version)
+	{
 
 		$this->plugin_name = $plugin_name;
 		$this->version = $version;
 
+		// Load the settings class
+		$this->load_settings_class();
+	}
+
+	/**
+	 * Load the settings class.
+	 *
+	 * @since    1.0.0
+	 * @access   private
+	 */
+	private function load_settings_class()
+	{
+
+		/**
+		 * The class responsible for defining the settings functionality
+		 * of the plugin.
+		 */
+		require_once plugin_dir_path(dirname(__FILE__)) . 'admin/class-db-conn-settings.php';
+
+		$this->settings = new Db_Conn_Settings($this->plugin_name, $this->version);
+	}
+
+	/**
+	 * Add the settings menu page.
+	 *
+	 * @since    1.0.0
+	 */
+	public function add_plugin_admin_menu()
+	{
+		$this->settings->add_settings_page();
+	}
+
+	/**
+	 * Register plugin settings.
+	 *
+	 * @since    1.0.0
+	 */
+	public function register_plugin_settings()
+	{
+		$this->settings->register_settings();
 	}
 
 	/**
@@ -59,7 +110,8 @@ class Db_Conn_Admin {
 	 *
 	 * @since    1.0.0
 	 */
-	public function enqueue_styles() {
+	public function enqueue_styles()
+	{
 
 		/**
 		 * This function is provided for demonstration purposes only.
@@ -73,8 +125,7 @@ class Db_Conn_Admin {
 		 * class.
 		 */
 
-		wp_enqueue_style( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'css/db-conn-admin.css', array(), $this->version, 'all' );
-
+		wp_enqueue_style($this->plugin_name, plugin_dir_url(__FILE__) . 'css/db-conn-admin.css', array(), $this->version, 'all');
 	}
 
 	/**
@@ -82,7 +133,8 @@ class Db_Conn_Admin {
 	 *
 	 * @since    1.0.0
 	 */
-	public function enqueue_scripts() {
+	public function enqueue_scripts()
+	{
 
 		/**
 		 * This function is provided for demonstration purposes only.
@@ -96,8 +148,6 @@ class Db_Conn_Admin {
 		 * class.
 		 */
 
-		wp_enqueue_script( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'js/db-conn-admin.js', array( 'jquery' ), $this->version, false );
-
+		wp_enqueue_script($this->plugin_name, plugin_dir_url(__FILE__) . 'js/db-conn-admin.js', array('jquery'), $this->version, false);
 	}
-
 }

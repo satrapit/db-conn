@@ -26,6 +26,25 @@
  */
 
 // If uninstall not called from WordPress, then exit.
-if ( ! defined( 'WP_UNINSTALL_PLUGIN' ) ) {
+if (! defined('WP_UNINSTALL_PLUGIN')) {
 	exit;
 }
+
+/**
+ * Plugin uninstall handler.
+ *
+ * NOTE: This plugin intentionally preserves all user settings and data
+ * even after uninstallation. This ensures that if users reinstall the
+ * plugin in the future, their configurations will be retained.
+ *
+ * The following data is preserved:
+ * - Plugin settings (db_conn_plugin_options)
+ * - User configurations
+ * - Custom slugs and preferences
+ *
+ * This approach provides a better user experience and follows the principle
+ * of data preservation for user-generated content and configurations.
+ */
+
+// Log uninstall event for debugging purposes
+error_log('Database Connector: Plugin uninstalled. User settings preserved for future use.');
