@@ -1,0 +1,29 @@
+{
+  "php.validate.enable": true,
+  "php.validate.run": "onType",
+  "php.problems.exclude": {
+    "**/class-db-conn-twig.php": true
+  },
+  "files.exclude": {
+    "**/.git": true,
+    "**/.DS_Store": true,
+    "**/Thumbs.db": true
+  },
+  "editor.tabSize": 2,
+  "editor.insertSpaces": false,
+  "files.trimTrailingWhitespace": true,
+  "files.insertFinalNewline": true,
+  "[php]": {
+    "editor.defaultFormatter": "bmewburn.vscode-intelephense-client"
+  },
+  "intelephense.diagnostics.undefinedTypes": false,
+  "intelephense.diagnostics.undefinedFunctions": false,
+  "intelephense.diagnostics.undefinedConstants": false,
+  "intelephense.diagnostics.undefinedClassConstants": false,
+  "intelephense.diagnostics.undefinedMethods": false,
+  "intelephense.diagnostics.undefinedProperties": false,
+  "intelephense.diagnostics.implementationErrors": false,
+  "intelephense.diagnostics.typeErrors": false,
+  "php.suggest.basic": false,
+  "intelephense.diagnostics.argumentCount": false
+}

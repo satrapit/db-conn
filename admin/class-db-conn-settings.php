@@ -108,20 +108,20 @@ class Db_Conn_Settings
       'db-conn-slug'
     );
 
-    // Login slug field
+    // Sign-in slug field
     add_settings_field(
-      'login_slug',
-      __('Login Page Slug', 'db-conn'),
-      array($this, 'login_slug_callback'),
+      'signin_slug',
+      __('Sign In Page Slug', 'db-conn'),
+      array($this, 'signin_slug_callback'),
       'db-conn-slug',
       'db_conn_slug_section'
     );
 
     // Dashboard slug field
     add_settings_field(
-      'dashboard_slug',
-      __('Dashboard Page Slug', 'db-conn'),
-      array($this, 'dashboard_slug_callback'),
+      'panel_slug',
+      __('Panel Page Slug', 'db-conn'),
+      array($this, 'panel_slug_callback'),
       'db-conn-slug',
       'db_conn_slug_section'
     );
@@ -142,11 +142,12 @@ class Db_Conn_Settings
       <h1><?php echo esc_html(get_admin_page_title()); ?></h1>
 
       <nav class="nav-tab-wrapper">
-        <a href="?page=db-conn-settings&tab=general" class="nav-tab <?php echo $tab === 'general' ? 'nav-tab-active' : ''; ?>">
+        <a href="?page=db-conn-settings&tab=general"
+          class="nav-tab <?php echo $tab === 'general' ? 'nav-tab-active' : ''; ?>">
           <?php _e('General', 'db-conn'); ?>
         </a>
         <a href="?page=db-conn-settings&tab=slug" class="nav-tab <?php echo $tab === 'slug' ? 'nav-tab-active' : ''; ?>">
-          <?php _e('Slug', 'db-conn'); ?>
+          <?php _e('Page slugs', 'db-conn'); ?>
         </a>
       </nav>
 
@@ -226,32 +227,33 @@ class Db_Conn_Settings
   }
 
   /**
-   * Login slug field callback.
+   * Sign-in slug field callback.
    *
    * @since    1.0.0
    */
-  public function login_slug_callback()
+  public function signin_slug_callback()
   {
     $options = get_option($this->option_name, array());
-    $value = isset($options['login_slug']) ? $options['login_slug'] : 'login';
+    $value = isset($options['signin_slug']) ? $options['signin_slug'] : 'signin';
   ?>
-    <input type="text" id="login_slug" name="<?php echo $this->option_name; ?>[login_slug]" value="<?php echo esc_attr($value); ?>" class="regular-text" />
-    <p class="description"><?php _e('Enter the custom slug for the login page.', 'db-conn'); ?></p>
+    <input type="text" id="signin_slug" name="<?php echo $this->option_name; ?>[signin_slug]"
+      value="<?php echo esc_attr($value); ?>" class="regular-text" />
+    <p class="description"><?php _e('Enter the custom slug for the sign in page.', 'db-conn'); ?></p>
   <?php
   }
-
   /**
    * Dashboard slug field callback.
    *
    * @since    1.0.0
    */
-  public function dashboard_slug_callback()
+  public function panel_slug_callback()
   {
     $options = get_option($this->option_name, array());
-    $value = isset($options['dashboard_slug']) ? $options['dashboard_slug'] : 'dashboard';
+    $value = isset($options['panel_slug']) ? $options['panel_slug'] : 'panel';
   ?>
-    <input type="text" id="dashboard_slug" name="<?php echo $this->option_name; ?>[dashboard_slug]" value="<?php echo esc_attr($value); ?>" class="regular-text" />
-    <p class="description"><?php _e('Enter the custom slug for the dashboard page.', 'db-conn'); ?></p>
+    <input type="text" id="panel_slug" name="<?php echo $this->option_name; ?>[panel_slug]"
+      value="<?php echo esc_attr($value); ?>" class="regular-text" />
+    <p class="description"><?php _e('Enter the custom slug for the panel page.', 'db-conn'); ?></p>
 <?php
   }
 
@@ -264,14 +266,105 @@ class Db_Conn_Settings
    */
   public function sanitize_settings($input)
   {
-    $sanitized = array();
-
-    if (isset($input['login_slug'])) {
-      $sanitized['login_slug'] = sanitize_title($input['login_slug']);
+    // Verify nonce for security
+    if (!isset($_POST['_wpnonce']) || !wp_verify_nonce($_POST['_wpnonce'], 'db_conn_settings_group-options')) {
+      add_settings_error(
+        $this->option_name,
+        'nonce_failed',
+        __('Security check failed. Please try again.', 'db-conn'),
+        'error'
+      );
+      return get_option($this->option_name, array());
     }
 
-    if (isset($input['dashboard_slug'])) {
-      $sanitized['dashboard_slug'] = sanitize_title($input['dashboard_slug']);
+    // Verify user capabilities
+    if (!current_user_can('manage_options')) {
+      add_settings_error(
+        $this->option_name,
+        'unauthorized',
+        __('You do not have permission to modify these settings.', 'db-conn'),
+        'error'
+      );
+      return get_option($this->option_name, array());
+    }
+
+    $sanitized = array();
+    $old_options = get_option($this->option_name, array());
+    $slugs_changed = false;
+
+    if (isset($input['signin_slug'])) {
+      $signin_slug = sanitize_title($input['signin_slug']);
+
+      // Validate the signin slug
+      $validation_result = $this->validate_slug($signin_slug, 'signin');
+      if (is_wp_error($validation_result)) {
+        add_settings_error(
+          $this->option_name,
+          'signin_slug_error',
+          $validation_result->get_error_message(),
+          'error'
+        );
+        // Keep the old value if validation fails
+        $sanitized['signin_slug'] = isset($old_options['signin_slug']) ? $old_options['signin_slug'] : 'signin';
+      } else {
+        $sanitized['signin_slug'] = $signin_slug;
+        // Check if slug changed
+        if (!isset($old_options['signin_slug']) || $old_options['signin_slug'] !== $signin_slug) {
+          $slugs_changed = true;
+        }
+      }
+    }
+
+    if (isset($input['panel_slug'])) {
+      $panel_slug = sanitize_title($input['panel_slug']);
+
+      // Validate the panel slug
+      $validation_result = $this->validate_slug($panel_slug, 'panel');
+      if (is_wp_error($validation_result)) {
+        add_settings_error(
+          $this->option_name,
+          'panel_slug_error',
+          $validation_result->get_error_message(),
+          'error'
+        );
+        // Keep the old value if validation fails
+        $sanitized['panel_slug'] = isset($old_options['panel_slug']) ? $old_options['panel_slug'] : 'panel';
+      } else {
+        $sanitized['panel_slug'] = $panel_slug;
+        // Check if slug changed
+        if (!isset($old_options['panel_slug']) || $old_options['panel_slug'] !== $panel_slug) {
+          $slugs_changed = true;
+        }
+      }
+    }
+
+    // Check for duplicate slugs within our own settings
+    if (isset($sanitized['signin_slug']) && isset($sanitized['panel_slug'])) {
+      if ($sanitized['signin_slug'] === $sanitized['panel_slug']) {
+        add_settings_error(
+          $this->option_name,
+          'duplicate_slugs_error',
+          __('Sign In and Panel slugs cannot be the same.', 'db-conn'),
+          'error'
+        );
+        // Reset to defaults
+        $sanitized['signin_slug'] = isset($old_options['signin_slug']) ? $old_options['signin_slug'] : 'signin';
+        $sanitized['panel_slug'] = isset($old_options['panel_slug']) ? $old_options['panel_slug'] : 'panel';
+        $slugs_changed = false;
+      }
+    }
+
+    // If slugs changed and no errors, schedule rewrite rules flush
+    if ($slugs_changed && !get_settings_errors($this->option_name)) {
+      // Use transient to trigger flush on next page load
+      set_transient('db_conn_flush_rewrite_rules', 1, 60);
+
+      add_settings_error(
+        $this->option_name,
+        'slugs_updated',
+        __('Slugs updated successfully. Rewrite rules have been refreshed.', 'db-conn'),
+        'success'
+      );
     }
 
     return $sanitized;
@@ -289,5 +382,18 @@ class Db_Conn_Settings
   {
     $options = get_option($this->option_name, array());
     return isset($options[$key]) ? $options[$key] : $default;
+  }
+
+  /**
+   * Validate slug against existing WordPress content.
+   *
+   * @since    1.0.0
+   * @param    string    $slug    The slug to validate.
+   * @param    string    $type    The type of slug (signin/panel).
+   * @return   bool|WP_Error      True if valid, WP_Error if invalid.
+   */
+  private function validate_slug($slug, $type = '')
+  {
+    return Db_Conn_Functions::validate_slug($slug, $type, true);
   }
 }

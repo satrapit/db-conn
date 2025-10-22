@@ -80,6 +80,7 @@ class Db_Conn
 		$this->set_locale();
 		$this->define_admin_hooks();
 		$this->define_public_hooks();
+		$this->define_routing_hooks();
 	}
 
 	/**
@@ -114,6 +115,16 @@ class Db_Conn
 		require_once plugin_dir_path(dirname(__FILE__)) . 'includes/class-db-conn-i18n.php';
 
 		/**
+		 * The Twig loader wrapper for conflict-free Twig loading.
+		 */
+		require_once plugin_dir_path(dirname(__FILE__)) . 'includes/class-db-conn-twig.php';
+
+		/**
+		 * The class responsible for routing and template handling.
+		 */
+		require_once plugin_dir_path(dirname(__FILE__)) . 'includes/class-db-conn-router.php';
+
+		/**
 		 * The class responsible for defining all actions that occur in the admin area.
 		 */
 		require_once plugin_dir_path(dirname(__FILE__)) . 'admin/class-db-conn-admin.php';
@@ -125,9 +136,9 @@ class Db_Conn
 		require_once plugin_dir_path(dirname(__FILE__)) . 'public/class-db-conn-public.php';
 
 		/**
-		 * Helper functions for plugin settings.
+		 * The class responsible for helper functions and plugin options access.
 		 */
-		require_once plugin_dir_path(dirname(__FILE__)) . 'includes/db-conn-settings-functions.php';
+		require_once plugin_dir_path(dirname(__FILE__)) . 'includes/class-db-conn-functions.php';
 
 		$this->loader = new Db_Conn_Loader();
 	}
@@ -186,6 +197,30 @@ class Db_Conn
 	}
 
 	/**
+	 * Register all of the hooks related to the routing functionality
+	 * of the plugin.
+	 *
+	 * @since    1.0.0
+	 * @access   private
+	 */
+	private function define_routing_hooks()
+	{
+		$plugin_router = new Db_Conn_Router($this->get_plugin_name(), $this->get_version());
+
+		// Register rewrite rules
+		$this->loader->add_action('init', $plugin_router, 'register_rewrite_rules');
+
+		// Add query vars
+		$this->loader->add_filter('query_vars', $plugin_router, 'add_query_vars');
+
+		// Handle template redirect
+		$this->loader->add_action('template_redirect', $plugin_router, 'template_redirect');
+
+		// Check for rewrite rules flush
+		$this->loader->add_action('init', $this, 'maybe_flush_rewrite_rules');
+	}
+
+	/**
 	 * Run the loader to execute all of the hooks with WordPress.
 	 *
 	 * @since    1.0.0
@@ -227,5 +262,18 @@ class Db_Conn
 	public function get_version()
 	{
 		return $this->version;
+	}
+
+	/**
+	 * Maybe flush rewrite rules if requested.
+	 *
+	 * @since    1.0.0
+	 */
+	public function maybe_flush_rewrite_rules()
+	{
+		if (get_transient('db_conn_flush_rewrite_rules')) {
+			delete_transient('db_conn_flush_rewrite_rules');
+			flush_rewrite_rules();
+		}
 	}
 }

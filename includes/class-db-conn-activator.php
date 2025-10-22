@@ -59,8 +59,8 @@ class Db_Conn_Activator
 		if (false === $existing_settings) {
 
 			$default_settings = array(
-				'login_slug'    => 'login',
-				'dashboard_slug' => 'dashboard',
+				'signin_slug'    => 'signin',
+				'panel_slug' => 'panel',
 				'created_date'   => current_time('mysql'),
 				'version'        => DB_CONN_VERSION
 			);
@@ -95,8 +95,8 @@ class Db_Conn_Activator
 	{
 
 		$default_keys = array(
-			'login_slug'    => 'login',
-			'dashboard_slug' => 'dashboard',
+			'signin_slug'    => 'signin',
+			'panel_slug' => 'panel',
 			'created_date'   => current_time('mysql'),
 			'version'        => DB_CONN_VERSION
 		);
