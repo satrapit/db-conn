@@ -1,0 +1,16 @@
+# Composer
+/vendor/
+composer.lock
+
+# IDE
+.vscode/
+*.sublime-project
+*.sublime-workspace
+
+# OS
+.DS_Store
+Thumbs.db
+
+# WordPress
+wp-config.php
+.htaccess

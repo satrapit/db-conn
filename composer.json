@@ -16,5 +16,8 @@
   "config": {
     "optimize-autoloader": true,
     "vendor-dir": "vendor"
+  },
+  "require-dev": {
+    "sepia/po-parser": "^6.0"
   }
 }

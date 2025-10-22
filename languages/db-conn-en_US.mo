@@ -1,116 +1,120 @@
-# Copyright (C) 2025 Database Connector
-# This file is distributed under the GPL-2.0+.
 msgid ""
 msgstr ""
 "Project-Id-Version: Database Connector 1.0.0\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/db-conn\n"
 "POT-Creation-Date: 2025-10-22 00:00:00+00:00\n"
+"PO-Revision-Date: 2025-10-22 00:00:00+00:00\n"
+"Last-Translator: Majid Barkhordari <info@arsamnet.com>\n"
+"Language-Team: English\n"
+"Language: en_US\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"PO-Revision-Date: 2025-MO-DA HO:MI+ZONE\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
-"Language-Team: LANGUAGE <LL@li.org>\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: WordPress\n"
 
 #: admin/class-db-conn-settings.php:75
 msgid "Database Connector Settings"
-msgstr ""
+msgstr "Database Connector Settings"
 
 #: admin/class-db-conn-settings.php:76
 msgid "Database Connector"
-msgstr ""
+msgstr "Database Connector"
 
 #: admin/class-db-conn-settings.php:99
 msgid "General Settings"
-msgstr ""
+msgstr "General Settings"
 
 #: admin/class-db-conn-settings.php:107
 msgid "Slug Settings"
-msgstr ""
+msgstr "Slug Settings"
 
 #: admin/class-db-conn-settings.php:115
 msgid "Sign In Page Slug"
-msgstr ""
+msgstr "Sign In Page Slug"
 
 #: admin/class-db-conn-settings.php:123
 msgid "Panel Page Slug"
-msgstr ""
+msgstr "Panel Page Slug"
 
 #: admin/class-db-conn-settings.php:145
 msgid "General"
-msgstr ""
+msgstr "General"
 
 #: admin/class-db-conn-settings.php:148
 msgid "Page slugs"
-msgstr ""
+msgstr "Page slugs"
 
 #: admin/class-db-conn-settings.php:174
 msgid "This is the general settings tab."
-msgstr ""
+msgstr "This is the general settings tab."
 
 #: admin/class-db-conn-settings.php:197
 msgid "Configure general settings for the Database Connector plugin."
-msgstr ""
+msgstr "Configure general settings for the Database Connector plugin."
 
 #: admin/class-db-conn-settings.php:207
 msgid "Configure custom slugs for plugin pages."
-msgstr ""
+msgstr "Configure custom slugs for plugin pages."
 
 #: admin/class-db-conn-settings.php:220
 msgid "Enter the custom slug for the sign in page."
-msgstr ""
+msgstr "Enter the custom slug for the sign in page."
 
 #: admin/class-db-conn-settings.php:234
 msgid "Enter the custom slug for the panel page."
-msgstr ""
+msgstr "Enter the custom slug for the panel page."
 
 #: admin/class-db-conn-settings.php:248
 msgid "Security check failed. Please try again."
-msgstr ""
+msgstr "Security check failed. Please try again."
 
 #: admin/class-db-conn-settings.php:260
 msgid "You do not have permission to modify these settings."
-msgstr ""
+msgstr "You do not have permission to modify these settings."
 
 #: admin/class-db-conn-settings.php:309
 msgid "Sign In and Panel slugs cannot be the same."
-msgstr ""
+msgstr "Sign In and Panel slugs cannot be the same."
 
 #: admin/class-db-conn-settings.php:323
 msgid "Slugs updated successfully. Rewrite rules have been refreshed."
-msgstr ""
+msgstr "Slugs updated successfully. Rewrite rules have been refreshed."
 
 #: includes/class-db-conn-router.php:263
 #: includes/class-db-conn-router.php:293
 msgid "Database Connector: Twig templating engine is not available."
-msgstr ""
+msgstr "Database Connector: Twig templating engine is not available."
 
 #: includes/class-db-conn-router.php:269
 #: views/signin.twig:13
 msgid "Sign In"
-msgstr ""
+msgstr "Sign In"
 
 #: includes/class-db-conn-router.php:299
 msgid "Panel"
-msgstr ""
+msgstr "Panel"
 
 #: includes/class-db-conn-router.php:319
-msgid "Database Connector: Twig templating engine is not available. Please install Twig via Composer."
+msgid ""
+"Database Connector: Twig templating engine is not available. Please install Twig"
+" via Composer."
 msgstr ""
+"Database Connector: Twig templating engine is not available. Please install Twig"
+" via Composer."
 
 #: includes/class-db-conn-router.php:330
 msgid "Database Connector: Error initializing Twig templating engine."
-msgstr ""
+msgstr "Database Connector: Error initializing Twig templating engine."
 
 #: views/panel.twig:13
 msgid "This is a demo panel page."
-msgstr ""
+msgstr "This is a demo panel page."
 
 #: views/signin.twig:9
 msgid "Mobile Number:"
-msgstr ""
+msgstr "Mobile Number:"
 
 #: views/signin.twig:13
 msgid "OTP:"
-msgstr ""
+msgstr "OTP:"

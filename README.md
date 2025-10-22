@@ -16,6 +16,17 @@ Database Connector adds two custom pages to your WordPress site:
 - Smart slug validation to prevent conflicts
 - Mobile-friendly, responsive design
 - Compatible with Timber and other Twig-based themes
+- **Multilingual support** with English and Persian (RTL support included)
+- Fully internationalized and translation-ready
+
+## Languages
+
+The plugin is fully translated and supports:
+
+- 🇺🇸 **English (en_US)** - Base language
+- 🇮🇷 **Persian/Farsi (fa_IR)** - Full translation with RTL support
+
+For translation documentation, see [TRANSLATION.md](TRANSLATION.md)
 
 ## Installation
 

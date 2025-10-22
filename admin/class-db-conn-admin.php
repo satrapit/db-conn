@@ -126,6 +126,11 @@ class Db_Conn_Admin
 		 */
 
 		wp_enqueue_style($this->plugin_name, plugin_dir_url(__FILE__) . 'css/db-conn-admin.css', array(), $this->version, 'all');
+
+		// Load RTL stylesheet for RTL languages
+		if (is_rtl()) {
+			wp_enqueue_style($this->plugin_name . '-rtl', plugin_dir_url(__FILE__) . 'css/db-conn-admin-rtl.css', array($this->plugin_name), $this->version, 'all');
+		}
 	}
 
 	/**

@@ -1,0 +1,60 @@
+/**
+ * RTL (Right-to-Left) styles for Database Connector admin
+ *
+ * This file provides RTL support for languages like Persian, Arabic, and Hebrew
+ *
+ * @package    Db_Conn
+ * @subpackage Db_Conn/admin/css
+ */
+
+/* RTL Navigation Tabs */
+.rtl .db-conn-settings .nav-tab-wrapper {
+  text-align: right;
+}
+
+.rtl .db-conn-settings .nav-tab {
+  float: right;
+  margin-left: 0.5em;
+  margin-right: 0;
+}
+
+/* RTL Form Fields */
+.rtl .db-conn-settings input[type="text"],
+.rtl .db-conn-settings input[type="email"],
+.rtl .db-conn-settings input[type="url"],
+.rtl .db-conn-settings input[type="number"],
+.rtl .db-conn-settings select,
+.rtl .db-conn-settings textarea {
+  direction: rtl;
+  text-align: right;
+}
+
+/* RTL Form Labels */
+.rtl .db-conn-settings label {
+  text-align: right;
+}
+
+/* RTL Descriptions */
+.rtl .db-conn-settings .description,
+.rtl .db-conn-settings p.description {
+  text-align: right;
+}
+
+/* RTL Settings Sections */
+.rtl .db-conn-settings .form-table th {
+  text-align: right;
+}
+
+.rtl .db-conn-settings .form-table td {
+  text-align: right;
+}
+
+/* RTL Submit Button */
+.rtl .db-conn-settings .submit {
+  text-align: left;
+}
+
+/* RTL Tab Content */
+.rtl .db-conn-settings .tab-content {
+  direction: rtl;
+}

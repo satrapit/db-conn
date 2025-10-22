@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "4bdcd3145883d14d78e3dea673860f3f",
+    "content-hash": "ce5ecc87766bb58be84c374777156d64",
     "packages": [
         {
             "name": "symfony/deprecation-contracts",
@@ -321,7 +321,62 @@
             "time": "2025-05-03T07:21:55+00:00"
         }
     ],
-    "packages-dev": [],
+    "packages-dev": [
+        {
+            "name": "sepia/po-parser",
+            "version": "6.0.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/pherrymason/PHP-po-parser.git",
+                "reference": "391b90c6d64ebadcc89475225ce11ddbc25490cc"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/pherrymason/PHP-po-parser/zipball/391b90c6d64ebadcc89475225ce11ddbc25490cc",
+                "reference": "391b90c6d64ebadcc89475225ce11ddbc25490cc",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3",
+                "symfony/polyfill-mbstring": "^1"
+            },
+            "require-dev": {
+                "fzaninotto/faker": "^1.7",
+                "phpunit/phpunit": "^4.8.36",
+                "squizlabs/php_codesniffer": "^2.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Sepia\\PoParser\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Raúl Ferràs",
+                    "email": "raul.ferras@gmail.com",
+                    "role": "developer"
+                }
+            ],
+            "description": "Gettext *.PO file parser for PHP.",
+            "homepage": "https://github.com/raulferras/PHP-po-parser",
+            "keywords": [
+                "gettext",
+                "i10n",
+                "i18n",
+                "po"
+            ],
+            "support": {
+                "issues": "https://github.com/raulferras/PHP-po-parser/issues",
+                "source": "https://github.com/pherrymason/PHP-po-parser/tree/6.0.2"
+            },
+            "time": "2023-08-01T13:12:08+00:00"
+        }
+    ],
     "aliases": [],
     "minimum-stability": "stable",
     "stability-flags": {},

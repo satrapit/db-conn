@@ -1,0 +1,65 @@
+/**
+ * RTL (Right-to-Left) styles for Database Connector public pages
+ *
+ * This file provides RTL support for public-facing pages
+ *
+ * @package    Db_Conn
+ * @subpackage Db_Conn/public/css
+ */
+
+/* RTL Form Elements */
+.rtl body {
+  direction: rtl;
+  text-align: right;
+}
+
+.rtl input[type="text"],
+.rtl input[type="email"],
+.rtl input[type="tel"],
+.rtl input[type="url"],
+.rtl input[type="number"],
+.rtl input[type="password"],
+.rtl select,
+.rtl textarea {
+  direction: rtl;
+  text-align: right;
+}
+
+/* RTL Labels */
+.rtl label {
+  text-align: right;
+  display: inline-block;
+  margin-left: 0.5em;
+  margin-right: 0;
+}
+
+/* RTL Buttons */
+.rtl button,
+.rtl input[type="submit"],
+.rtl .button {
+  text-align: center;
+}
+
+/* RTL Lists */
+.rtl ul,
+.rtl ol {
+  margin-right: 2em;
+  margin-left: 0;
+  padding-right: 2em;
+  padding-left: 0;
+}
+
+/* RTL Headings */
+.rtl h1,
+.rtl h2,
+.rtl h3,
+.rtl h4,
+.rtl h5,
+.rtl h6 {
+  text-align: right;
+}
+
+/* RTL Paragraphs */
+.rtl p {
+  text-align: right;
+}

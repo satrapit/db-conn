@@ -1,116 +1,120 @@
-# Copyright (C) 2025 Database Connector
-# This file is distributed under the GPL-2.0+.
 msgid ""
 msgstr ""
 "Project-Id-Version: Database Connector 1.0.0\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/db-conn\n"
 "POT-Creation-Date: 2025-10-22 00:00:00+00:00\n"
+"PO-Revision-Date: 2025-10-22 00:00:00+00:00\n"
+"Last-Translator: Majid Barkhordari <info@arsamnet.com>\n"
+"Language-Team: Persian\n"
+"Language: fa_IR\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"PO-Revision-Date: 2025-MO-DA HO:MI+ZONE\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
-"Language-Team: LANGUAGE <LL@li.org>\n"
+"Plural-Forms: nplurals=2; plural=(n==0 || n==1);\n"
 "X-Generator: WordPress\n"
 
 #: admin/class-db-conn-settings.php:75
 msgid "Database Connector Settings"
-msgstr ""
+msgstr "تنظیمات اتصال به پایگاه داده"
 
 #: admin/class-db-conn-settings.php:76
 msgid "Database Connector"
-msgstr ""
+msgstr "اتصال به پایگاه داده"
 
 #: admin/class-db-conn-settings.php:99
 msgid "General Settings"
-msgstr ""
+msgstr "تنظیمات عمومی"
 
 #: admin/class-db-conn-settings.php:107
 msgid "Slug Settings"
-msgstr ""
+msgstr "تنظیمات نامک"
 
 #: admin/class-db-conn-settings.php:115
 msgid "Sign In Page Slug"
-msgstr ""
+msgstr "نامک صفحه ورود"
 
 #: admin/class-db-conn-settings.php:123
 msgid "Panel Page Slug"
-msgstr ""
+msgstr "نامک صفحه پنل"
 
 #: admin/class-db-conn-settings.php:145
 msgid "General"
-msgstr ""
+msgstr "عمومی"
 
 #: admin/class-db-conn-settings.php:148
 msgid "Page slugs"
-msgstr ""
+msgstr "نامک‌های صفحات"
 
 #: admin/class-db-conn-settings.php:174
 msgid "This is the general settings tab."
-msgstr ""
+msgstr "این تب تنظیمات عمومی است."
 
 #: admin/class-db-conn-settings.php:197
 msgid "Configure general settings for the Database Connector plugin."
-msgstr ""
+msgstr "پیکربندی تنظیمات عمومی برای افزونه اتصال به پایگاه داده."
 
 #: admin/class-db-conn-settings.php:207
 msgid "Configure custom slugs for plugin pages."
-msgstr ""
+msgstr "پیکربندی نامک‌های سفارشی برای صفحات افزونه."
 
 #: admin/class-db-conn-settings.php:220
 msgid "Enter the custom slug for the sign in page."
-msgstr ""
+msgstr "نامک سفارشی برای صفحه ورود را وارد کنید."
 
 #: admin/class-db-conn-settings.php:234
 msgid "Enter the custom slug for the panel page."
-msgstr ""
+msgstr "نامک سفارشی برای صفحه پنل را وارد کنید."
 
 #: admin/class-db-conn-settings.php:248
 msgid "Security check failed. Please try again."
-msgstr ""
+msgstr "بررسی امنیتی ناموفق بود. لطفاً دوباره تلاش کنید."
 
 #: admin/class-db-conn-settings.php:260
 msgid "You do not have permission to modify these settings."
-msgstr ""
+msgstr "شما مجوز تغییر این تنظیمات را ندارید."
 
 #: admin/class-db-conn-settings.php:309
 msgid "Sign In and Panel slugs cannot be the same."
-msgstr ""
+msgstr "نامک ورود و پنل نمی‌توانند یکسان باشند."
 
 #: admin/class-db-conn-settings.php:323
 msgid "Slugs updated successfully. Rewrite rules have been refreshed."
-msgstr ""
+msgstr "نامک‌ها با موفقیت به‌روزرسانی شدند. قوانین بازنویسی تازه‌سازی شدند."
 
 #: includes/class-db-conn-router.php:263
 #: includes/class-db-conn-router.php:293
 msgid "Database Connector: Twig templating engine is not available."
-msgstr ""
+msgstr "اتصال به پایگاه داده: موتور قالب Twig در دسترس نیست."
 
 #: includes/class-db-conn-router.php:269
 #: views/signin.twig:13
 msgid "Sign In"
-msgstr ""
+msgstr "ورود"
 
 #: includes/class-db-conn-router.php:299
 msgid "Panel"
-msgstr ""
+msgstr "پنل"
 
 #: includes/class-db-conn-router.php:319
-msgid "Database Connector: Twig templating engine is not available. Please install Twig via Composer."
+msgid ""
+"Database Connector: Twig templating engine is not available. Please install Twig"
+" via Composer."
 msgstr ""
+"اتصال به پایگاه داده: موتور قالب Twig در دسترس نیست. لطفاً Twig را از طریق "
+"Composer نصب کنید."
 
 #: includes/class-db-conn-router.php:330
 msgid "Database Connector: Error initializing Twig templating engine."
-msgstr ""
+msgstr "اتصال به پایگاه داده: خطا در مقداردهی اولیه موتور قالب Twig."
 
 #: views/panel.twig:13
 msgid "This is a demo panel page."
-msgstr ""
+msgstr "این یک صفحه پنل نمایشی است."
 
 #: views/signin.twig:9
 msgid "Mobile Number:"
-msgstr ""
+msgstr "شماره موبایل:"
 
 #: views/signin.twig:13
 msgid "OTP:"
-msgstr ""
+msgstr "کد یکبار مصرف:"

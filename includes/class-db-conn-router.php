@@ -170,6 +170,7 @@ class Db_Conn_Router
       'esc_url' => 'esc_url',
       'wp_nonce_field' => 'wp_nonce_field',
       'wp_create_nonce' => 'wp_create_nonce',
+      'is_rtl' => 'is_rtl',
     );
 
     foreach ($functions as $twig_name => $php_function) {
