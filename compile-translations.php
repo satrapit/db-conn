@@ -8,8 +8,8 @@
 
 require_once __DIR__ . '/vendor/autoload.php';
 
-use Sepia\PoParser\Parser;
-use Sepia\PoParser\SourceHandler\FileSystem;
+use Gettext\Translations;
+use Gettext\Generators\Mo;
 
 $languagesDir = __DIR__ . '/languages';
 
@@ -27,14 +27,13 @@ foreach ($poFiles as $poFile) {
 	try {
 		echo "Compiling: " . basename($poFile) . " -> " . basename($moFile) . "\n";
 
-		// Parse PO file
-		$parser = new Parser(new FileSystem($poFile));
-		$catalog = $parser->parse();
+		// Load PO file
+		$translations = Translations::fromPoFile($poFile);
 
-		// Compile to MO
-		$compiler = new Sepia\PoParser\PoCompiler();
-		file_put_contents($moFile, $compiler->compile($catalog));
-		echo "  ✓ Successfully compiled\n";
+		// Generate MO file
+		$translations->toMoFile($moFile);
+
+		echo "  ✓ Successfully compiled (" . filesize($moFile) . " bytes)\n";
 	} catch (Exception $e) {
 		echo "  ✗ Error: " . $e->getMessage() . "\n";
 	}
