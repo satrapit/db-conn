@@ -155,4 +155,18 @@ class Db_Conn_Admin
 
 		wp_enqueue_script($this->plugin_name, plugin_dir_url(__FILE__) . 'js/db-conn-admin.js', array('jquery'), $this->version, false);
 	}
+
+	/**
+	 * Add settings link to the plugin actions on the plugins page.
+	 *
+	 * @since    1.0.0
+	 * @param    array    $links    An array of plugin action links.
+	 * @return   array              Modified array of plugin action links.
+	 */
+	public function add_plugin_action_links($links)
+	{
+		$settings_link = '<a href="' . admin_url('options-general.php?page=db-conn-settings') . '">' . __('Settings', 'db-conn') . '</a>';
+		array_unshift($links, $settings_link);
+		return $links;
+	}
 }

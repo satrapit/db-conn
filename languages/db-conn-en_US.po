@@ -15,6 +15,18 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: WordPress\n"
 
+#. Plugin Name of the plugin
+msgid "Database Connector"
+msgstr "Database Connector"
+
+#. Description of the plugin
+msgid "Database Connector is a WordPress plugin that allows you to connect to external databases and display data on your website."
+msgstr "Database Connector is a WordPress plugin that allows you to connect to external databases and display data on your website."
+
+#. Author of the plugin
+msgid "Majid Barkhordari"
+msgstr "Majid Barkhordari"
+
 #: admin/class-db-conn-settings.php:75
 msgid "Database Connector Settings"
 msgstr "Database Connector Settings"
@@ -116,3 +128,7 @@ msgstr "Mobile Number:"
 #: views/signin.twig:13
 msgid "OTP:"
 msgstr "OTP:"
+
+#: admin/class-db-conn-admin.php:178
+msgid "Settings"
+msgstr "Settings"

@@ -15,7 +15,7 @@
  * @wordpress-plugin
  * Plugin Name:       Database Connector
  * Plugin URI:        https://arsamnet.com
- * Description:       Arsamnet Database Connector
+ * Description:       Database Connector is a WordPress plugin that allows you to connect to external databases and display data on your website.
  * Version:           1.0.0
  * Author:            Majid Barkhordari
  * Author URI:        https://arsamnet.com/
@@ -23,10 +23,12 @@
  * License URI:       http://www.gnu.org/licenses/gpl-2.0.txt
  * Text Domain:       db-conn
  * Domain Path:       /languages
+ * Requires at least: 5.0
+ * Requires PHP:      7.2
  */
 
 // If this file is called directly, abort.
-if ( ! defined( 'WPINC' ) ) {
+if (! defined('WPINC')) {
 	die;
 }
 
@@ -35,14 +37,15 @@ if ( ! defined( 'WPINC' ) ) {
  * Start at version 1.0.0 and use SemVer - https://semver.org
  * Rename this for your plugin and update it as you release new versions.
  */
-define( 'DB_CONN_VERSION', '1.0.0' );
+define('DB_CONN_VERSION', '1.0.0');
 
 /**
  * The code that runs during plugin activation.
  * This action is documented in includes/class-db-conn-activator.php
  */
-function activate_db_conn() {
-	require_once plugin_dir_path( __FILE__ ) . 'includes/class-db-conn-activator.php';
+function activate_db_conn()
+{
+	require_once plugin_dir_path(__FILE__) . 'includes/class-db-conn-activator.php';
 	Db_Conn_Activator::activate();
 }
 
@@ -50,19 +53,29 @@ function activate_db_conn() {
  * The code that runs during plugin deactivation.
  * This action is documented in includes/class-db-conn-deactivator.php
  */
-function deactivate_db_conn() {
-	require_once plugin_dir_path( __FILE__ ) . 'includes/class-db-conn-deactivator.php';
+function deactivate_db_conn()
+{
+	require_once plugin_dir_path(__FILE__) . 'includes/class-db-conn-deactivator.php';
 	Db_Conn_Deactivator::deactivate();
 }
 
-register_activation_hook( __FILE__, 'activate_db_conn' );
-register_deactivation_hook( __FILE__, 'deactivate_db_conn' );
+register_activation_hook(__FILE__, 'activate_db_conn');
+register_deactivation_hook(__FILE__, 'deactivate_db_conn');
+
+/**
+ * Load plugin textdomain for header translations.
+ */
+add_action('init', 'db_conn_load_plugin_textdomain');
+function db_conn_load_plugin_textdomain()
+{
+	load_plugin_textdomain('db-conn', false, dirname(plugin_basename(__FILE__)) . '/languages/');
+}
 
 /**
  * The core plugin class that is used to define internationalization,
  * admin-specific hooks, and public-facing site hooks.
  */
-require plugin_dir_path( __FILE__ ) . 'includes/class-db-conn.php';
+require plugin_dir_path(__FILE__) . 'includes/class-db-conn.php';
 
 /**
  * Begins execution of the plugin.
@@ -73,10 +86,10 @@ require plugin_dir_path( __FILE__ ) . 'includes/class-db-conn.php';
  *
  * @since    1.0.0
  */
-function run_db_conn() {
+function run_db_conn()
+{
 
 	$plugin = new Db_Conn();
 	$plugin->run();
-
 }
 run_db_conn();

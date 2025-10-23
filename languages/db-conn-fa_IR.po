@@ -15,6 +15,18 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n==0 || n==1);\n"
 "X-Generator: WordPress\n"
 
+#. Plugin Name of the plugin
+msgid "Database Connector"
+msgstr "اتصال به پایگاه داده"
+
+#. Description of the plugin
+msgid "Database Connector is a WordPress plugin that allows you to connect to external databases and display data on your website."
+msgstr "اتصال به پایگاه داده یک افزونه وردپرس است که به شما امکان می‌دهد به پایگاه‌های داده خارجی متصل شوید و اطلاعات را در وب‌سایت خود نمایش دهید."
+
+#. Author of the plugin
+msgid "Majid Barkhordari"
+msgstr "مجید برخورداری"
+
 #: admin/class-db-conn-settings.php:75
 msgid "Database Connector Settings"
 msgstr "تنظیمات اتصال به پایگاه داده"
@@ -29,15 +41,15 @@ msgstr "تنظیمات عمومی"
 
 #: admin/class-db-conn-settings.php:107
 msgid "Slug Settings"
-msgstr "تنظیمات نامک"
+msgstr "تنظیمات پیوند یکتا"
 
 #: admin/class-db-conn-settings.php:115
 msgid "Sign In Page Slug"
-msgstr "نامک صفحه ورود"
+msgstr "پیوند یکتای صفحه ورود"
 
 #: admin/class-db-conn-settings.php:123
 msgid "Panel Page Slug"
-msgstr "نامک صفحه پنل"
+msgstr "پیوند یکتای صفحه پنل"
 
 #: admin/class-db-conn-settings.php:145
 msgid "General"
@@ -45,7 +57,7 @@ msgstr "عمومی"
 
 #: admin/class-db-conn-settings.php:148
 msgid "Page slugs"
-msgstr "نامک‌های صفحات"
+msgstr "پیوندهای یکتای صفحات"
 
 #: admin/class-db-conn-settings.php:174
 msgid "This is the general settings tab."
@@ -57,15 +69,15 @@ msgstr "پیکربندی تنظیمات عمومی برای افزونه اتص�
 
 #: admin/class-db-conn-settings.php:207
 msgid "Configure custom slugs for plugin pages."
-msgstr "پیکربندی نامک‌های سفارشی برای صفحات افزونه."
+msgstr "پیکربندی پیوندهای یکتای سفارشی برای صفحات افزونه."
 
 #: admin/class-db-conn-settings.php:220
 msgid "Enter the custom slug for the sign in page."
-msgstr "نامک سفارشی برای صفحه ورود را وارد کنید."
+msgstr "پیوند یکتای سفارشی برای صفحه ورود را وارد کنید."
 
 #: admin/class-db-conn-settings.php:234
 msgid "Enter the custom slug for the panel page."
-msgstr "نامک سفارشی برای صفحه پنل را وارد کنید."
+msgstr "پیوند یکتای سفارشی برای صفحه پنل را وارد کنید."
 
 #: admin/class-db-conn-settings.php:248
 msgid "Security check failed. Please try again."
@@ -77,11 +89,11 @@ msgstr "شما مجوز تغییر این تنظیمات را ندارید."
 
 #: admin/class-db-conn-settings.php:309
 msgid "Sign In and Panel slugs cannot be the same."
-msgstr "نامک ورود و پنل نمی‌توانند یکسان باشند."
+msgstr "پیوند یکتای ورود و پنل نمی‌توانند یکسان باشند."
 
 #: admin/class-db-conn-settings.php:323
 msgid "Slugs updated successfully. Rewrite rules have been refreshed."
-msgstr "نامک‌ها با موفقیت به‌روزرسانی شدند. قوانین بازنویسی تازه‌سازی شدند."
+msgstr "پیوندهای یکتا با موفقیت به‌روزرسانی شدند. قوانین بازنویسی تازه‌سازی شدند."
 
 #: includes/class-db-conn-router.php:263
 #: includes/class-db-conn-router.php:293
@@ -116,3 +128,7 @@ msgstr "شماره موبایل:"
 #: views/signin.twig:13
 msgid "OTP:"
 msgstr "کد یکبار مصرف:"
+
+#: admin/class-db-conn-admin.php:178
+msgid "Settings"
+msgstr "تنظیمات"
