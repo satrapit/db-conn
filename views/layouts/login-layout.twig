@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="{{ lang|default('en') }}" dir="{{ direction|default('ltr') }}">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>{{ page_title|default('Sign In') }}
+			-
+			{{ site_name|default('DB Conn') }}</title>
+		<link rel="stylesheet" href="{{ plugin_url ~ 'public/css/style.css' }}">
+	</head>
+	<body class="min-h-screen bg-gradient-to-br from-primary-500 to-primary-700 flex items-center justify-center p-4">
+
+		<div class="w-full max-w-md">
+			<div class="text-center mb-8">
+				<h1 class="text-4xl font-bold text-white">{{ site_name|default('DB Conn') }}</h1>
+			</div>
+
+			<div class="bg-white rounded-2xl shadow-2xl p-8">
+				<h2 class="text-2xl font-bold text-gray-900 mb-6 text-center">{{ page_title }}</h2>
+				{% block content %}{% endblock %}
+			</div>
+
+			<div class="mt-8 text-center text-white text-sm">
+				<p>&copy;
+					{{ current_year|default('2025') }}
+					{{ site_name|default('DB Conn') }}</p>
+			</div>
+		</div>
+
+		<script src="{{ plugin_url ~ 'public/js/script.js' }}"></script>
+	</body>
+</html>

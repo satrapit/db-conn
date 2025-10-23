@@ -171,6 +171,11 @@ class Db_Conn_Router
       'wp_nonce_field' => 'wp_nonce_field',
       'wp_create_nonce' => 'wp_create_nonce',
       'is_rtl' => 'is_rtl',
+      'wp_head' => 'wp_head',
+      'wp_footer' => 'wp_footer',
+      'wp_logout_url' => 'wp_logout_url',
+      'is_user_logged_in' => 'is_user_logged_in',
+      'wp_get_current_user' => 'wp_get_current_user',
     );
 
     foreach ($functions as $twig_name => $php_function) {
@@ -268,13 +273,15 @@ class Db_Conn_Router
     try {
       $context = array(
         'page_title' => __('Sign In', 'db-conn'),
-        'signin_url' => home_url(add_query_arg(array(), $GLOBALS['wp']->request)),
         'site_name' => get_bloginfo('name'),
-        'form_action' => '', // Add your form action URL here
-        'nonce' => wp_create_nonce('db_conn_signin'),
+        'plugin_url' => plugin_dir_url(dirname(__FILE__)),
+        'lang' => get_bloginfo('language'),
+        'direction' => is_rtl() ? 'rtl' : 'ltr',
+        'home_url' => home_url('/'),
+        'current_year' => date('Y'),
       );
 
-      echo $this->twig->render('signin.twig', $context);
+      echo $this->twig->render('pages/signin.twig', $context);
     } catch (Exception $e) {
       wp_die('Twig Error: ' . esc_html($e->getMessage()));
     }
@@ -299,11 +306,14 @@ class Db_Conn_Router
       $context = array(
         'page_title' => __('Panel', 'db-conn'),
         'site_name' => get_bloginfo('name'),
-        'user_data' => array(), // Add user data here
-        'panel_data' => array(), // Add panel specific data here
+        'plugin_url' => plugin_dir_url(dirname(__FILE__)),
+        'lang' => get_bloginfo('language'),
+        'direction' => is_rtl() ? 'rtl' : 'ltr',
+        'home_url' => home_url('/'),
+        'current_year' => date('Y'),
       );
 
-      echo $this->twig->render('panel.twig', $context);
+      echo $this->twig->render('pages/panel.twig', $context);
     } catch (Exception $e) {
       wp_die('Twig Error: ' . esc_html($e->getMessage()));
     }
@@ -353,5 +363,29 @@ class Db_Conn_Router
   public function validate_slug($slug)
   {
     return Db_Conn_Functions::validate_slug($slug, '', false);
+  }
+
+  /**
+   * Get the signin page slug.
+   *
+   * @since    1.0.0
+   * @return   string    The signin page slug.
+   */
+  public function get_signin_slug()
+  {
+    $options = get_option($this->option_name, array());
+    return isset($options['signin_slug']) ? $options['signin_slug'] : 'signin';
+  }
+
+  /**
+   * Get the panel page slug.
+   *
+   * @since    1.0.0
+   * @return   string    The panel page slug.
+   */
+  public function get_panel_slug()
+  {
+    $options = get_option($this->option_name, array());
+    return isset($options['panel_slug']) ? $options['panel_slug'] : 'panel';
   }
 }
