@@ -1,7 +1,19 @@
 {% extends "layouts/layout.twig" %}
 
 {% block content %}
-	<div class="card">
+	<div class="card" data-page="panel" style="opacity: 0; transition: opacity 0.3s;">
 		<p class="text-gray-700">This is a demo panel page. You can add your content here.</p>
 	</div>
+
+	<script>
+		// Show content after auth check passes
+document.addEventListener('DOMContentLoaded', function () {
+setTimeout(function () {
+const panel = document.querySelector('[data-page="panel"]');
+if (panel) {
+panel.style.opacity = '1';
+}
+}, 100);
+});
+	</script>
 {% endblock %}

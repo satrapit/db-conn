@@ -4,6 +4,8 @@ module.exports = {
 		"./views/**/*.twig",
 		"./admin/**/*.php",
 		"./public/**/*.php",
+		"./public/**/*.js",
+		"./public/js/**/*.js",
 		"./includes/**/*.php"
 	],
 	theme: {
