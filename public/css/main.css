@@ -6,3 +6,541 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer components {
+	/* ========================================
+	   APP LAYOUT
+	   ======================================== */
+
+	.app-body {
+		@apply bg-gray-50 overflow-x-hidden;
+		padding-top: 64px; /* Header height */
+		padding-bottom: 72px; /* Bottom nav height on mobile */
+	}
+
+	@media (min-width: 768px) {
+		.app-body {
+			padding-bottom: 0;
+		}
+	}
+
+	/* ========================================
+	   FIXED HEADER
+	   ======================================== */
+
+	.app-header {
+		@apply fixed top-0 left-0 right-0 bg-white border-b border-gray-200 shadow-sm z-50;
+		height: 64px;
+	}
+
+	.app-header-container {
+		@apply max-w-7xl mx-auto px-4 h-full flex items-center justify-between;
+	}
+
+	.mobile-menu-btn {
+		@apply md:hidden p-2 rounded-lg hover:bg-gray-100 transition-colors;
+	}
+
+	.app-logo {
+		@apply flex items-center gap-2;
+	}
+
+	.app-title {
+		@apply text-xl font-bold text-gray-900 hidden sm:block;
+	}
+
+	/* Desktop Navigation */
+	.desktop-nav {
+		@apply hidden md:flex items-center gap-1 flex-1 justify-center;
+	}
+
+	.nav-link {
+		@apply flex items-center gap-2 px-4 py-2 rounded-lg text-gray-600 hover:text-blue-600 hover:bg-blue-50 transition-all duration-200;
+	}
+
+	.nav-link.active {
+		@apply text-blue-600 bg-blue-50 font-medium;
+	}
+
+	.nav-link svg {
+		@apply transition-transform duration-200;
+	}
+
+	.nav-link:hover svg {
+		@apply scale-110;
+	}
+
+	/* User Menu */
+	.user-menu {
+		@apply relative;
+	}
+
+	.user-menu-btn {
+		@apply p-2 rounded-full hover:bg-gray-100 transition-colors text-gray-600 hover:text-gray-900;
+	}
+
+	.user-dropdown {
+		@apply absolute right-0 top-full mt-2 w-56 bg-white rounded-xl shadow-lg border border-gray-200 py-2 opacity-0 invisible transition-all duration-200 transform translate-y-2;
+	}
+
+	/* RTL Support for user dropdown */
+	[dir="rtl"] .user-dropdown {
+		@apply right-auto left-0;
+	}
+
+	/* Mobile positioning fix for user dropdown */
+	@media (max-width: 767px) {
+		.user-dropdown {
+			@apply fixed right-4 left-auto;
+			top: 60px;
+		}
+
+		[dir="rtl"] .user-dropdown {
+			@apply right-auto left-4;
+		}
+	}
+
+	.user-menu:hover .user-dropdown,
+	.user-dropdown:hover {
+		@apply opacity-100 visible translate-y-0;
+	}
+
+	/* Show class for mobile toggle */
+	.user-dropdown.show {
+		@apply opacity-100 visible translate-y-0;
+	}
+
+	.dropdown-item {
+		@apply flex items-center gap-3 px-4 py-2.5 text-gray-700 hover:bg-gray-50 transition-colors;
+	}
+
+	.dropdown-item:hover {
+		@apply text-blue-600;
+	}
+
+	.dropdown-divider {
+		@apply h-px bg-gray-200 my-2;
+	}
+
+	/* ========================================
+	   MOBILE SIDEBAR
+	   ======================================== */
+
+	.mobile-sidebar {
+		@apply fixed top-0 left-0 h-full w-80 max-w-[85vw] bg-white shadow-2xl transform -translate-x-full transition-transform duration-300 z-50;
+	}
+
+	/* RTL Support for mobile sidebar */
+	[dir="rtl"] .mobile-sidebar {
+		@apply left-auto right-0 translate-x-full;
+	}
+
+	.mobile-sidebar.active {
+		@apply translate-x-0;
+	}
+
+	[dir="rtl"] .mobile-sidebar.active {
+		@apply translate-x-0;
+	}
+
+	.mobile-sidebar-header {
+		@apply flex items-center justify-between p-4 border-b border-gray-200;
+	}
+
+	.mobile-sidebar-close {
+		@apply p-2 rounded-lg hover:bg-gray-100 transition-colors;
+	}
+
+	.mobile-sidebar-nav {
+		@apply p-4 space-y-2;
+	}
+
+	.mobile-nav-link {
+		@apply flex items-center gap-3 px-4 py-3 rounded-lg text-gray-700 hover:bg-blue-50 hover:text-blue-600 transition-all duration-200;
+	}
+
+	.mobile-nav-link.active {
+		@apply bg-blue-50 text-blue-600 font-medium;
+	}
+
+	.mobile-sidebar-overlay {
+		@apply fixed inset-0 bg-black bg-opacity-50 opacity-0 invisible transition-all duration-300 z-40;
+	}
+
+	.mobile-sidebar-overlay.active {
+		@apply opacity-100 visible;
+	}
+
+	/* ========================================
+	   BOTTOM NAVIGATION
+	   ======================================== */
+
+	.bottom-nav {
+		@apply md:hidden fixed bottom-0 left-0 right-0 bg-white border-t border-gray-200 shadow-lg z-40;
+		height: 72px;
+	}
+
+	.bottom-nav {
+		@apply flex items-center justify-around px-2;
+	}
+
+	.bottom-nav-link {
+		@apply flex flex-col items-center justify-center gap-1 py-2 px-3 rounded-lg text-gray-500 hover:text-blue-600 transition-all duration-200 flex-1 max-w-[100px];
+	}
+
+	.bottom-nav-link.active {
+		@apply text-blue-600;
+	}
+
+	.bottom-nav-link svg {
+		@apply transition-transform duration-200;
+	}
+
+	.bottom-nav-link.active svg {
+		@apply scale-110;
+	}
+
+	.bottom-nav-link span {
+		@apply text-xs font-medium;
+	}
+
+	/* ========================================
+	   MAIN CONTENT
+	   ======================================== */
+
+	.app-main {
+		@apply min-h-screen;
+	}
+
+	.app-container {
+		@apply max-w-7xl mx-auto px-4 py-6;
+	}
+
+	.page-header {
+		@apply mb-6;
+	}
+
+	.page-title {
+		@apply text-2xl md:text-3xl font-bold text-gray-900;
+	}
+
+	.app-page {
+		@apply opacity-0 transition-opacity duration-300;
+	}
+
+	/* ========================================
+	   CARDS & CONTAINERS
+	   ======================================== */
+
+	.card {
+		@apply bg-white rounded-xl shadow-sm border border-gray-200 p-6 mb-6 transition-shadow duration-200 hover:shadow-md;
+	}
+
+	/* ========================================
+	   STAT CARDS (Dashboard)
+	   ======================================== */
+
+	.stat-card {
+		@apply rounded-xl p-6 shadow-lg transition-all duration-200 hover:shadow-xl hover:scale-105 cursor-pointer;
+	}
+
+	.stat-icon {
+		@apply mb-3;
+	}
+
+	.stat-content {
+		@apply space-y-1;
+	}
+
+	.stat-label {
+		@apply text-sm opacity-90;
+	}
+
+	.stat-value {
+		@apply text-3xl font-bold;
+	}
+
+	/* ========================================
+	   ACTION BUTTONS
+	   ======================================== */
+
+	.action-btn {
+		@apply flex flex-col items-center justify-center p-4 rounded-lg border-2 border-gray-200 hover:border-blue-500 hover:bg-blue-50 text-gray-700 hover:text-blue-600 transition-all duration-200 hover:shadow-md;
+	}
+
+	/* ========================================
+	   ACTIVITY FEED
+	   ======================================== */
+
+	.activity-item {
+		@apply flex items-start gap-3 p-3 rounded-lg hover:bg-gray-50 transition-colors;
+	}
+
+	.activity-icon {
+		@apply w-10 h-10 rounded-full flex items-center justify-center flex-shrink-0;
+	}
+
+	.activity-content {
+		@apply flex-1 min-w-0;
+	}
+
+	.activity-title {
+		@apply text-sm font-medium text-gray-900;
+	}
+
+	.activity-time {
+		@apply text-xs text-gray-500;
+	}
+
+	/* ========================================
+	   PROFILE PAGE
+	   ======================================== */
+
+	.profile-avatar {
+		@apply w-24 h-24 rounded-full bg-gradient-to-br from-blue-100 to-blue-200 flex items-center justify-center;
+	}
+
+	.profile-field {
+		@apply space-y-2;
+	}
+
+	.profile-label {
+		@apply block text-sm font-medium text-gray-700;
+	}
+
+	.profile-input {
+		@apply w-full px-4 py-2 border border-gray-300 rounded-lg bg-gray-50 text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent;
+	}
+
+	.setting-item {
+		@apply p-4 rounded-lg border border-gray-200 hover:border-blue-300 transition-colors;
+	}
+
+	/* Toggle Switch */
+	.toggle-switch {
+		@apply relative inline-block w-12 h-6 cursor-pointer;
+	}
+
+	.toggle-switch input {
+		@apply opacity-0 w-0 h-0;
+	}
+
+	.toggle-slider {
+		@apply absolute inset-0 bg-gray-300 rounded-full transition-all duration-300;
+	}
+
+	.toggle-slider::before {
+		@apply absolute content-[''] h-5 w-5 left-0.5 bottom-0.5 bg-white rounded-full transition-all duration-300;
+	}
+
+	.toggle-switch input:checked + .toggle-slider {
+		@apply bg-blue-600;
+	}
+
+	.toggle-switch input:checked + .toggle-slider::before {
+		@apply transform translate-x-6;
+	}
+
+	/* ========================================
+	   SERVICE CARDS
+	   ======================================== */
+
+	.service-card {
+		@apply bg-white rounded-xl p-6 border border-gray-200 shadow-sm hover:shadow-md transition-all duration-200 hover:-translate-y-1;
+	}
+
+	.service-icon {
+		@apply w-16 h-16 rounded-xl flex items-center justify-center mb-4;
+	}
+
+	.service-title {
+		@apply text-lg font-bold text-gray-900 mb-2;
+	}
+
+	.service-description {
+		@apply text-sm text-gray-600 mb-4;
+	}
+
+	.service-status {
+		@apply inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-medium;
+	}
+
+	.status-active {
+		@apply bg-green-100 text-green-700;
+	}
+
+	.status-inactive {
+		@apply bg-gray-100 text-gray-700;
+	}
+
+	.status-dot {
+		@apply w-2 h-2 rounded-full;
+	}
+
+	.status-active .status-dot {
+		@apply bg-green-500 animate-pulse;
+	}
+
+	.status-inactive .status-dot {
+		@apply bg-gray-500;
+	}
+
+	/* ========================================
+	   PLAN CARDS
+	   ======================================== */
+
+	.plan-card {
+		@apply bg-white rounded-xl p-6 border-2 border-gray-200 hover:border-blue-300 transition-all duration-200 relative;
+	}
+
+	.plan-featured {
+		@apply border-blue-500 shadow-lg transform scale-105;
+	}
+
+	.plan-badge {
+		@apply absolute -top-3 left-1/2 transform -translate-x-1/2 bg-blue-600 text-white px-4 py-1 rounded-full text-xs font-bold;
+	}
+
+	.plan-name {
+		@apply text-xl font-bold text-gray-900 mb-2;
+	}
+
+	.plan-price {
+		@apply text-3xl font-bold text-gray-900 mb-6;
+	}
+
+	.plan-features {
+		@apply space-y-3 mb-6;
+	}
+
+	.plan-features li {
+		@apply flex items-center gap-2 text-sm text-gray-600;
+	}
+
+	.plan-features li::before {
+		content: '✓';
+		@apply text-green-500 font-bold;
+	}
+
+	/* ========================================
+	   HELP PAGE
+	   ======================================== */
+
+	.help-search {
+		@apply w-full pl-12 pr-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent;
+	}
+
+	.help-search-icon {
+		@apply absolute left-4 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-400 pointer-events-none;
+	}
+
+	.help-topic {
+		@apply flex items-center gap-3 p-4 rounded-lg border border-gray-200 hover:border-blue-300 hover:bg-blue-50 transition-all duration-200;
+	}
+
+	.faq-item {
+		@apply border border-gray-200 rounded-lg overflow-hidden;
+	}
+
+	.faq-question {
+		@apply p-4 font-medium text-gray-900 cursor-pointer hover:bg-gray-50 transition-colors list-none;
+	}
+
+	.faq-question::-webkit-details-marker {
+		@apply hidden;
+	}
+
+	.faq-question::after {
+		content: '+';
+		@apply float-right text-2xl text-blue-600;
+	}
+
+	.faq-item[open] .faq-question::after {
+		content: '−';
+	}
+
+	.faq-answer {
+		@apply px-4 pb-4 text-gray-600 text-sm;
+	}
+
+	.contact-option {
+		@apply flex flex-col items-center p-6 rounded-xl border-2 border-gray-200 hover:border-blue-300 hover:bg-blue-50 transition-all duration-200 text-center;
+	}
+
+	/* ========================================
+	   ABOUT PAGE
+	   ======================================== */
+
+	.about-logo {
+		@apply mb-4;
+	}
+
+	.feature-item {
+		@apply p-4 rounded-lg border border-gray-200 hover:border-blue-300 hover:bg-blue-50 transition-all duration-200;
+	}
+
+	.team-member {
+		@apply text-center;
+	}
+
+	.team-avatar {
+		@apply w-20 h-20 rounded-full bg-gradient-to-br from-gray-100 to-gray-200 flex items-center justify-center mx-auto mb-3;
+	}
+
+	.team-name {
+		@apply font-bold text-gray-900 mb-1;
+	}
+
+	.team-role {
+		@apply text-sm text-gray-600;
+	}
+
+	/* ========================================
+	   BUTTONS
+	   ======================================== */
+
+	.btn-primary {
+		@apply px-6 py-2 bg-blue-600 text-white rounded-lg font-medium hover:bg-blue-700 transition-colors duration-200 shadow-sm hover:shadow-md;
+	}
+
+	.btn-outline {
+		@apply px-6 py-2 border-2 border-gray-300 text-gray-700 rounded-lg font-medium hover:border-blue-500 hover:text-blue-600 hover:bg-blue-50 transition-all duration-200;
+	}
+
+	.btn-danger {
+		@apply px-6 py-2 bg-red-50 text-red-600 rounded-lg font-medium hover:bg-red-600 hover:text-white transition-colors duration-200 border border-red-200;
+	}
+
+	/* ========================================
+	   ANIMATIONS
+	   ======================================== */
+
+	@keyframes fadeIn {
+		from {
+			opacity: 0;
+			transform: translateY(10px);
+		}
+		to {
+			opacity: 1;
+			transform: translateY(0);
+		}
+	}
+
+	.animate-fade-in {
+		animation: fadeIn 0.3s ease-out;
+	}
+
+	/* ========================================
+	   RESPONSIVE UTILITIES
+	   ======================================== */
+
+	@media (max-width: 767px) {
+		.app-container {
+			@apply px-3 py-4;
+		}
+
+		.card {
+			@apply p-4;
+		}
+	}
+}
