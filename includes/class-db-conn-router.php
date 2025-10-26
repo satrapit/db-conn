@@ -220,6 +220,36 @@ class Db_Conn_Router
   }
 
   /**
+   * Check if user is authenticated via cookie.
+   *
+   * @since    1.0.0
+   * @return   bool    True if authenticated, false otherwise.
+   */
+  private function is_authenticated()
+  {
+    return isset($_COOKIE['db_conn_auth']) && !empty($_COOKIE['db_conn_auth']);
+  }
+
+  /**
+   * Get configured slug for a page.
+   *
+   * @since    1.0.0
+   * @param    string    $page    Page name ('signin' or 'panel').
+   * @return   string             The configured slug.
+   */
+  private function get_page_slug($page)
+  {
+    $options = get_option($this->option_name, array());
+    $default_slugs = array(
+      'signin' => 'signin',
+      'panel' => 'panel',
+    );
+
+    $option_key = $page . '_slug';
+    return isset($options[$option_key]) ? $options[$option_key] : $default_slugs[$page];
+  }
+
+  /**
    * Handle template redirect for custom pages.
    *
    * @since    1.0.0
@@ -262,6 +292,13 @@ class Db_Conn_Router
    */
   private function render_signin_page()
   {
+    // If user is already authenticated, redirect to panel
+    if ($this->is_authenticated()) {
+      $panel_slug = $this->get_page_slug('panel');
+      wp_redirect(home_url('/' . $panel_slug));
+      exit;
+    }
+
     // Initialize Twig lazily when needed
     $this->init_twig();
 
@@ -294,6 +331,13 @@ class Db_Conn_Router
    */
   private function render_panel_page()
   {
+    // If user is not authenticated, redirect to signin
+    if (!$this->is_authenticated()) {
+      $signin_slug = $this->get_page_slug('signin');
+      wp_redirect(home_url('/' . $signin_slug));
+      exit;
+    }
+
     // Initialize Twig lazily when needed
     $this->init_twig();
 
