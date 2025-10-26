@@ -236,7 +236,6 @@ class Db_Conn_Functions
 			'date',
 			'day',
 			'feed',
-			'home',
 			'hour',
 			'index',
 			'login',

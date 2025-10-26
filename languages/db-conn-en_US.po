@@ -51,7 +51,27 @@ msgstr "Sign In Page Slug"
 msgid "Panel Page Slug"
 msgstr "Panel Page Slug"
 
-#: admin/class-db-conn-settings.php:145
+#: admin/class-db-conn-settings.php:131
+msgid "Home Page Slug"
+msgstr "Home Page Slug"
+
+#: admin/class-db-conn-settings.php:139
+msgid "Services Page Slug"
+msgstr "Services Page Slug"
+
+#: admin/class-db-conn-settings.php:147
+msgid "Help Page Slug"
+msgstr "Help Page Slug"
+
+#: admin/class-db-conn-settings.php:155
+msgid "Profile Page Slug"
+msgstr "Profile Page Slug"
+
+#: admin/class-db-conn-settings.php:163
+msgid "About Page Slug"
+msgstr "About Page Slug"
+
+#: admin/class-db-conn-settings.php:188
 msgid "General"
 msgstr "General"
 
@@ -79,19 +99,39 @@ msgstr "Enter the custom slug for the sign in page."
 msgid "Enter the custom slug for the panel page."
 msgstr "Enter the custom slug for the panel page."
 
-#: admin/class-db-conn-settings.php:248
+#: admin/class-db-conn-settings.php:256
+msgid "Enter the custom slug for the home page."
+msgstr "Enter the custom slug for the home page."
+
+#: admin/class-db-conn-settings.php:270
+msgid "Enter the custom slug for the services page."
+msgstr "Enter the custom slug for the services page."
+
+#: admin/class-db-conn-settings.php:284
+msgid "Enter the custom slug for the help page."
+msgstr "Enter the custom slug for the help page."
+
+#: admin/class-db-conn-settings.php:298
+msgid "Enter the custom slug for the profile page."
+msgstr "Enter the custom slug for the profile page."
+
+#: admin/class-db-conn-settings.php:312
+msgid "Enter the custom slug for the about page."
+msgstr "Enter the custom slug for the about page."
+
+#: admin/class-db-conn-settings.php:342
 msgid "Security check failed. Please try again."
 msgstr "Security check failed. Please try again."
 
-#: admin/class-db-conn-settings.php:260
+#: admin/class-db-conn-settings.php:354
 msgid "You do not have permission to modify these settings."
 msgstr "You do not have permission to modify these settings."
 
-#: admin/class-db-conn-settings.php:309
-msgid "Sign In and Panel slugs cannot be the same."
-msgstr "Sign In and Panel slugs cannot be the same."
+#: admin/class-db-conn-settings.php:507
+msgid "Duplicate slug detected: %s. All page slugs must be unique."
+msgstr "Duplicate slug detected: %s. All page slugs must be unique."
 
-#: admin/class-db-conn-settings.php:323
+#: admin/class-db-conn-settings.php:524
 msgid "Slugs updated successfully. Rewrite rules have been refreshed."
 msgstr "Slugs updated successfully. Rewrite rules have been refreshed."
 

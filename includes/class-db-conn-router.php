@@ -192,7 +192,13 @@ class Db_Conn_Router
   {
     $options = get_option($this->option_name, array());
     $signin_slug = isset($options['signin_slug']) ? $options['signin_slug'] : 'signin';
-    $panel_slug = isset($options['panel_slug']) ? $options['panel_slug'] : 'panel';    // Add rewrite rules for custom pages
+    $panel_slug = isset($options['panel_slug']) ? $options['panel_slug'] : 'panel';
+    $services_slug = isset($options['services_slug']) ? $options['services_slug'] : 'services';
+    $help_slug = isset($options['help_slug']) ? $options['help_slug'] : 'help';
+    $profile_slug = isset($options['profile_slug']) ? $options['profile_slug'] : 'profile';
+    $about_slug = isset($options['about_slug']) ? $options['about_slug'] : 'about';
+
+    // Add rewrite rules for custom pages
     add_rewrite_rule(
       '^' . $signin_slug . '/?$',
       'index.php?db_conn_page=signin',
@@ -202,6 +208,30 @@ class Db_Conn_Router
     add_rewrite_rule(
       '^' . $panel_slug . '/?$',
       'index.php?db_conn_page=panel',
+      'top'
+    );
+
+    add_rewrite_rule(
+      '^' . $services_slug . '/?$',
+      'index.php?db_conn_page=services',
+      'top'
+    );
+
+    add_rewrite_rule(
+      '^' . $help_slug . '/?$',
+      'index.php?db_conn_page=help',
+      'top'
+    );
+
+    add_rewrite_rule(
+      '^' . $profile_slug . '/?$',
+      'index.php?db_conn_page=profile',
+      'top'
+    );
+
+    add_rewrite_rule(
+      '^' . $about_slug . '/?$',
+      'index.php?db_conn_page=about',
       'top'
     );
   }
@@ -274,6 +304,18 @@ class Db_Conn_Router
       case 'panel':
         $this->render_panel_page();
         break;
+      case 'services':
+        $this->render_services_page();
+        break;
+      case 'help':
+        $this->render_help_page();
+        break;
+      case 'profile':
+        $this->render_profile_page();
+        break;
+      case 'about':
+        $this->render_about_page();
+        break;
       default:
         // Unknown page, show 404
         global $wp_query;
@@ -316,7 +358,11 @@ class Db_Conn_Router
         'direction' => is_rtl() ? 'rtl' : 'ltr',
         'home_url' => home_url('/'),
         'current_year' => date('Y'),
+        'page_slugs' => $this->get_all_page_slugs(),
       );
+
+      // Add page data for JavaScript
+      $this->enqueue_page_data($context['page_slugs']);
 
       echo $this->twig->render('pages/signin.twig', $context);
     } catch (Exception $e) {
@@ -355,7 +401,11 @@ class Db_Conn_Router
         'direction' => is_rtl() ? 'rtl' : 'ltr',
         'home_url' => home_url('/'),
         'current_year' => date('Y'),
+        'page_slugs' => $this->get_all_page_slugs(),
       );
+
+      // Add page data for JavaScript
+      $this->enqueue_page_data($context['page_slugs']);
 
       echo $this->twig->render('pages/panel.twig', $context);
     } catch (Exception $e) {
@@ -431,5 +481,207 @@ class Db_Conn_Router
   {
     $options = get_option($this->option_name, array());
     return isset($options['panel_slug']) ? $options['panel_slug'] : 'panel';
+  }
+
+  /**
+   * Render the services page.
+   *
+   * @since    1.0.0
+   */
+  private function render_services_page()
+  {
+    // If user is not authenticated, redirect to signin
+    if (!$this->is_authenticated()) {
+      $signin_slug = $this->get_page_slug('signin');
+      wp_redirect(home_url('/' . $signin_slug));
+      exit;
+    }
+
+    $this->init_twig();
+
+    if (!$this->twig) {
+      wp_die(__('Database Connector: Twig templating engine is not available.', 'db-conn'));
+      return;
+    }
+
+    try {
+      $context = array(
+        'page_title' => __('Services', 'db-conn'),
+        'site_name' => get_bloginfo('name'),
+        'plugin_url' => plugin_dir_url(dirname(__FILE__)),
+        'lang' => get_bloginfo('language'),
+        'direction' => is_rtl() ? 'rtl' : 'ltr',
+        'home_url' => home_url('/'),
+        'current_year' => date('Y'),
+        'page_slugs' => $this->get_all_page_slugs(),
+      );
+
+      $this->enqueue_page_data($context['page_slugs']);
+      echo $this->twig->render('pages/services.twig', $context);
+    } catch (Exception $e) {
+      wp_die('Twig Error: ' . esc_html($e->getMessage()));
+    }
+  }
+
+  /**
+   * Render the help page.
+   *
+   * @since    1.0.0
+   */
+  private function render_help_page()
+  {
+    // If user is not authenticated, redirect to signin
+    if (!$this->is_authenticated()) {
+      $signin_slug = $this->get_page_slug('signin');
+      wp_redirect(home_url('/' . $signin_slug));
+      exit;
+    }
+
+    $this->init_twig();
+
+    if (!$this->twig) {
+      wp_die(__('Database Connector: Twig templating engine is not available.', 'db-conn'));
+      return;
+    }
+
+    try {
+      $context = array(
+        'page_title' => __('Help', 'db-conn'),
+        'site_name' => get_bloginfo('name'),
+        'plugin_url' => plugin_dir_url(dirname(__FILE__)),
+        'lang' => get_bloginfo('language'),
+        'direction' => is_rtl() ? 'rtl' : 'ltr',
+        'home_url' => home_url('/'),
+        'current_year' => date('Y'),
+        'page_slugs' => $this->get_all_page_slugs(),
+      );
+
+      $this->enqueue_page_data($context['page_slugs']);
+      echo $this->twig->render('pages/help.twig', $context);
+    } catch (Exception $e) {
+      wp_die('Twig Error: ' . esc_html($e->getMessage()));
+    }
+  }
+
+  /**
+   * Render the profile page.
+   *
+   * @since    1.0.0
+   */
+  private function render_profile_page()
+  {
+    // If user is not authenticated, redirect to signin
+    if (!$this->is_authenticated()) {
+      $signin_slug = $this->get_page_slug('signin');
+      wp_redirect(home_url('/' . $signin_slug));
+      exit;
+    }
+
+    $this->init_twig();
+
+    if (!$this->twig) {
+      wp_die(__('Database Connector: Twig templating engine is not available.', 'db-conn'));
+      return;
+    }
+
+    try {
+      $context = array(
+        'page_title' => __('Profile', 'db-conn'),
+        'site_name' => get_bloginfo('name'),
+        'plugin_url' => plugin_dir_url(dirname(__FILE__)),
+        'lang' => get_bloginfo('language'),
+        'direction' => is_rtl() ? 'rtl' : 'ltr',
+        'home_url' => home_url('/'),
+        'current_year' => date('Y'),
+        'page_slugs' => $this->get_all_page_slugs(),
+      );
+
+      $this->enqueue_page_data($context['page_slugs']);
+      echo $this->twig->render('pages/profile.twig', $context);
+    } catch (Exception $e) {
+      wp_die('Twig Error: ' . esc_html($e->getMessage()));
+    }
+  }
+
+  /**
+   * Render the about page.
+   *
+   * @since    1.0.0
+   */
+  private function render_about_page()
+  {
+    // If user is not authenticated, redirect to signin
+    if (!$this->is_authenticated()) {
+      $signin_slug = $this->get_page_slug('signin');
+      wp_redirect(home_url('/' . $signin_slug));
+      exit;
+    }
+
+    $this->init_twig();
+
+    if (!$this->twig) {
+      wp_die(__('Database Connector: Twig templating engine is not available.', 'db-conn'));
+      return;
+    }
+
+    try {
+      $context = array(
+        'page_title' => __('About', 'db-conn'),
+        'site_name' => get_bloginfo('name'),
+        'plugin_url' => plugin_dir_url(dirname(__FILE__)),
+        'lang' => get_bloginfo('language'),
+        'direction' => is_rtl() ? 'rtl' : 'ltr',
+        'home_url' => home_url('/'),
+        'current_year' => date('Y'),
+        'page_slugs' => $this->get_all_page_slugs(),
+      );
+
+      $this->enqueue_page_data($context['page_slugs']);
+      echo $this->twig->render('pages/about.twig', $context);
+    } catch (Exception $e) {
+      wp_die('Twig Error: ' . esc_html($e->getMessage()));
+    }
+  }
+
+  /**
+   * Get all page slugs.
+   *
+   * @since    1.0.0
+   * @return   array    Array of all page slugs.
+   */
+  private function get_all_page_slugs()
+  {
+    $options = get_option($this->option_name, array());
+    return array(
+      'signin' => isset($options['signin_slug']) ? $options['signin_slug'] : 'signin',
+      'panel' => isset($options['panel_slug']) ? $options['panel_slug'] : 'panel',
+      'services' => isset($options['services_slug']) ? $options['services_slug'] : 'services',
+      'help' => isset($options['help_slug']) ? $options['help_slug'] : 'help',
+      'profile' => isset($options['profile_slug']) ? $options['profile_slug'] : 'profile',
+      'about' => isset($options['about_slug']) ? $options['about_slug'] : 'about',
+    );
+  }
+
+  /**
+   * Enqueue page data for JavaScript.
+   *
+   * @since    1.0.0
+   * @param    array    $page_slugs    Array of page slugs.
+   */
+  private function enqueue_page_data($page_slugs)
+  {
+    $home_url = home_url('/');
+    $page_data = array(
+      'signinUrl' => $home_url . $page_slugs['signin'],
+      'panelUrl' => $home_url . $page_slugs['panel'],
+      'homeUrl' => $home_url . $page_slugs['panel'],
+      'servicesUrl' => $home_url . $page_slugs['services'],
+      'helpUrl' => $home_url . $page_slugs['help'],
+      'profileUrl' => $home_url . $page_slugs['profile'],
+      'aboutUrl' => $home_url . $page_slugs['about'],
+    );
+
+    // Output JavaScript to make data available
+    echo '<script>window.dbConnPageData = ' . wp_json_encode($page_data) . ';</script>';
   }
 }

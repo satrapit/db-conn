@@ -51,7 +51,27 @@ msgstr "پیوند یکتای صفحه ورود"
 msgid "Panel Page Slug"
 msgstr "پیوند یکتای صفحه پنل"
 
-#: admin/class-db-conn-settings.php:145
+#: admin/class-db-conn-settings.php:131
+msgid "Home Page Slug"
+msgstr "پیوند یکتای صفحه خانه"
+
+#: admin/class-db-conn-settings.php:139
+msgid "Services Page Slug"
+msgstr "پیوند یکتای صفحه خدمات"
+
+#: admin/class-db-conn-settings.php:147
+msgid "Help Page Slug"
+msgstr "پیوند یکتای صفحه راهنما"
+
+#: admin/class-db-conn-settings.php:155
+msgid "Profile Page Slug"
+msgstr "پیوند یکتای صفحه پروفایل"
+
+#: admin/class-db-conn-settings.php:163
+msgid "About Page Slug"
+msgstr "پیوند یکتای صفحه درباره ما"
+
+#: admin/class-db-conn-settings.php:188
 msgid "General"
 msgstr "عمومی"
 
@@ -79,19 +99,39 @@ msgstr "پیوند یکتای سفارشی برای صفحه ورود را وا�
 msgid "Enter the custom slug for the panel page."
 msgstr "پیوند یکتای سفارشی برای صفحه پنل را وارد کنید."
 
-#: admin/class-db-conn-settings.php:248
+#: admin/class-db-conn-settings.php:256
+msgid "Enter the custom slug for the home page."
+msgstr "پیوند یکتای سفارشی برای صفحه خانه را وارد کنید."
+
+#: admin/class-db-conn-settings.php:270
+msgid "Enter the custom slug for the services page."
+msgstr "پیوند یکتای سفارشی برای صفحه خدمات را وارد کنید."
+
+#: admin/class-db-conn-settings.php:284
+msgid "Enter the custom slug for the help page."
+msgstr "پیوند یکتای سفارشی برای صفحه راهنما را وارد کنید."
+
+#: admin/class-db-conn-settings.php:298
+msgid "Enter the custom slug for the profile page."
+msgstr "پیوند یکتای سفارشی برای صفحه پروفایل را وارد کنید."
+
+#: admin/class-db-conn-settings.php:312
+msgid "Enter the custom slug for the about page."
+msgstr "پیوند یکتای سفارشی برای صفحه درباره ما را وارد کنید."
+
+#: admin/class-db-conn-settings.php:342
 msgid "Security check failed. Please try again."
 msgstr "بررسی امنیتی ناموفق بود. لطفاً دوباره تلاش کنید."
 
-#: admin/class-db-conn-settings.php:260
+#: admin/class-db-conn-settings.php:354
 msgid "You do not have permission to modify these settings."
 msgstr "شما مجوز تغییر این تنظیمات را ندارید."
 
-#: admin/class-db-conn-settings.php:309
-msgid "Sign In and Panel slugs cannot be the same."
-msgstr "پیوند یکتای ورود و پنل نمی‌توانند یکسان باشند."
+#: admin/class-db-conn-settings.php:507
+msgid "Duplicate slug detected: %s. All page slugs must be unique."
+msgstr "پیوند یکتای تکراری شناسایی شد: %s. همه پیوندهای یکتای صفحات باید منحصر به فرد باشند."
 
-#: admin/class-db-conn-settings.php:323
+#: admin/class-db-conn-settings.php:524
 msgid "Slugs updated successfully. Rewrite rules have been refreshed."
 msgstr "پیوندهای یکتا با موفقیت به‌روزرسانی شدند. قوانین بازنویسی تازه‌سازی شدند."
 

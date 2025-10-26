@@ -6,11 +6,14 @@
 import { initAuthGuard } from './modules/auth.js';
 import { initSigninPage } from './pages/signin.js';
 import { initPanelPage } from './pages/panel.js';
-import { initHomePage } from './pages/home.js';
 import { initProfilePage } from './pages/profile.js';
 import { initServicesPage } from './pages/services.js';
 import { initHelpPage } from './pages/help.js';
 import { initAboutPage } from './pages/about.js';
+import darkModeManager, { setupDarkModeToggles } from './utils/darkMode.js';
+
+// Dark mode is already initialized in darkMode.js (runs immediately)
+// This prevents flash of wrong theme on page load
 
 // Run auth guard immediately (before DOM loads) to prevent page flash
 initAuthGuard();
@@ -41,9 +44,6 @@ document.addEventListener('DOMContentLoaded', function () {
 			case 'panel':
 				initPanelPage();
 				break;
-			case 'home':
-				initHomePage();
-				break;
 			case 'profile':
 				initProfilePage();
 				break;
@@ -67,6 +67,9 @@ document.addEventListener('DOMContentLoaded', function () {
  * Handles mobile menu, bottom nav, and user menu
  */
 function initAppNavigation() {
+	// Initialize dark mode toggles
+	setupDarkModeToggles();
+
 	// Mobile menu toggle
 	const mobileMenuBtn = document.getElementById('mobileMenuBtn');
 	const mobileSidebar = document.getElementById('mobileSidebar');
@@ -108,22 +111,26 @@ function initAppNavigation() {
 		});
 	}
 
-	// Handle navigation link clicks
-	const navLinks = document.querySelectorAll('[data-nav]');
-	navLinks.forEach(link => {
-		link.addEventListener('click', (e) => {
+	// Handle logout button
+	const logoutBtn = document.getElementById('logoutBtn');
+	if (logoutBtn) {
+		logoutBtn.addEventListener('click', (e) => {
 			e.preventDefault();
-			const page = link.getAttribute('data-nav');
-			console.log(`Navigating to: ${page}`);
+			console.log('Logging out...');
 
-			// Update active states
-			updateActiveNav(page);
-
-			// In a real app, you would navigate here
-			// For now, just log and optionally reload
-			// window.location.href = `/${page}`;
+			// Import and use auth module
+			import('./modules/auth.js').then(module => {
+				module.logout();
+			});
 		});
-	});
+	}
+
+	// Update active navigation states based on current page
+	const currentPageElement = document.querySelector('[data-page]');
+	if (currentPageElement) {
+		const currentPageName = currentPageElement.getAttribute('data-page');
+		updateActiveNav(currentPageName);
+	}
 }
 
 /**

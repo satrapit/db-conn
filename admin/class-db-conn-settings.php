@@ -125,6 +125,42 @@ class Db_Conn_Settings
       'db-conn-slug',
       'db_conn_slug_section'
     );
+
+    // Services slug field
+    add_settings_field(
+      'services_slug',
+      __('Services Page Slug', 'db-conn'),
+      array($this, 'services_slug_callback'),
+      'db-conn-slug',
+      'db_conn_slug_section'
+    );
+
+    // Help slug field
+    add_settings_field(
+      'help_slug',
+      __('Help Page Slug', 'db-conn'),
+      array($this, 'help_slug_callback'),
+      'db-conn-slug',
+      'db_conn_slug_section'
+    );
+
+    // Profile slug field
+    add_settings_field(
+      'profile_slug',
+      __('Profile Page Slug', 'db-conn'),
+      array($this, 'profile_slug_callback'),
+      'db-conn-slug',
+      'db_conn_slug_section'
+    );
+
+    // About slug field
+    add_settings_field(
+      'about_slug',
+      __('About Page Slug', 'db-conn'),
+      array($this, 'about_slug_callback'),
+      'db-conn-slug',
+      'db_conn_slug_section'
+    );
   }
 
   /**
@@ -138,21 +174,21 @@ class Db_Conn_Settings
     $default_tab = 'general';
     $tab = isset($_GET['tab']) ? $_GET['tab'] : $default_tab;
 ?>
-    <div class="wrap db-conn-settings">
-      <h1><?php echo esc_html(get_admin_page_title()); ?></h1>
+<div class="wrap db-conn-settings">
+	<h1><?php echo esc_html(get_admin_page_title()); ?></h1>
 
-      <nav class="nav-tab-wrapper">
-        <a href="?page=db-conn-settings&tab=general"
-          class="nav-tab <?php echo $tab === 'general' ? 'nav-tab-active' : ''; ?>">
-          <?php _e('General', 'db-conn'); ?>
-        </a>
-        <a href="?page=db-conn-settings&tab=slug" class="nav-tab <?php echo $tab === 'slug' ? 'nav-tab-active' : ''; ?>">
-          <?php _e('Page slugs', 'db-conn'); ?>
-        </a>
-      </nav>
+	<nav class="nav-tab-wrapper">
+		<a href="?page=db-conn-settings&tab=general"
+			class="nav-tab <?php echo $tab === 'general' ? 'nav-tab-active' : ''; ?>">
+			<?php _e('General', 'db-conn'); ?>
+		</a>
+		<a href="?page=db-conn-settings&tab=slug" class="nav-tab <?php echo $tab === 'slug' ? 'nav-tab-active' : ''; ?>">
+			<?php _e('Page slugs', 'db-conn'); ?>
+		</a>
+	</nav>
 
-      <div class="tab-content">
-        <?php
+	<div class="tab-content">
+		<?php
         switch ($tab) {
           case 'general':
             $this->display_general_tab();
@@ -162,9 +198,9 @@ class Db_Conn_Settings
             break;
         }
         ?>
-      </div>
-    </div>
-  <?php
+	</div>
+</div>
+<?php
   }
 
   /**
@@ -175,17 +211,17 @@ class Db_Conn_Settings
   private function display_general_tab()
   {
   ?>
-    <form action="options.php" method="post">
-      <?php
+<form action="options.php" method="post">
+	<?php
       settings_fields('db_conn_settings_group');
       do_settings_sections('db-conn-general');
       ?>
-      <div style="margin-top: 20px;">
-        <p><?php _e('This is the general settings tab.', 'db-conn'); ?></p>
-      </div>
-      <?php submit_button(); ?>
-    </form>
-  <?php
+	<div style="margin-top: 20px;">
+		<p><?php _e('This is the general settings tab.', 'db-conn'); ?></p>
+	</div>
+	<?php submit_button(); ?>
+</form>
+<?php
   }
 
   /**
@@ -196,14 +232,14 @@ class Db_Conn_Settings
   private function display_slug_tab()
   {
   ?>
-    <form action="options.php" method="post">
-      <?php
+<form action="options.php" method="post">
+	<?php
       settings_fields('db_conn_settings_group');
       do_settings_sections('db-conn-slug');
       submit_button();
       ?>
-    </form>
-  <?php
+</form>
+<?php
   }
 
   /**
@@ -236,10 +272,10 @@ class Db_Conn_Settings
     $options = get_option($this->option_name, array());
     $value = isset($options['signin_slug']) ? $options['signin_slug'] : 'signin';
   ?>
-    <input type="text" id="signin_slug" name="<?php echo $this->option_name; ?>[signin_slug]"
-      value="<?php echo esc_attr($value); ?>" class="regular-text" />
-    <p class="description"><?php _e('Enter the custom slug for the sign in page.', 'db-conn'); ?></p>
-  <?php
+<input type="text" id="signin_slug" name="<?php echo $this->option_name; ?>[signin_slug]"
+	value="<?php echo esc_attr($value); ?>" class="regular-text" />
+<p class="description"><?php _e('Enter the custom slug for the sign in page.', 'db-conn'); ?></p>
+<?php
   }
   /**
    * Dashboard slug field callback.
@@ -251,9 +287,73 @@ class Db_Conn_Settings
     $options = get_option($this->option_name, array());
     $value = isset($options['panel_slug']) ? $options['panel_slug'] : 'panel';
   ?>
-    <input type="text" id="panel_slug" name="<?php echo $this->option_name; ?>[panel_slug]"
-      value="<?php echo esc_attr($value); ?>" class="regular-text" />
-    <p class="description"><?php _e('Enter the custom slug for the panel page.', 'db-conn'); ?></p>
+<input type="text" id="panel_slug" name="<?php echo $this->option_name; ?>[panel_slug]"
+	value="<?php echo esc_attr($value); ?>" class="regular-text" />
+<p class="description"><?php _e('Enter the custom slug for the panel page.', 'db-conn'); ?></p>
+<?php
+  }
+
+  /**
+   * Services slug field callback.
+   *
+   * @since    1.0.0
+   */
+  public function services_slug_callback()
+  {
+    $options = get_option($this->option_name, array());
+    $value = isset($options['services_slug']) ? $options['services_slug'] : 'services';
+  ?>
+<input type="text" id="services_slug" name="<?php echo $this->option_name; ?>[services_slug]"
+	value="<?php echo esc_attr($value); ?>" class="regular-text" />
+<p class="description"><?php _e('Enter the custom slug for the services page.', 'db-conn'); ?></p>
+<?php
+  }
+
+  /**
+   * Help slug field callback.
+   *
+   * @since    1.0.0
+   */
+  public function help_slug_callback()
+  {
+    $options = get_option($this->option_name, array());
+    $value = isset($options['help_slug']) ? $options['help_slug'] : 'help';
+  ?>
+<input type="text" id="help_slug" name="<?php echo $this->option_name; ?>[help_slug]"
+	value="<?php echo esc_attr($value); ?>" class="regular-text" />
+<p class="description"><?php _e('Enter the custom slug for the help page.', 'db-conn'); ?></p>
+<?php
+  }
+
+  /**
+   * Profile slug field callback.
+   *
+   * @since    1.0.0
+   */
+  public function profile_slug_callback()
+  {
+    $options = get_option($this->option_name, array());
+    $value = isset($options['profile_slug']) ? $options['profile_slug'] : 'profile';
+  ?>
+<input type="text" id="profile_slug" name="<?php echo $this->option_name; ?>[profile_slug]"
+	value="<?php echo esc_attr($value); ?>" class="regular-text" />
+<p class="description"><?php _e('Enter the custom slug for the profile page.', 'db-conn'); ?></p>
+<?php
+  }
+
+  /**
+   * About slug field callback.
+   *
+   * @since    1.0.0
+   */
+  public function about_slug_callback()
+  {
+    $options = get_option($this->option_name, array());
+    $value = isset($options['about_slug']) ? $options['about_slug'] : 'about';
+  ?>
+<input type="text" id="about_slug" name="<?php echo $this->option_name; ?>[about_slug]"
+	value="<?php echo esc_attr($value); ?>" class="regular-text" />
+<p class="description"><?php _e('Enter the custom slug for the about page.', 'db-conn'); ?></p>
 <?php
   }
 
@@ -338,19 +438,51 @@ class Db_Conn_Settings
       }
     }
 
+    // Sanitize and validate all other page slugs
+    $page_slugs = array('services', 'help', 'profile', 'about');
+    foreach ($page_slugs as $page_type) {
+      $input_key = $page_type . '_slug';
+      if (isset($input[$input_key])) {
+        $slug = sanitize_title($input[$input_key]);
+
+        // Validate the slug
+        $validation_result = $this->validate_slug($slug, $page_type);
+        if (is_wp_error($validation_result)) {
+          add_settings_error(
+            $this->option_name,
+            $input_key . '_error',
+            $validation_result->get_error_message(),
+            'error'
+          );
+          // Keep the old value if validation fails
+          $sanitized[$input_key] = isset($old_options[$input_key]) ? $old_options[$input_key] : $page_type;
+        } else {
+          $sanitized[$input_key] = $slug;
+          // Check if slug changed
+          if (!isset($old_options[$input_key]) || $old_options[$input_key] !== $slug) {
+            $slugs_changed = true;
+          }
+        }
+      }
+    }
+
     // Check for duplicate slugs within our own settings
-    if (isset($sanitized['signin_slug']) && isset($sanitized['panel_slug'])) {
-      if ($sanitized['signin_slug'] === $sanitized['panel_slug']) {
-        add_settings_error(
-          $this->option_name,
-          'duplicate_slugs_error',
-          __('Sign In and Panel slugs cannot be the same.', 'db-conn'),
-          'error'
-        );
-        // Reset to defaults
-        $sanitized['signin_slug'] = isset($old_options['signin_slug']) ? $old_options['signin_slug'] : 'signin';
-        $sanitized['panel_slug'] = isset($old_options['panel_slug']) ? $old_options['panel_slug'] : 'panel';
-        $slugs_changed = false;
+    $all_slugs = array();
+    foreach ($sanitized as $key => $value) {
+      if (strpos($key, '_slug') !== false) {
+        if (in_array($value, $all_slugs)) {
+          add_settings_error(
+            $this->option_name,
+            'duplicate_slugs_error',
+            sprintf(__('Duplicate slug detected: %s. All page slugs must be unique.', 'db-conn'), $value),
+            'error'
+          );
+          // Reset to old options
+          $sanitized = $old_options;
+          $slugs_changed = false;
+          break;
+        }
+        $all_slugs[] = $value;
       }
     }
 

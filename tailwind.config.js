@@ -8,6 +8,7 @@ module.exports = {
 		"./public/js/**/*.js",
 		"./includes/**/*.php"
 	],
+	darkMode: 'class', // Enable dark mode with class strategy
 	theme: {
 		extend: {
 			colors: {
