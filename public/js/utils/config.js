@@ -7,7 +7,7 @@ const pageData = window.dbConnPageData || {};
 
 export const CONFIG = {
 	API_URL: 'https://portal.com/api',
-	TOKEN_KEY: 'auth_token',
+	TOKEN_KEY: 'db_conn_auth_token',
 	COOKIE_NAME: 'db_conn_auth',
 	COOKIE_DAYS: 30,
 	PANEL_URL: pageData.panelUrl || '/panel',

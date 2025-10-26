@@ -7,6 +7,37 @@
 @tailwind components;
 @tailwind utilities;
 
+/* ========================================
+   CUSTOM FONTS - Dana VF
+   ======================================== */
+
+/* Dana Variable Font - Modern browsers with variable font support */
+@font-face {
+	font-family: 'Dana VF';
+	src: url('../fonts/DanaVF.woff2') format('woff2-variations'),
+		url('../fonts/DanaVF.woff') format('woff-variations'),
+		url('../fonts/DanaVF.woff') format('woff');
+	font-display: swap;
+	font-weight: 100 900;
+}
+
+/* Dana Static Fonts - Fallback for older browsers */
+@font-face {
+	font-family: 'Dana';
+	src: url('../fonts/staticfonts/Dana-Regular.woff') format('woff');
+	font-weight: 400;
+	font-style: normal;
+	font-display: swap;
+}
+
+@font-face {
+	font-family: 'Dana';
+	src: url('../fonts/staticfonts/Dana-Bold.woff') format('woff');
+	font-weight: 700;
+	font-style: normal;
+	font-display: swap;
+}
+
 @layer base {
 	/* ========================================
 	   DARK MODE SUPPORT
@@ -15,6 +46,18 @@
 	/* Smooth transitions for theme switching */
 	html {
 		@apply transition-colors duration-200;
+	}
+
+	/* Apply Dana font to body - with fallback support */
+	body {
+		font-family: 'Dana', sans-serif;
+	}
+
+	/* Use variable font for browsers that support it */
+	@supports (font-variation-settings: normal) {
+		body {
+			font-family: 'Dana VF', sans-serif;
+		}
 	}
 
 	/* Light mode (default) */
