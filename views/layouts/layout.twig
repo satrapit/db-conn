@@ -7,13 +7,34 @@
 		<title>{{ page_title|default('Panel') }}
 			-
 			{{ site_name|default('DB Conn') }}</title>
+
+		{# Preload critical fonts #}
+		<link rel="preload" href="{{ plugin_url ~ 'public/fonts/DanaVF.woff2' }}" as="font" type="font/woff2" crossorigin>
+		<link rel="preload" href="https://cdn-uicons.flaticon.com/3.0.0/uicons-regular-rounded/css/uicons-regular-rounded.css" as="style">
+		<link
+		rel="preload" href="https://cdn-uicons.flaticon.com/3.0.0/uicons-solid-rounded/css/uicons-solid-rounded.css" as="style">
+
+		{# Stylesheets #}
 		<link rel="stylesheet" href="{{ plugin_url ~ 'public/css/style.css' }}">
-		<link rel='stylesheet' href='https://cdn-uicons.flaticon.com/2.6.0/uicons-regular-rounded/css/uicons-regular-rounded.css'>
-		<link rel='stylesheet' href='https://cdn-uicons.flaticon.com/2.6.0/uicons-bold-rounded/css/uicons-bold-rounded.css'>
-		<link rel='stylesheet' href='https://cdn-uicons.flaticon.com/2.6.0/uicons-solid-rounded/css/uicons-solid-rounded.css'>
+		<link rel='stylesheet' href='https://cdn-uicons.flaticon.com/3.0.0/uicons-regular-rounded/css/uicons-regular-rounded.css'>
+		<link
+		rel='stylesheet' href='https://cdn-uicons.flaticon.com/3.0.0/uicons-solid-rounded/css/uicons-solid-rounded.css'>
+
+		{# Ensure fonts are loaded before rendering #}
+		<script>
+			document.fonts.ready.then(() => {
+document.body.style.opacity = '1';
+});
+		</script>
+		<style>
+			body {
+				opacity: 0;
+				transition: opacity 0.1s ease-in;
+			}
+		</style>
 	</head>
 	<body
-		class="app-body">
+		class="app-body ss02">
 
 		{# Fixed Top Header #}
 		<header class="app-header">
@@ -48,7 +69,7 @@
 				{# User Menu #}
 				<div class="user-menu">
 					<button class="user-menu-btn" id="userMenuBtn" aria-label="User menu">
-						<i class="fi fi-sr-circle-user text-2xl"></i>
+						<i class="fi fi-rr-circle-user text-2xl"></i>
 					</button>
 					{# User Dropdown #}
 					<div class="user-dropdown" id="userDropdown">

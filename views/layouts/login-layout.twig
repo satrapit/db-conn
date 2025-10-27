@@ -6,12 +6,33 @@
 		<title>{{ page_title|default('Sign In') }}
 			-
 			{{ site_name|default('DB Conn') }}</title>
+
+		{# Preload critical fonts #}
+		<link rel="preload" href="{{ plugin_url ~ 'public/fonts/DanaVF.woff2' }}" as="font" type="font/woff2" crossorigin>
+		<link rel="preload" href="https://cdn-uicons.flaticon.com/3.0.0/uicons-regular-rounded/css/uicons-regular-rounded.css" as="style">
+		<link
+		rel="preload" href="https://cdn-uicons.flaticon.com/3.0.0/uicons-solid-rounded/css/uicons-solid-rounded.css" as="style">
+
+		{# Stylesheets #}
 		<link rel="stylesheet" href="{{ plugin_url ~ 'public/css/style.css' }}">
-		<link rel='stylesheet' href='https://cdn-uicons.flaticon.com/2.6.0/uicons-regular-rounded/css/uicons-regular-rounded.css'>
-		<link rel='stylesheet' href='https://cdn-uicons.flaticon.com/2.6.0/uicons-bold-rounded/css/uicons-bold-rounded.css'>
-		<link rel='stylesheet' href='https://cdn-uicons.flaticon.com/2.6.0/uicons-solid-rounded/css/uicons-solid-rounded.css'>
+		<link rel='stylesheet' href='https://cdn-uicons.flaticon.com/3.0.0/uicons-regular-rounded/css/uicons-regular-rounded.css'>
+		<link
+		rel='stylesheet' href='https://cdn-uicons.flaticon.com/3.0.0/uicons-solid-rounded/css/uicons-solid-rounded.css'>
+
+		{# Ensure fonts are loaded before rendering #}
+		<script>
+			document.fonts.ready.then(() => {
+document.body.style.opacity = '1';
+});
+		</script>
+		<style>
+			body {
+				opacity: 0;
+				transition: opacity 0.1s ease-in;
+			}
+		</style>
 	</head>
-	<body class="min-h-screen bg-gradient-to-br from-primary-500 to-primary-700 flex items-center justify-center p-4">
+	<body class="min-h-screen bg-gradient-to-br from-primary-500 to-primary-700 flex items-center justify-center p-4 ss02">
 
 		<div class="w-full max-w-md">
 			<div class="text-center mb-8">

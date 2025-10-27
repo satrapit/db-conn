@@ -142,11 +142,11 @@
 		@apply text-blue-600 dark:text-blue-400 bg-blue-50 dark:bg-gray-700 font-medium;
 	}
 
-	.nav-link svg {
+	.nav-link i {
 		@apply transition-transform duration-200;
 	}
 
-	.nav-link:hover svg {
+	.nav-link:hover i {
 		@apply scale-110;
 	}
 
@@ -272,11 +272,11 @@
 		@apply text-blue-600 dark:text-blue-400;
 	}
 
-	.bottom-nav-link svg {
+	.bottom-nav-link i {
 		@apply transition-transform duration-200;
 	}
 
-	.bottom-nav-link.active svg {
+	.bottom-nav-link.active i {
 		@apply scale-110;
 	}
 
@@ -608,6 +608,16 @@
 
 	.animate-fade-in {
 		animation: fadeIn 0.3s ease-out;
+	}
+
+	/* ========================================
+	   FONT FEATURE SETTINGS
+	   ======================================== */
+
+	.ss02 {
+		-moz-font-feature-settings: "ss02";
+		-webkit-font-feature-settings: "ss02";
+		font-feature-settings: "ss02";
 	}
 
 	/* ========================================
