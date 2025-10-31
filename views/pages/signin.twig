@@ -10,17 +10,17 @@
 	<div id="phone-step" class="space-y-4" style="display: none;">
 		<div>
 			<label for="phone" class="block text-sm font-medium text-gray-700 mb-2">
-				شماره موبایل
+				{{ strings.auth.signin.phone_label }}
 			</label>
-			<input type="text" id="phone" name="phone" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500 outline-none transition-colors" placeholder="09xxxxxxxxx" maxlength="11" pattern="^09\d{9}$">
+			<input type="text" id="phone" name="phone" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500 outline-none transition-colors" placeholder="{{ strings.auth.signin.phone_placeholder }}" maxlength="11" pattern="^09\d{9}$">
 		</div>
 		<div id="phone-countdown-container" class="text-center text-sm text-gray-600 bg-gray-50 border border-gray-200 rounded-lg p-3 hidden">
-			<span>درخواست مجدد کد در
+			<span>{{ strings.auth.signin.request_again_in }}
 			</span>
 			<span id="phone-countdown" class="font-bold text-primary-600"></span>
 		</div>
 		<button id="send-otp-btn" class="w-full bg-primary-600 hover:bg-primary-700 text-white font-semibold py-3 px-4 rounded-lg transition-colors duration-200">
-			ارسال کد تایید
+			{{ strings.auth.signin.send_otp_btn }}
 		</button>
 	</div>
 
@@ -35,28 +35,28 @@
 			</div>
 			<button id="edit-phone-btn" type="button" class="text-primary-600 hover:text-primary-700 text-sm font-medium flex items-center gap-1 transition-colors">
 				<i class="fi fi-rr-edit"></i>
-				ویرایش
+				{{ strings.auth.signin.edit }}
 			</button>
 		</div>
 
 		<div>
 			<label for="otp" class="block text-sm font-medium text-gray-700 mb-2">
-				کد تایید
+				{{ strings.auth.signin.otp_label }}
 			</label>
-			<input type="text" id="otp" name="otp" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500 outline-none transition-colors text-center text-2xl tracking-widest" placeholder="000000" maxlength="6" pattern="\d{6}">
+			<input type="text" id="otp" name="otp" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500 outline-none transition-colors text-center text-2xl tracking-widest" placeholder="{{ strings.auth.signin.otp_placeholder }}" maxlength="6" pattern="\d{6}">
 		</div>
 		<div id="countdown-container" class="text-center text-sm text-gray-600 hidden">
-			<span>ارسال مجدد کد در
+			<span>{{ strings.auth.signin.resend_in }}
 			</span>
 			<span id="countdown" class="font-bold"></span>
 			<span>
-				ثانیه</span>
+				{{ strings.auth.signin.seconds }}</span>
 		</div>
 		<button id="verify-otp-btn" class="w-full bg-primary-600 hover:bg-primary-700 text-white font-semibold py-3 px-4 rounded-lg transition-colors duration-200">
-			تایید کد
+			{{ strings.auth.signin.verify_otp_btn }}
 		</button>
 		<button id="resend-otp-btn" class="w-full bg-gray-200 hover:bg-gray-300 text-gray-700 font-semibold py-3 px-4 rounded-lg transition-colors duration-200 hidden">
-			ارسال مجدد کد
+			{{ strings.auth.signin.resend_otp_btn }}
 		</button>
 	</div>
 {% endblock %}

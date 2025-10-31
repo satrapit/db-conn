@@ -4,7 +4,7 @@
  * Register all actions and filters for the plugin
  *
  * @link       https://arsamnet.com
- * @since      1.0.0
+ * @since    3.0.0
  *
  * @package    Db_Conn
  * @subpackage Db_Conn/includes
@@ -26,7 +26,7 @@ class Db_Conn_Loader
 	/**
 	 * Initialize the loader.
 	 *
-	 * @since    1.0.0
+	 * @since    3.0.0
 	 */
 	public function __construct()
 	{
@@ -36,7 +36,7 @@ class Db_Conn_Loader
 	/**
 	 * Add a new action and register it immediately with WordPress.
 	 *
-	 * @since    1.0.0
+	 * @since    3.0.0
 	 * @param    string               $hook             The name of the WordPress action that is being registered.
 	 * @param    object               $component        A reference to the instance of the object on which the action is defined.
 	 * @param    string               $callback         The name of the function definition on the $component.
@@ -51,7 +51,7 @@ class Db_Conn_Loader
 	/**
 	 * Add a new filter and register it immediately with WordPress.
 	 *
-	 * @since    1.0.0
+	 * @since    3.0.0
 	 * @param    string               $hook             The name of the WordPress filter that is being registered.
 	 * @param    object               $component        A reference to the instance of the object on which the filter is defined.
 	 * @param    string               $callback         The name of the function definition on the $component.
@@ -69,7 +69,7 @@ class Db_Conn_Loader
 	 * Hooks are now registered immediately, so this method is no longer needed
 	 * but kept for backward compatibility.
 	 *
-	 * @since    1.0.0
+	 * @since    3.0.0
 	 */
 	public function run()
 	{

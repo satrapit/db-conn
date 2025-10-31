@@ -9,14 +9,14 @@
  * that starts the plugin.
  *
  * @link              https://arsamnet.com
- * @since             1.0.0
+ * @since             3.0.0
  * @package           Db_Conn
  *
  * @wordpress-plugin
  * Plugin Name:       Database Connector
  * Plugin URI:        https://arsamnet.com
  * Description:       Database Connector is a WordPress plugin that allows you to connect to external databases and display data on your website.
- * Version:           1.0.0
+ * Version:           3.0.0
  * Author:            Majid Barkhordari
  * Author URI:        https://arsamnet.com/
  * License:           GPL-2.0+
@@ -34,10 +34,10 @@ if (! defined('WPINC')) {
 
 /**
  * Currently plugin version.
- * Start at version 1.0.0 and use SemVer - https://semver.org
+ * Start at version 3.0.0 and use SemVer - https://semver.org
  * Rename this for your plugin and update it as you release new versions.
  */
-define('DB_CONN_VERSION', '1.0.0');
+define('DB_CONN_VERSION', '3.0.0');
 
 /**
  * The code that runs during plugin activation.
@@ -84,7 +84,7 @@ require plugin_dir_path(__FILE__) . 'includes/class-db-conn.php';
  * then kicking off the plugin from this point in the file does
  * not affect the page life cycle.
  *
- * @since    1.0.0
+ * @since    3.0.0
  */
 function run_db_conn()
 {

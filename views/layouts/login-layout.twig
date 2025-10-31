@@ -14,25 +14,55 @@
 		rel="preload" href="https://cdn-uicons.flaticon.com/3.0.0/uicons-solid-rounded/css/uicons-solid-rounded.css" as="style">
 
 		{# Stylesheets #}
-		<link rel="stylesheet" href="{{ plugin_url ~ 'public/css/style.css' }}">
+		<link rel="stylesheet" href="{{ plugin_url ~ 'public/css/style.css?ver=' ~ plugin_version }}">
 		<link rel='stylesheet' href='https://cdn-uicons.flaticon.com/3.0.0/uicons-regular-rounded/css/uicons-regular-rounded.css'>
 		<link
 		rel='stylesheet' href='https://cdn-uicons.flaticon.com/3.0.0/uicons-solid-rounded/css/uicons-solid-rounded.css'>
 
-		{# Ensure fonts are loaded before rendering #}
-		<script>
-			document.fonts.ready.then(() => {
-document.body.style.opacity = '1';
-});
-		</script>
+		{# Inline Preloader Styles - Load immediately #}
 		<style>
-			body {
+			#page-preloader {
+				position: fixed;
+				inset: 0;
+				background-color: rgba(255, 255, 255, 0.8);
+				backdrop-filter: blur(8px);
+				display: flex;
+				align-items: center;
+				justify-content: center;
+				z-index: 9999;
+				transition: opacity 0.3s ease;
+			}
+			.loader {
+				width: 50px;
+				padding: 8px;
+				aspect-ratio: 1;
+				border-radius: 50%;
+				background: #00a796;
+				--_m: conic-gradient(#0000 10%, #000), linear-gradient(#000 0 0) content-box;
+				-webkit-mask: var(--_m);
+				mask: var(--_m);
+				-webkit-mask-composite: source-out;
+				mask-composite: subtract;
+				animation: spin 1s infinite linear;
+			}
+			@keyframes spin {
+				to {
+					transform: rotate(1turn);
+				}
+			}
+			#page-preloader.hidden {
 				opacity: 0;
-				transition: opacity 0.1s ease-in;
+				pointer-events: none;
 			}
 		</style>
 	</head>
-	<body class="min-h-screen bg-gradient-to-br from-primary-500 to-primary-700 flex items-center justify-center p-4 ss02">
+	<body
+		class="min-h-screen bg-gradient-to-br from-primary-500 to-primary-700 flex items-center justify-center p-4 ss02">
+
+		{# Preloader - First element in body #}
+		<div id="page-preloader">
+			<div class="loader"></div>
+		</div>
 
 		<div class="w-full max-w-md">
 			<div class="text-center mb-8">
@@ -51,6 +81,16 @@ document.body.style.opacity = '1';
 			</div>
 		</div>
 
-		<script src="{{ plugin_url ~ 'public/js/script.js' }}"></script>
+		<script>
+			// Hide preloader when fonts are loaded
+document.fonts.ready.then(() => {
+const preloader = document.getElementById('page-preloader');
+if (preloader) {
+preloader.classList.add('hidden');
+setTimeout(() => preloader.remove(), 300);
+}
+});
+		</script>
+		<script src="{{ plugin_url ~ 'public/js/script.js?ver=' ~ plugin_version }}"></script>
 	</body>
 </html>

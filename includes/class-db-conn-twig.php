@@ -11,7 +11,7 @@
  * IDE warnings about undefined classes are expected and can be ignored.
  *
  * @link       https://arsamnet.com
- * @since      1.0.0
+ * @since    3.0.0
  *
  * @package    Db_Conn
  * @subpackage Db_Conn/includes

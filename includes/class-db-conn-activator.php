@@ -4,7 +4,7 @@
  * Fired during plugin activation
  *
  * @link       https://arsamnet.com
- * @since      1.0.0
+ * @since      3.0.0
  *
  * @package    Db_Conn
  * @subpackage Db_Conn/includes
@@ -15,7 +15,7 @@
  *
  * This class defines all code necessary to run during the plugin's activation.
  *
- * @since      1.0.0
+ * @since      3.0.0
  * @package    Db_Conn
  * @subpackage Db_Conn/includes
  * @author     Majid Barkhordari <info@arsamnet.com>
@@ -29,7 +29,7 @@ class Db_Conn_Activator
 	 * This method runs when the plugin is activated and sets up default settings
 	 * if they don't already exist in the database.
 	 *
-	 * @since    1.0.0
+	 * @since    3.0.0
 	 */
 	public static function activate()
 	{
@@ -44,7 +44,7 @@ class Db_Conn_Activator
 	/**
 	 * Create default plugin settings if they don't exist.
 	 *
-	 * @since    1.0.0
+	 * @since    3.0.0
 	 * @access   private
 	 */
 	private static function create_default_settings()
@@ -86,7 +86,7 @@ class Db_Conn_Activator
 	/**
 	 * Ensure all required settings keys exist.
 	 *
-	 * @since    1.0.0
+	 * @since    3.0.0
 	 * @access   private
 	 * @param    array    $existing_settings    Current settings array.
 	 * @return   array                          Updated settings array.

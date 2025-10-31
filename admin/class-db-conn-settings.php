@@ -4,7 +4,7 @@
  * The settings-specific functionality of the plugin.
  *
  * @link       https://arsamnet.com
- * @since      1.0.0
+ * @since      3.0.0
  *
  * @package    Db_Conn
  * @subpackage Db_Conn/admin
@@ -25,7 +25,7 @@ class Db_Conn_Settings
   /**
    * The ID of this plugin.
    *
-   * @since    1.0.0
+   * @since    3.0.0
    * @access   private
    * @var      string    $plugin_name    The ID of this plugin.
    */
@@ -34,7 +34,7 @@ class Db_Conn_Settings
   /**
    * The version of this plugin.
    *
-   * @since    1.0.0
+   * @since    3.0.0
    * @access   private
    * @var      string    $version    The current version of this plugin.
    */
@@ -43,7 +43,7 @@ class Db_Conn_Settings
   /**
    * The options name for this plugin.
    *
-   * @since    1.0.0
+   * @since    3.0.0
    * @access   private
    * @var      string    $option_name    The option name for this plugin.
    */
@@ -52,7 +52,7 @@ class Db_Conn_Settings
   /**
    * Initialize the class and set its properties.
    *
-   * @since    1.0.0
+   * @since    3.0.0
    * @param      string    $plugin_name       The name of this plugin.
    * @param      string    $version    The version of this plugin.
    */
@@ -66,7 +66,7 @@ class Db_Conn_Settings
   /**
    * Add the settings page to the admin menu.
    *
-   * @since    1.0.0
+   * @since    3.0.0
    */
   public function add_settings_page()
   {
@@ -82,7 +82,7 @@ class Db_Conn_Settings
   /**
    * Register the settings for this plugin.
    *
-   * @since    1.0.0
+   * @since    3.0.0
    */
   public function register_settings()
   {
@@ -166,7 +166,7 @@ class Db_Conn_Settings
   /**
    * Display the settings page.
    *
-   * @since    1.0.0
+   * @since    3.0.0
    */
   public function display_settings_page()
   {
@@ -174,21 +174,21 @@ class Db_Conn_Settings
     $default_tab = 'general';
     $tab = isset($_GET['tab']) ? $_GET['tab'] : $default_tab;
 ?>
-<div class="wrap db-conn-settings">
-	<h1><?php echo esc_html(get_admin_page_title()); ?></h1>
+    <div class="wrap db-conn-settings">
+      <h1><?php echo esc_html(get_admin_page_title()); ?></h1>
 
-	<nav class="nav-tab-wrapper">
-		<a href="?page=db-conn-settings&tab=general"
-			class="nav-tab <?php echo $tab === 'general' ? 'nav-tab-active' : ''; ?>">
-			<?php _e('General', 'db-conn'); ?>
-		</a>
-		<a href="?page=db-conn-settings&tab=slug" class="nav-tab <?php echo $tab === 'slug' ? 'nav-tab-active' : ''; ?>">
-			<?php _e('Page slugs', 'db-conn'); ?>
-		</a>
-	</nav>
+      <nav class="nav-tab-wrapper">
+        <a href="?page=db-conn-settings&tab=general"
+          class="nav-tab <?php echo $tab === 'general' ? 'nav-tab-active' : ''; ?>">
+          <?php _e('General', 'db-conn'); ?>
+        </a>
+        <a href="?page=db-conn-settings&tab=slug" class="nav-tab <?php echo $tab === 'slug' ? 'nav-tab-active' : ''; ?>">
+          <?php _e('Page slugs', 'db-conn'); ?>
+        </a>
+      </nav>
 
-	<div class="tab-content">
-		<?php
+      <div class="tab-content">
+        <?php
         switch ($tab) {
           case 'general':
             $this->display_general_tab();
@@ -198,54 +198,54 @@ class Db_Conn_Settings
             break;
         }
         ?>
-	</div>
-</div>
-<?php
+      </div>
+    </div>
+  <?php
   }
 
   /**
    * Display the general tab content.
    *
-   * @since    1.0.0
+   * @since    3.0.0
    */
   private function display_general_tab()
   {
   ?>
-<form action="options.php" method="post">
-	<?php
+    <form action="options.php" method="post">
+      <?php
       settings_fields('db_conn_settings_group');
       do_settings_sections('db-conn-general');
       ?>
-	<div style="margin-top: 20px;">
-		<p><?php _e('This is the general settings tab.', 'db-conn'); ?></p>
-	</div>
-	<?php submit_button(); ?>
-</form>
-<?php
+      <div style="margin-top: 20px;">
+        <p><?php _e('This is the general settings tab.', 'db-conn'); ?></p>
+      </div>
+      <?php submit_button(); ?>
+    </form>
+  <?php
   }
 
   /**
    * Display the slug tab content.
    *
-   * @since    1.0.0
+   * @since    3.0.0
    */
   private function display_slug_tab()
   {
   ?>
-<form action="options.php" method="post">
-	<?php
+    <form action="options.php" method="post">
+      <?php
       settings_fields('db_conn_settings_group');
       do_settings_sections('db-conn-slug');
       submit_button();
       ?>
-</form>
-<?php
+    </form>
+  <?php
   }
 
   /**
    * General section callback.
    *
-   * @since    1.0.0
+   * @since    3.0.0
    */
   public function general_section_callback()
   {
@@ -255,7 +255,7 @@ class Db_Conn_Settings
   /**
    * Slug section callback.
    *
-   * @since    1.0.0
+   * @since    3.0.0
    */
   public function slug_section_callback()
   {
@@ -265,102 +265,102 @@ class Db_Conn_Settings
   /**
    * Sign-in slug field callback.
    *
-   * @since    1.0.0
+   * @since    3.0.0
    */
   public function signin_slug_callback()
   {
     $options = get_option($this->option_name, array());
     $value = isset($options['signin_slug']) ? $options['signin_slug'] : 'signin';
   ?>
-<input type="text" id="signin_slug" name="<?php echo $this->option_name; ?>[signin_slug]"
-	value="<?php echo esc_attr($value); ?>" class="regular-text" />
-<p class="description"><?php _e('Enter the custom slug for the sign in page.', 'db-conn'); ?></p>
-<?php
+    <input type="text" id="signin_slug" name="<?php echo $this->option_name; ?>[signin_slug]"
+      value="<?php echo esc_attr($value); ?>" class="regular-text" />
+    <p class="description"><?php _e('Enter the custom slug for the sign in page.', 'db-conn'); ?></p>
+  <?php
   }
   /**
    * Dashboard slug field callback.
    *
-   * @since    1.0.0
+   * @since    3.0.0
    */
   public function panel_slug_callback()
   {
     $options = get_option($this->option_name, array());
     $value = isset($options['panel_slug']) ? $options['panel_slug'] : 'panel';
   ?>
-<input type="text" id="panel_slug" name="<?php echo $this->option_name; ?>[panel_slug]"
-	value="<?php echo esc_attr($value); ?>" class="regular-text" />
-<p class="description"><?php _e('Enter the custom slug for the panel page.', 'db-conn'); ?></p>
-<?php
+    <input type="text" id="panel_slug" name="<?php echo $this->option_name; ?>[panel_slug]"
+      value="<?php echo esc_attr($value); ?>" class="regular-text" />
+    <p class="description"><?php _e('Enter the custom slug for the panel page.', 'db-conn'); ?></p>
+  <?php
   }
 
   /**
    * Services slug field callback.
    *
-   * @since    1.0.0
+   * @since    3.0.0
    */
   public function services_slug_callback()
   {
     $options = get_option($this->option_name, array());
     $value = isset($options['services_slug']) ? $options['services_slug'] : 'services';
   ?>
-<input type="text" id="services_slug" name="<?php echo $this->option_name; ?>[services_slug]"
-	value="<?php echo esc_attr($value); ?>" class="regular-text" />
-<p class="description"><?php _e('Enter the custom slug for the services page.', 'db-conn'); ?></p>
-<?php
+    <input type="text" id="services_slug" name="<?php echo $this->option_name; ?>[services_slug]"
+      value="<?php echo esc_attr($value); ?>" class="regular-text" />
+    <p class="description"><?php _e('Enter the custom slug for the services page.', 'db-conn'); ?></p>
+  <?php
   }
 
   /**
    * Help slug field callback.
    *
-   * @since    1.0.0
+   * @since    3.0.0
    */
   public function help_slug_callback()
   {
     $options = get_option($this->option_name, array());
     $value = isset($options['help_slug']) ? $options['help_slug'] : 'help';
   ?>
-<input type="text" id="help_slug" name="<?php echo $this->option_name; ?>[help_slug]"
-	value="<?php echo esc_attr($value); ?>" class="regular-text" />
-<p class="description"><?php _e('Enter the custom slug for the help page.', 'db-conn'); ?></p>
-<?php
+    <input type="text" id="help_slug" name="<?php echo $this->option_name; ?>[help_slug]"
+      value="<?php echo esc_attr($value); ?>" class="regular-text" />
+    <p class="description"><?php _e('Enter the custom slug for the help page.', 'db-conn'); ?></p>
+  <?php
   }
 
   /**
    * Profile slug field callback.
    *
-   * @since    1.0.0
+   * @since    3.0.0
    */
   public function profile_slug_callback()
   {
     $options = get_option($this->option_name, array());
     $value = isset($options['profile_slug']) ? $options['profile_slug'] : 'profile';
   ?>
-<input type="text" id="profile_slug" name="<?php echo $this->option_name; ?>[profile_slug]"
-	value="<?php echo esc_attr($value); ?>" class="regular-text" />
-<p class="description"><?php _e('Enter the custom slug for the profile page.', 'db-conn'); ?></p>
-<?php
+    <input type="text" id="profile_slug" name="<?php echo $this->option_name; ?>[profile_slug]"
+      value="<?php echo esc_attr($value); ?>" class="regular-text" />
+    <p class="description"><?php _e('Enter the custom slug for the profile page.', 'db-conn'); ?></p>
+  <?php
   }
 
   /**
    * About slug field callback.
    *
-   * @since    1.0.0
+   * @since    3.0.0
    */
   public function about_slug_callback()
   {
     $options = get_option($this->option_name, array());
     $value = isset($options['about_slug']) ? $options['about_slug'] : 'about';
   ?>
-<input type="text" id="about_slug" name="<?php echo $this->option_name; ?>[about_slug]"
-	value="<?php echo esc_attr($value); ?>" class="regular-text" />
-<p class="description"><?php _e('Enter the custom slug for the about page.', 'db-conn'); ?></p>
+    <input type="text" id="about_slug" name="<?php echo $this->option_name; ?>[about_slug]"
+      value="<?php echo esc_attr($value); ?>" class="regular-text" />
+    <p class="description"><?php _e('Enter the custom slug for the about page.', 'db-conn'); ?></p>
 <?php
   }
 
   /**
    * Sanitize the settings.
    *
-   * @since    1.0.0
+   * @since    3.0.0
    * @param    array    $input    The input array.
    * @return   array              The sanitized array.
    */
@@ -505,7 +505,7 @@ class Db_Conn_Settings
   /**
    * Get plugin option value.
    *
-   * @since    1.0.0
+   * @since    3.0.0
    * @param    string    $key    The option key.
    * @param    mixed     $default    The default value.
    * @return   mixed              The option value.
@@ -519,7 +519,7 @@ class Db_Conn_Settings
   /**
    * Validate slug against existing WordPress content.
    *
-   * @since    1.0.0
+   * @since    3.0.0
    * @param    string    $slug    The slug to validate.
    * @param    string    $type    The type of slug (signin/panel).
    * @return   bool|WP_Error      True if valid, WP_Error if invalid.

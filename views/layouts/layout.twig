@@ -15,121 +15,55 @@
 		rel="preload" href="https://cdn-uicons.flaticon.com/3.0.0/uicons-solid-rounded/css/uicons-solid-rounded.css" as="style">
 
 		{# Stylesheets #}
-		<link rel="stylesheet" href="{{ plugin_url ~ 'public/css/style.css' }}">
+		<link rel="stylesheet" href="{{ plugin_url ~ 'public/css/style.css?ver=' ~ plugin_version }}">
 		<link rel='stylesheet' href='https://cdn-uicons.flaticon.com/3.0.0/uicons-regular-rounded/css/uicons-regular-rounded.css'>
 		<link
 		rel='stylesheet' href='https://cdn-uicons.flaticon.com/3.0.0/uicons-solid-rounded/css/uicons-solid-rounded.css'>
 
-		{# Ensure fonts are loaded before rendering #}
-		<script>
-			document.fonts.ready.then(() => {
-document.body.style.opacity = '1';
-});
-		</script>
+		{# Inline Preloader Styles - Load immediately #}
 		<style>
-			body {
+			#page-preloader {
+				position: fixed;
+				inset: 0;
+				background-color: rgba(255, 255, 255, 0.8);
+				backdrop-filter: blur(8px);
+				display: flex;
+				align-items: center;
+				justify-content: center;
+				z-index: 9999;
+				transition: opacity 0.3s ease;
+			}
+			.loader {
+				width: 50px;
+				padding: 8px;
+				aspect-ratio: 1;
+				border-radius: 50%;
+				background: #00a796;
+				--_m: conic-gradient(#0000 10%, #000), linear-gradient(#000 0 0) content-box;
+				-webkit-mask: var(--_m);
+				mask: var(--_m);
+				-webkit-mask-composite: source-out;
+				mask-composite: subtract;
+				animation: spin 1s infinite linear;
+			}
+			@keyframes spin {
+				to {
+					transform: rotate(1turn);
+				}
+			}
+			#page-preloader.hidden {
 				opacity: 0;
-				transition: opacity 0.1s ease-in;
+				pointer-events: none;
 			}
 		</style>
 	</head>
 	<body
 		class="app-body ss02">
 
-		{# Fixed Top Header #}
-		<header class="app-header">
-			<div
-				class="app-header-container">
-				{# Mobile Menu Button #}
-				<button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Menu">
-					<i class="fi fi-rr-menu-burger text-2xl"></i>
-				</button>
-
-				{# Logo/Brand #}
-				<div class="app-logo">
-					<i class="fi fi-rr-database text-2xl text-blue-600"></i>
-					<span class="app-title">DB Conn</span>
-				</div>
-
-				{# Desktop Navigation #}
-				<nav class="desktop-nav">
-					<a href="{{ home_url ~ page_slugs.panel }}" data-nav="panel" class="nav-link">
-						<i class="fi fi-rr-home text-xl"></i>
-						<span>پنل</span>
-					</a>
-					<a href="{{ home_url ~ page_slugs.services }}" data-nav="services" class="nav-link">
-						<i class="fi fi-rr-apps text-xl"></i>
-						<span>خدمات</span>
-					</a>
-					<a href="{{ home_url ~ page_slugs.help }}" data-nav="help" class="nav-link">
-						<i class="fi fi-rr-interrogation text-xl"></i>
-						<span>راهنما</span>
-					</a>
-				</nav>
-				{# User Menu #}
-				<div class="user-menu">
-					<button class="user-menu-btn" id="userMenuBtn" aria-label="User menu">
-						<i class="fi fi-rr-circle-user text-2xl"></i>
-					</button>
-					{# User Dropdown #}
-					<div class="user-dropdown" id="userDropdown">
-						<a href="{{ home_url ~ page_slugs.profile }}" data-nav="profile" class="dropdown-item">
-							<i class="fi fi-rr-user text-xl"></i>
-							<span>پروفایل</span>
-						</a>
-						<a href="{{ home_url ~ page_slugs.about }}" data-nav="about" class="dropdown-item">
-							<i class="fi fi-rr-info text-xl"></i>
-							<span>درباره ما</span>
-						</a>
-						<div class="dropdown-divider"></div>
-						<button data-theme-toggle class="dropdown-item w-full text-left">
-							<span class="theme-icon">
-								<i class="fi fi-rr-moon-stars text-xl"></i>
-							</span>
-							<span>تغییر حالت تاریک</span>
-						</button>
-						<div class="dropdown-divider"></div>
-						<a href="#" id="logoutBtn" class="dropdown-item text-red-600 dark:text-red-400">
-							<i class="fi fi-rr-sign-out-alt text-xl"></i>
-							<span>خروج</span>
-						</a>
-					</div>
-				</div>
-			</div>
-		</header>
-
-		{# Mobile Sidebar Menu #}
-		<div class="mobile-sidebar" id="mobileSidebar">
-			<div class="mobile-sidebar-header">
-				<h3 class="text-lg font-bold text-gray-900">منو</h3>
-				<button class="mobile-sidebar-close" id="closeSidebarBtn" aria-label="Close menu">
-					<i class="fi fi-rr-cross text-2xl"></i>
-				</button>
-			</div>
-			<nav class="mobile-sidebar-nav">
-				<a href="{{ home_url ~ page_slugs.panel }}" data-nav="panel" class="mobile-nav-link">
-					<i class="fi fi-rr-home text-xl"></i>
-					<span>پنل</span>
-				</a>
-				<a href="{{ home_url ~ page_slugs.profile }}" data-nav="profile" class="mobile-nav-link">
-					<i class="fi fi-rr-user text-xl"></i>
-					<span>پروفایل</span>
-				</a>
-				<a href="{{ home_url ~ page_slugs.services }}" data-nav="services" class="mobile-nav-link">
-					<i class="fi fi-rr-apps text-xl"></i>
-					<span>خدمات</span>
-				</a>
-				<a href="{{ home_url ~ page_slugs.help }}" data-nav="help" class="mobile-nav-link">
-					<i class="fi fi-rr-interrogation text-xl"></i>
-					<span>راهنما</span>
-				</a>
-				<a href="{{ home_url ~ page_slugs.about }}" data-nav="about" class="mobile-nav-link">
-					<i class="fi fi-rr-info text-xl"></i>
-					<span>درباره ما</span>
-				</a>
-			</nav>
+		{# Preloader - First element in body #}
+		<div id="page-preloader">
+			<div class="loader"></div>
 		</div>
-		<div class="mobile-sidebar-overlay" id="sidebarOverlay"></div>
 
 		{# Main Content Area #}
 		<main class="app-main">
@@ -141,26 +75,18 @@ document.body.style.opacity = '1';
 			</div>
 		</main>
 
-		{# Bottom Navigation (Mobile) #}
-		<nav class="bottom-nav">
-			<a href="{{ home_url ~ page_slugs.panel }}" data-nav="panel" class="bottom-nav-link active">
-				<i class="fi fi-rr-home text-2xl"></i>
-				<span>پنل</span>
-			</a>
-			<a href="{{ home_url ~ page_slugs.services }}" data-nav="services" class="bottom-nav-link">
-				<i class="fi fi-rr-apps text-2xl"></i>
-				<span>خدمات</span>
-			</a>
-			<a href="{{ home_url ~ page_slugs.help }}" data-nav="help" class="bottom-nav-link">
-				<i class="fi fi-rr-interrogation text-2xl"></i>
-				<span>راهنما</span>
-			</a>
-			<a href="{{ home_url ~ page_slugs.profile }}" data-nav="profile" class="bottom-nav-link">
-				<i class="fi fi-rr-user text-2xl"></i>
-				<span>پروفایل</span>
-			</a>
-		</nav>
+		{% include 'components/bottom-nav.twig' %}
 
-		<script src="{{ plugin_url ~ 'public/js/script.js' }}" type="module"></script>
+		<script>
+			// Hide preloader when fonts are loaded
+document.fonts.ready.then(() => {
+const preloader = document.getElementById('page-preloader');
+if (preloader) {
+preloader.classList.add('hidden');
+setTimeout(() => preloader.remove(), 300);
+}
+});
+		</script>
+		<script src="{{ plugin_url ~ 'public/js/script.js?ver=' ~ plugin_version }}"></script>
 	</body>
 </html>

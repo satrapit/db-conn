@@ -4,7 +4,6 @@
 function Api_Action($app)
 {
 	// ------------------ CONFIG ------------------
-	$OTP_COOLDOWN = 120; // seconds (2 min)
 	$OTP_EXPIRY = 120; // seconds (2 min)
 	$TOKEN_EXPIRE_DAYS = 30;
 	$JWT_SECRET = Config("JWT.SECRET_KEY");
@@ -29,7 +28,7 @@ function Api_Action($app)
 
 	// --------------------- SEND OTP ---------------------
 	$app->post('/send-otp', function ($request, $response, $args)
-	use ($json, $fail, $OTP_COOLDOWN, $OTP_EXPIRY, $IS_DEBUG) {
+	use ($json, $fail, $OTP_EXPIRY, $IS_DEBUG) {
 		$data = $request->getParsedBody();
 		$phone = trim($data['phone'] ?? '');
 
@@ -44,20 +43,11 @@ function Api_Action($app)
 			$lastTime = strtotime($lastOtp['created_at']);
 			$elapsed = $now - $lastTime;
 
-			if ($elapsed < $OTP_COOLDOWN) {
-				return $json($response, [
-					"success" => false,
-					"message" => "لطفاً " . ($OTP_COOLDOWN - $elapsed) . " ثانیه دیگر تلاش کنید",
-					"remaining" => $OTP_COOLDOWN - $elapsed
-				], 429);
-			}
-
 			if ($elapsed < $OTP_EXPIRY && !$lastOtp['used_at']) {
 				// OTP still valid, return success with remaining time
 				$resp = [
 					"success" => true,
-					"message" => "کد مجددا ارسال شد",
-					"remaining" => $OTP_COOLDOWN - $elapsed
+					"message" => "کد مجددا ارسال شد"
 				];
 
 				if ($IS_DEBUG && isset($lastOtp['otp_code'])) {

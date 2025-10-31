@@ -1,5 +1,6 @@
 {
   "name": "arsamnet/db-conn",
+  "version": "3.0.0",
   "description": "WordPress Database Connector Plugin",
   "type": "wordpress-plugin",
   "license": "GPL-2.0+",

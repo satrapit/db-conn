@@ -6,7 +6,7 @@
  * Provides convenient accessor methods for plugin options and settings.
  *
  * @link       https://arsamnet.com
- * @since      1.0.0
+ * @since    3.0.0
  *
  * @package    Db_Conn
  * @subpackage Db_Conn/includes
@@ -22,7 +22,7 @@ if (!defined('WPINC')) {
  *
  * Provides static methods for accessing plugin options and settings.
  *
- * @since      1.0.0
+ * @since    3.0.0
  * @package    Db_Conn
  * @subpackage Db_Conn/includes
  * @author     Majid Barkhordari <info@arsamnet.com>
@@ -33,7 +33,7 @@ class Db_Conn_Functions
 	/**
 	 * The options name for this plugin.
 	 *
-	 * @since    1.0.0
+	 * @since    3.0.0
 	 * @access   private
 	 * @var      string    $option_name    The option name for this plugin.
 	 */
@@ -42,7 +42,7 @@ class Db_Conn_Functions
 	/**
 	 * Static cache for options to prevent multiple database calls.
 	 *
-	 * @since    1.0.0
+	 * @since    3.0.0
 	 * @access   private
 	 * @var      array|null    $options_cache    Cached options array.
 	 */
@@ -51,7 +51,7 @@ class Db_Conn_Functions
 	/**
 	 * Get all options with caching.
 	 *
-	 * @since    1.0.0
+	 * @since    3.0.0
 	 * @return   array    The options array.
 	 */
 	private static function get_cached_options()
@@ -65,7 +65,7 @@ class Db_Conn_Functions
 	/**
 	 * Clear the options cache.
 	 *
-	 * @since    1.0.0
+	 * @since    3.0.0
 	 */
 	private static function clear_cache()
 	{
@@ -75,7 +75,7 @@ class Db_Conn_Functions
 	/**
 	 * Get Database Connector plugin option.
 	 *
-	 * @since    1.0.0
+	 * @since    3.0.0
 	 * @param    string    $key        The option key.
 	 * @param    mixed     $default    The default value.
 	 * @return   mixed                 The option value.
@@ -89,7 +89,7 @@ class Db_Conn_Functions
 	/**
 	 * Get signin page slug.
 	 *
-	 * @since    1.0.0
+	 * @since    3.0.0
 	 * @return   string    The signin page slug.
 	 */
 	public static function get_signin_slug()
@@ -100,7 +100,7 @@ class Db_Conn_Functions
 	/**
 	 * Get panel page slug.
 	 *
-	 * @since    1.0.0
+	 * @since    3.0.0
 	 * @return   string    The panel page slug.
 	 */
 	public static function get_panel_slug()
@@ -111,7 +111,7 @@ class Db_Conn_Functions
 	/**
 	 * Get all Database Connector plugin options with defaults.
 	 *
-	 * @since    1.0.0
+	 * @since    3.0.0
 	 * @return   array    The complete options array with defaults.
 	 */
 	public static function get_all_options()
@@ -120,7 +120,7 @@ class Db_Conn_Functions
 			'signin_slug'     => 'signin',
 			'panel_slug' => 'panel',
 			'created_date'   => current_time('mysql'),
-			'version'        => defined('DB_CONN_VERSION') ? DB_CONN_VERSION : '1.0.0'
+			'version'        => defined('DB_CONN_VERSION') ? DB_CONN_VERSION : '3.0.0'
 		);
 
 		$options = self::get_cached_options();
@@ -130,7 +130,7 @@ class Db_Conn_Functions
 	/**
 	 * Check if plugin settings exist in database.
 	 *
-	 * @since    1.0.0
+	 * @since    3.0.0
 	 * @return   bool    True if settings exist, false otherwise.
 	 */
 	public static function settings_exist()
@@ -142,7 +142,7 @@ class Db_Conn_Functions
 	/**
 	 * Update a plugin option.
 	 *
-	 * @since    1.0.0
+	 * @since    3.0.0
 	 * @param    string    $key      The option key.
 	 * @param    mixed     $value    The option value.
 	 * @return   bool                True if updated, false otherwise.
@@ -161,7 +161,7 @@ class Db_Conn_Functions
 	/**
 	 * Update multiple plugin options at once.
 	 *
-	 * @since    1.0.0
+	 * @since    3.0.0
 	 * @param    array    $options    Array of key-value pairs to update.
 	 * @return   bool                 True if updated, false otherwise.
 	 */
@@ -179,7 +179,7 @@ class Db_Conn_Functions
 	/**
 	 * Delete a plugin option.
 	 *
-	 * @since    1.0.0
+	 * @since    3.0.0
 	 * @param    string    $key    The option key to delete.
 	 * @return   bool              True if deleted, false otherwise.
 	 */
@@ -200,7 +200,7 @@ class Db_Conn_Functions
 	/**
 	 * Get the option name used by this plugin.
 	 *
-	 * @since    1.0.0
+	 * @since    3.0.0
 	 * @return   string    The option name.
 	 */
 	public static function get_option_name()
@@ -211,7 +211,7 @@ class Db_Conn_Functions
 	/**
 	 * Get list of reserved slugs that cannot be used.
 	 *
-	 * @since    1.0.0
+	 * @since    3.0.0
 	 * @return   array    Array of reserved slugs.
 	 */
 	public static function get_reserved_slugs()
@@ -260,7 +260,7 @@ class Db_Conn_Functions
 	/**
 	 * Validate slug against existing WordPress content and reserved words.
 	 *
-	 * @since    1.0.0
+	 * @since    3.0.0
 	 * @param    string    $slug           The slug to validate.
 	 * @param    string    $type           Optional. The type of slug (for error messages).
 	 * @param    bool      $allow_current  Optional. Whether to allow current plugin slugs. Default true.
@@ -361,7 +361,7 @@ if (!function_exists('db_conn_get_option')) {
 	/**
 	 * Get Database Connector plugin option.
 	 *
-	 * @since    1.0.0
+	 * @since    3.0.0
 	 * @param    string    $key        The option key.
 	 * @param    mixed     $default    The default value.
 	 * @return   mixed                 The option value.
@@ -376,7 +376,7 @@ if (!function_exists('db_conn_get_signin_slug')) {
 	/**
 	 * Get signin page slug.
 	 *
-	 * @since    1.0.0
+	 * @since    3.0.0
 	 * @return   string    The signin page slug.
 	 */
 	function db_conn_get_signin_slug()
@@ -389,7 +389,7 @@ if (!function_exists('db_conn_get_panel_slug')) {
 	/**
 	 * Get panel page slug.
 	 *
-	 * @since    1.0.0
+	 * @since    3.0.0
 	 * @return   string    The panel page slug.
 	 */
 	function db_conn_get_panel_slug()
@@ -402,7 +402,7 @@ if (!function_exists('db_conn_get_all_options')) {
 	/**
 	 * Get all Database Connector plugin options with defaults.
 	 *
-	 * @since    1.0.0
+	 * @since    3.0.0
 	 * @return   array    The complete options array with defaults.
 	 */
 	function db_conn_get_all_options()
@@ -415,7 +415,7 @@ if (!function_exists('db_conn_settings_exist')) {
 	/**
 	 * Check if plugin settings exist in database.
 	 *
-	 * @since    1.0.0
+	 * @since    3.0.0
 	 * @return   bool    True if settings exist, false otherwise.
 	 */
 	function db_conn_settings_exist()

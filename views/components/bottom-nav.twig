@@ -1,0 +1,22 @@
+{# Bottom Navigation (Mobile) #}
+<nav class="bottom-nav">
+	<a href="{{ home_url ~ page_slugs.panel }}" data-nav="panel" class="bottom-nav-link">
+		<i class="fi fi-rr-home text-2xl"></i>
+		<span>{{ strings.navigation.bottom_nav.panel }}</span>
+	</a>
+	<a href="{{ home_url ~ page_slugs.services }}" data-nav="services" class="bottom-nav-link">
+		<i class="fi fi-rr-apps text-2xl"></i>
+		<span>{{ strings.navigation.bottom_nav.services }}</span>
+	</a>
+	<a href="{{ home_url ~ page_slugs.help }}" data-nav="help" class="bottom-nav-link">
+		<i class="fi fi-rr-interrogation text-2xl"></i>
+		<span>{{ strings.navigation.bottom_nav.help }}</span>
+	</a>
+	<a href="{{ home_url ~ page_slugs.profile }}" data-nav="profile" class="bottom-nav-link">
+		<span class="icon-wrapper">
+			<i class="fi fi-rr-user text-2xl"></i>
+			<span class="notification-dot"></span>
+		</span>
+		<span>{{ strings.navigation.bottom_nav.profile }}</span>
+	</a>
+</nav>

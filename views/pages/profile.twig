@@ -3,96 +3,122 @@
 {% block content %}
 	<div
 		class="app-page" data-page="profile">
-		{# Profile Header #}
+
+		{# Profile Information - Moved to Top #}
 		<div class="card mb-6">
-			<div class="flex flex-col items-center text-center">
-				<div class="profile-avatar mb-4">
-					<i class="fi fi-sr-circle-user text-7xl text-gray-400"></i>
+			<div class="flex items-center gap-4">
+				<div class="w-12 h-12 rounded-full flex items-center justify-center flex-shrink-0">
+					<i class="fi fi-sr-circle-user text-5xl text-gray-400"></i>
 				</div>
-				<h2 class="text-2xl font-bold text-gray-900 mb-1">جان دو</h2>
-				<p class="text-gray-500 mb-4">john.doe@example.com</p>
-				<button class="btn-primary">ویرایش پروفایل</button>
+				<div class="flex-1">
+					<h2 class="text-base font-bold text-gray-800 dark:text-gray-100">{{ strings.profile.default_name }}</h2>
+					<p class="text-sm text-gray-500 dark:text-gray-400">{{ strings.profile.profile_info.default_phone }}</p>
+				</div>
+				<a href="#" class="flex items-center gap-2 text-primary">
+					<span class="text-sm font-medium">{{ strings.profile.edit_profile }}</span>
+					<i class="fi fi-rr-arrow-small-left text-lg"></i>
+				</a>
 			</div>
 		</div>
 
-		{# Profile Information #}
+		{# Navigation Links #}
 		<div class="card mb-6">
-			<h3 class="text-lg font-bold text-gray-900 mb-4">اطلاعات پروفایل</h3>
-			<div class="space-y-4">
-				<div class="profile-field">
-					<label class="profile-label">نام کامل</label>
-					<input type="text" class="profile-input" value="جان دو" readonly>
+			<h3 class="card-title">{{ strings.profile.navigation.title }}</h3>
+			<div class="bg-white dark:bg-gray-800 rounded-lg overflow-hidden">
+				<a href="{{ home_url ~ page_slugs.panel }}" data-nav="panel" class="menu-item">
+					<span class="icon-wrapper">
+						<i class="fi fi-rr-home text-xl"></i>
+						<span class="notification-dot"></span>
+					</span>
+					<span class="text-base font-medium">{{ strings.profile.navigation.panel }}</span>
+				</a>
+				<a href="{{ home_url ~ page_slugs.services }}" data-nav="services" class="menu-item">
+					<i class="fi fi-rr-apps text-xl"></i>
+					<span class="text-base font-medium">{{ strings.profile.navigation.services }}</span>
+				</a>
+				<a href="{{ home_url ~ page_slugs.help }}" data-nav="help" class="menu-item">
+					<i class="fi fi-rr-interrogation text-xl"></i>
+					<span class="text-base font-medium">{{ strings.profile.navigation.help }}</span>
+				</a>
+				<a href="{{ home_url ~ page_slugs.about }}" data-nav="about" class="menu-item">
+					<i class="fi fi-rr-info text-xl"></i>
+					<span class="text-base font-medium">{{ strings.profile.navigation.about }}</span>
+				</a>
+			</div>
+		</div>
+
+		{# Profile Information Details #}
+		<div class="card mb-6">
+			<h3 class="card-title">{{ strings.profile.profile_info.title }}</h3>
+			<div class="bg-white dark:bg-gray-800 rounded-lg overflow-hidden">
+				<div class="menu-item">
+					<i class="fi fi-rr-user text-xl"></i>
+					<span class="text-base font-medium">{{ strings.profile.default_name }}</span>
 				</div>
-				<div class="profile-field">
-					<label class="profile-label">ایمیل</label>
-					<input type="email" class="profile-input" value="john.doe@example.com" readonly>
+				<div class="menu-item">
+					<i class="fi fi-rr-envelope text-xl"></i>
+					<span class="text-base font-medium">{{ strings.profile.default_email }}</span>
 				</div>
-				<div class="profile-field">
-					<label class="profile-label">تلفن</label>
-					<input type="tel" class="profile-input" value="+1 234 567 8900" readonly>
+				<div class="menu-item">
+					<i class="fi fi-rr-phone-call text-xl"></i>
+					<span class="text-base font-medium">{{ strings.profile.profile_info.default_phone }}</span>
 				</div>
-				<div class="profile-field">
-					<label class="profile-label">نقش</label>
-					<input type="text" class="profile-input" value="مدیر" readonly>
+				<div class="menu-item">
+					<i class="fi fi-rr-shield-check text-xl"></i>
+					<span class="text-base font-medium">{{ strings.profile.profile_info.default_role }}</span>
 				</div>
-				<div class="profile-field">
-					<label class="profile-label">عضویت از</label>
-					<input type="text" class="profile-input" value="ژانویه ۲۰۲۴" readonly>
+				<div class="menu-item">
+					<i class="fi fi-rr-calendar text-xl"></i>
+					<span class="text-base font-medium">{{ strings.profile.profile_info.default_member_date }}</span>
 				</div>
 			</div>
 		</div>
 
 		{# Account Settings #}
 		<div class="card mb-6">
-			<h3 class="text-lg font-bold text-gray-900 mb-4">تنظیمات حساب</h3>
-			<div class="space-y-3">
-				<div class="setting-item">
-					<div class="flex items-center justify-between">
-						<div>
-							<p class="font-medium text-gray-900">اعلان‌های ایمیل</p>
-							<p class="text-sm text-gray-500">دریافت بروزرسانی‌های ایمیل</p>
-						</div>
-						<label class="toggle-switch">
-							<input type="checkbox" checked>
-							<span class="toggle-slider"></span>
-						</label>
-					</div>
+			<h3 class="card-title">{{ strings.profile.account_settings.title }}</h3>
+			<div class="bg-white dark:bg-gray-800 rounded-lg overflow-hidden">
+				<div class="menu-item">
+					<i class="fi fi-rr-bell text-xl"></i>
+					<span class="text-base font-medium flex-1">{{ strings.profile.account_settings.email_notifications }}</span>
+					<label class="toggle-switch">
+						<input type="checkbox" checked>
+						<span class="toggle-slider"></span>
+					</label>
 				</div>
-				<div class="setting-item">
-					<div class="flex items-center justify-between">
-						<div>
-							<p class="font-medium text-gray-900">احراز هویت دو مرحله‌ای</p>
-							<p class="text-sm text-gray-500">امنیت پیشرفته</p>
-						</div>
-						<label class="toggle-switch">
-							<input type="checkbox">
-							<span class="toggle-slider"></span>
-						</label>
-					</div>
+				<div class="menu-item">
+					<i class="fi fi-rr-lock text-xl"></i>
+					<span class="text-base font-medium flex-1">{{ strings.profile.account_settings.two_factor }}</span>
+					<label class="toggle-switch">
+						<input type="checkbox">
+						<span class="toggle-slider"></span>
+					</label>
 				</div>
-				<div class="setting-item">
-					<div class="flex items-center justify-between">
-						<div>
-							<p class="font-medium text-gray-900">حالت تاریک</p>
-							<p class="text-sm text-gray-500">تغییر پوسته تاریک</p>
-						</div>
-						<label class="toggle-switch">
-							<input type="checkbox">
-							<span class="toggle-slider"></span>
-						</label>
-					</div>
+				<div class="menu-item">
+					<i class="fi fi-rr-moon-stars text-xl"></i>
+					<span class="text-base font-medium flex-1">{{ strings.profile.account_settings.dark_mode }}</span>
+					<label class="toggle-switch">
+						<input type="checkbox" id="darkModeToggle">
+						<span class="toggle-slider"></span>
+					</label>
 				</div>
 			</div>
 		</div>
 
 		{# Danger Zone #}
-		<div class="card border-red-200">
-			<h3 class="text-lg font-bold text-red-600 mb-4">منطقه خطر</h3>
-			<div class="space-y-3">
-				<button class="btn-danger w-full">تغییر رمز عبور</button>
-				<button class="btn-danger w-full">خروج از تمام نشست‌ها</button>
-				<button class="btn-danger w-full">حذف حساب</button>
+		<div class="card mb-6">
+			<div class="bg-white dark:bg-gray-800 rounded-lg overflow-hidden">
+				<a href="#" id="logoutBtn" class="menu-item hover:bg-red-50 dark:hover:bg-red-900/20 text-red-600 dark:text-red-400">
+					<i class="fi fi-rr-user-logout text-xl"></i>
+					<span class="text-base font-medium">{{ strings.profile.navigation.logout }}</span>
+				</a>
 			</div>
+		</div>
+
+		{# Plugin Information #}
+		<div class="text-center mb-3">
+			<span class="text-sm text-gray-500 dark:text-gray-400">{{ strings.profile.plugin_info.version }}
+				{{ plugin_version }}</span>
 		</div>
 	</div>
 {% endblock %}

@@ -1,6 +1,6 @@
 {
 	"name": "db-conn",
-	"version": "1.0.0",
+	"version": "3.0.0",
 	"description": "WordPress Database Connector Plugin with Tailwind CSS",
 	"scripts": {
 		"build:css": "npx tailwindcss -i ./public/css/main.css -o ./public/css/style.css --minify",

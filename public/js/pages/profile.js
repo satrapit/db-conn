@@ -6,6 +6,7 @@
 import { TokenManager } from '../modules/auth.js';
 import { CONFIG } from '../utils/config.js';
 import { logger } from '../utils/logger.js';
+import darkModeManager from '../utils/darkMode.js';
 
 /**
  * Initialize profile page
@@ -25,6 +26,7 @@ export async function initProfilePage() {
 		logger.info('Profile', 'Access granted');
 		showProfileContent();
 		initializeToggles();
+		initializeDarkModeToggle();
 	} else {
 		logger.warn('Profile', 'Invalid token, redirecting to signin');
 		window.location.replace(CONFIG.SIGNIN_URL);
@@ -59,4 +61,34 @@ function handleToggleChange(e) {
 	const settingName = e.target.closest('.setting-item').querySelector('.font-medium').textContent;
 	logger.info('Profile', `Setting toggled: ${settingName} - ${e.target.checked}`);
 	// Add your toggle logic here
+}
+
+/**
+ * Initialize dark mode toggle
+ */
+function initializeDarkModeToggle() {
+	const darkModeToggle = document.getElementById('darkModeToggle');
+
+	if (!darkModeToggle) {
+		logger.warn('Profile', 'Dark mode toggle not found');
+		return;
+	}
+
+	// Set initial state based on current theme
+	darkModeToggle.checked = darkModeManager.isDark();
+
+	// Listen for toggle changes
+	darkModeToggle.addEventListener('change', (e) => {
+		e.preventDefault();
+		darkModeManager.toggle();
+		logger.info('Profile', `Dark mode toggled: ${darkModeManager.isDark()}`);
+	});
+
+	// Listen for dark mode changes from other sources
+	darkModeManager.addObserver((isDark) => {
+		darkModeToggle.checked = isDark;
+		logger.debug('Profile', `Dark mode toggle updated: ${isDark}`);
+	});
+
+	logger.debug('Profile', 'Dark mode toggle initialized');
 }

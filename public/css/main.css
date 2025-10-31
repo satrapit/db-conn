@@ -93,9 +93,7 @@
 	   ======================================== */
 
 	.app-body {
-		@apply bg-gray-50 dark:bg-gray-900 overflow-x-hidden;
-		padding-top: 64px; /* Header height */
-		padding-bottom: 72px; /* Bottom nav height on mobile */
+		@apply bg-gray-50 dark:bg-gray-900 overflow-x-hidden pb-24;
 	}
 
 	@media (min-width: 768px) {
@@ -109,7 +107,7 @@
 	   ======================================== */
 
 	.app-header {
-		@apply fixed top-0 left-0 right-0 bg-white dark:bg-gray-800 border-b border-gray-200 dark:border-gray-700 shadow-sm z-50;
+		@apply fixed top-0 left-0 right-0 bg-white dark:bg-gray-800 shadow-sm z-50;
 		height: 64px;
 	}
 
@@ -160,7 +158,7 @@
 	}
 
 	.user-dropdown {
-		@apply absolute right-0 top-full mt-2 w-56 bg-white dark:bg-gray-800 rounded-xl shadow-lg border border-gray-200 dark:border-gray-700 py-2 opacity-0 invisible transition-all duration-200 transform translate-y-2;
+		@apply absolute right-0 top-full mt-2 w-56 bg-white dark:bg-gray-800 rounded-xl shadow-lg py-2 opacity-0 invisible transition-all duration-200 transform translate-y-2;
 	}
 
 	/* RTL Support for user dropdown */
@@ -224,7 +222,7 @@
 	}
 
 	.mobile-sidebar-header {
-		@apply flex items-center justify-between p-4 border-b border-gray-200 dark:border-gray-700;
+		@apply flex items-center justify-between p-4;
 	}
 
 	.mobile-sidebar-close {
@@ -256,7 +254,7 @@
 	   ======================================== */
 
 	.bottom-nav {
-		@apply md:hidden fixed bottom-0 left-0 right-0 bg-white dark:bg-gray-800 border-t border-gray-200 dark:border-gray-700 shadow-lg z-40;
+		@apply md:hidden fixed bottom-0 left-0 right-0 backdrop-blur-lg z-40 m-3 rounded-[72px] shadow-[0_12px_40px_6px_#00000033] bg-[rgba(255,255,255,0.2)];
 		height: 72px;
 	}
 
@@ -265,11 +263,11 @@
 	}
 
 	.bottom-nav-link {
-		@apply flex flex-col items-center justify-center gap-1 py-2 px-3 rounded-lg text-gray-500 dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-400 transition-all duration-200 flex-1 max-w-[100px];
+		@apply flex flex-col items-center justify-center gap-1 py-2 px-3 rounded-lg text-gray-500 dark:text-gray-400 hover:text-primary dark:hover:text-blue-400 transition-all duration-200 flex-1 max-w-[100px];
 	}
 
 	.bottom-nav-link.active {
-		@apply text-blue-600 dark:text-blue-400;
+		@apply text-primary dark:text-blue-400;
 	}
 
 	.bottom-nav-link i {
@@ -284,6 +282,16 @@
 		@apply text-xs font-medium;
 	}
 
+	/* Notification dot for icons */
+	.notification-dot {
+		@apply absolute -top-1 -left-1 w-1.5 h-1.5 bg-red-500 rounded-full;
+	}
+
+	/* Icon wrapper for relative positioning */
+	.icon-wrapper {
+		@apply relative inline-block;
+	}
+
 	/* ========================================
 	   MAIN CONTENT
 	   ======================================== */
@@ -293,15 +301,15 @@
 	}
 
 	.app-container {
-		@apply max-w-7xl mx-auto px-4 py-6;
+		@apply max-w-7xl mx-auto px-3 pt-3;
 	}
 
 	.page-header {
-		@apply mb-6;
+		@apply mt-2 mb-5;
 	}
 
 	.page-title {
-		@apply text-2xl md:text-3xl font-bold text-gray-900 dark:text-gray-100;
+		@apply text-xl md:text-3xl font-bold text-gray-600 dark:text-gray-100;
 	}
 
 	.app-page {
@@ -313,7 +321,19 @@
 	   ======================================== */
 
 	.card {
-		@apply bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-200 dark:border-gray-700 p-6 mb-6 transition-shadow duration-200 hover:shadow-md;
+		@apply bg-white dark:bg-gray-800 rounded-xl p-6 mb-6 transition-shadow duration-200 shadow-md;
+	}
+
+	.card:last-child {
+		@apply mb-3;
+	}
+
+	.card-title {
+		@apply text-lg font-bold text-gray-500 dark:text-gray-100 my-3 px-3;
+	}
+
+	.card-title.danger {
+		@apply text-red-600 dark:text-red-400;
 	}
 
 	/* ========================================
@@ -345,7 +365,16 @@
 	   ======================================== */
 
 	.action-btn {
-		@apply flex flex-col items-center justify-center p-4 rounded-lg border-2 border-gray-200 dark:border-gray-700 hover:border-blue-500 dark:hover:border-blue-400 hover:bg-blue-50 dark:hover:bg-gray-700 text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition-all duration-200 hover:shadow-md;
+		@apply flex flex-col items-center justify-center p-4 rounded-lg bg-white dark:bg-gray-800 hover:bg-gray-50 dark:hover:bg-gray-700 text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition-all duration-200 hover:shadow-md;
+	}
+
+	/* Menu item with horizontal line separator */
+	.menu-item {
+		@apply flex items-center gap-4 p-3 text-gray-600 dark:text-gray-300 transition-all duration-200;
+	}
+
+	.menu-item:not(:last-child) {
+		@apply border-b border-gray-100 dark:border-gray-700;
 	}
 
 	/* ========================================
@@ -389,11 +418,11 @@
 	}
 
 	.profile-input {
-		@apply w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-gray-50 dark:bg-gray-700 text-gray-700 dark:text-gray-200 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent;
+		@apply w-full px-4 py-2 rounded-lg bg-gray-50 dark:bg-gray-700 text-gray-700 dark:text-gray-200 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent;
 	}
 
 	.setting-item {
-		@apply p-4 rounded-lg border border-gray-200 dark:border-gray-700 hover:border-blue-300 dark:hover:border-blue-600 transition-colors;
+		@apply p-4 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors;
 	}
 
 	/* Toggle Switch */
@@ -406,7 +435,7 @@
 	}
 
 	.toggle-slider {
-		@apply absolute inset-0 bg-gray-300 rounded-full transition-all duration-300;
+		@apply absolute inset-0 bg-gray-200 dark:bg-gray-400 rounded-full transition-all duration-300;
 	}
 
 	.toggle-slider::before {
@@ -414,7 +443,7 @@
 	}
 
 	.toggle-switch input:checked + .toggle-slider {
-		@apply bg-blue-600;
+		@apply bg-primary;
 	}
 
 	.toggle-switch input:checked + .toggle-slider::before {
@@ -426,7 +455,7 @@
 	   ======================================== */
 
 	.service-card {
-		@apply bg-white rounded-xl p-6 border border-gray-200 shadow-sm hover:shadow-md transition-all duration-200 hover:-translate-y-1;
+		@apply bg-white rounded-xl p-6 shadow-sm hover:shadow-md transition-all duration-200 hover:-translate-y-1;
 	}
 
 	.service-icon {
@@ -470,11 +499,11 @@
 	   ======================================== */
 
 	.plan-card {
-		@apply bg-white rounded-xl p-6 border-2 border-gray-200 hover:border-blue-300 transition-all duration-200 relative;
+		@apply bg-white rounded-xl p-6 hover:shadow-md transition-all duration-200 relative;
 	}
 
 	.plan-featured {
-		@apply border-blue-500 shadow-lg transform scale-105;
+		@apply shadow-lg transform scale-105;
 	}
 
 	.plan-badge {
@@ -515,11 +544,11 @@
 	}
 
 	.help-topic {
-		@apply flex items-center gap-3 p-4 rounded-lg border border-gray-200 hover:border-blue-300 hover:bg-blue-50 transition-all duration-200;
+		@apply flex items-center gap-3 p-4 rounded-lg hover:bg-gray-50 transition-all duration-200;
 	}
 
 	.faq-item {
-		@apply border border-gray-200 rounded-lg overflow-hidden;
+		@apply rounded-lg overflow-hidden;
 	}
 
 	.faq-question {
@@ -544,7 +573,7 @@
 	}
 
 	.contact-option {
-		@apply flex flex-col items-center p-6 rounded-xl border-2 border-gray-200 hover:border-blue-300 hover:bg-blue-50 transition-all duration-200 text-center;
+		@apply flex flex-col items-center p-6 rounded-xl hover:bg-gray-50 transition-all duration-200 text-center;
 	}
 
 	/* ========================================
@@ -556,7 +585,7 @@
 	}
 
 	.feature-item {
-		@apply p-4 rounded-lg border border-gray-200 hover:border-blue-300 hover:bg-blue-50 transition-all duration-200;
+		@apply p-4 rounded-lg hover:bg-gray-50 transition-all duration-200;
 	}
 
 	.team-member {
@@ -584,11 +613,11 @@
 	}
 
 	.btn-outline {
-		@apply px-6 py-2 border-2 border-gray-300 text-gray-700 rounded-lg font-medium hover:border-blue-500 hover:text-blue-600 hover:bg-blue-50 transition-all duration-200;
+		@apply px-6 py-2 bg-gray-50 text-gray-700 rounded-lg font-medium hover:bg-gray-100 hover:text-blue-600 transition-all duration-200;
 	}
 
 	.btn-danger {
-		@apply px-6 py-2 bg-red-50 text-red-600 rounded-lg font-medium hover:bg-red-600 hover:text-white transition-colors duration-200 border border-red-200;
+		@apply px-6 py-2 bg-red-50 text-red-600 rounded-lg font-medium hover:bg-red-600 hover:text-white transition-colors duration-200;
 	}
 
 	/* ========================================
@@ -625,12 +654,8 @@
 	   ======================================== */
 
 	@media (max-width: 767px) {
-		.app-container {
-			@apply px-3 py-4;
-		}
-
 		.card {
-			@apply p-4;
+			@apply p-3;
 		}
 	}
 }

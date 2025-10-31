@@ -2,7 +2,7 @@
 # This file is distributed under the GPL-2.0+.
 msgid ""
 msgstr ""
-"Project-Id-Version: Database Connector 1.0.0\n"
+"Project-Id-Version: Database Connector 3.0.0\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/db-conn\n"
 "POT-Creation-Date: 2025-10-22 00:00:00+00:00\n"
 "MIME-Version: 1.0\n"

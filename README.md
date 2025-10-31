@@ -2,6 +2,8 @@
 
 A WordPress plugin for creating custom sign-in and panel pages with Twig templating and Tailwind CSS.
 
+**Version:** 3.0.0
+
 ## Features
 
 - Custom URL routing for sign-in and panel pages
@@ -334,6 +336,199 @@ All logs are prefixed with `[DB-Conn] [ModuleName]`:
 - **Debugging:** Toggle on/off without code changes
 - **Organized:** Module-prefixed messages for easy filtering
 
+## Centralized Strings Management
+
+### Overview
+
+All user-facing strings are centralized in `includes/class-db-conn-strings.php` for easy management, translation, and maintenance.
+
+### String Organization
+
+Strings are organized by component/section:
+
+- **navigation** - Navigation components (bottom nav, menu)
+- **auth** - Authentication pages (signin, signup)
+- **panel** - Panel/dashboard page
+- **profile** - Profile page
+- **services** - Services page
+- **help** - Help/support page
+- **about** - About page
+- **common** - Shared/common strings (buttons, status, time)
+
+### Usage in PHP
+
+**Get All Strings:**
+
+```php
+$all_strings = DB_Conn_Strings::get_all_strings();
+```
+
+**Get Section Strings:**
+
+```php
+$nav_strings = DB_Conn_Strings::get_section('navigation');
+$auth_strings = DB_Conn_Strings::get_section('auth');
+```
+
+**Get Specific String (Dot Notation):**
+
+```php
+$phone_label = DB_Conn_Strings::get('auth.signin.phone_label');
+$panel_title = DB_Conn_Strings::get('panel.page_title');
+$save_btn = DB_Conn_Strings::get('common.buttons.save');
+```
+
+### Usage in Twig Templates
+
+Strings are automatically passed to all templates via the `strings` variable.
+
+**Access Strings in Templates:**
+
+```twig
+{# Navigation #}
+<span>{{ strings.navigation.bottom_nav.panel }}</span>
+<span>{{ strings.navigation.bottom_nav.services }}</span>
+
+{# Authentication #}
+<label>{{ strings.auth.signin.phone_label }}</label>
+<button>{{ strings.auth.signin.send_otp_btn }}</button>
+
+{# Common Buttons #}
+<button>{{ strings.common.buttons.save }}</button>
+<button>{{ strings.common.buttons.cancel }}</button>
+
+{# Page Titles #}
+<h1>{{ strings.panel.page_title }}</h1>
+<h2>{{ strings.services.plans.title }}</h2>
+```
+
+**Loop Through Arrays:**
+
+```twig
+{# Service Plan Features #}
+{% for feature in strings.services.plans.basic.features %}
+  <li>{{ feature }}</li>
+{% endfor %}
+
+{# FAQ Items #}
+{% for key, item in strings.help.faq %}
+  {% if key starts with 'q' %}
+    <details>
+      <summary>{{ item.question }}</summary>
+      <p>{{ item.answer }}</p>
+    </details>
+  {% endif %}
+{% endfor %}
+```
+
+### Usage in JavaScript
+
+Strings are available in JavaScript through `window.dbConnPageData.strings`.
+
+**Access Strings in JS:**
+
+```javascript
+// Get strings object
+const strings = window.dbConnPageData.strings;
+
+// Navigation strings
+const panelText = strings.navigation.bottom_nav.panel;
+const servicesText = strings.navigation.bottom_nav.services;
+
+// Authentication strings
+const phoneLabel = strings.auth.signin.phone_label;
+const sendOtpBtn = strings.auth.signin.send_otp_btn;
+
+// Common strings
+const saveBtn = strings.common.buttons.save;
+const cancelBtn = strings.common.buttons.cancel;
+
+// Status strings
+const activeStatus = strings.common.status.active;
+const inactiveStatus = strings.common.status.inactive;
+```
+
+**Example: Dynamic Error Messages:**
+
+```javascript
+function showAlert(message, type = "error") {
+  const alert = document.getElementById("alert-message");
+
+  // Use centralized strings for consistent messaging
+  const errorPrefix = strings.common.error_prefix || "خطا";
+  const successPrefix = strings.common.success_prefix || "موفق";
+
+  alert.textContent =
+    type === "error"
+      ? `${errorPrefix}: ${message}`
+      : `${successPrefix}: ${message}`;
+}
+```
+
+**Example: Update Button Text:**
+
+```javascript
+// Get strings from centralized location
+const sendingText = strings.auth.signin.sending || "در حال ارسال...";
+const sentText = strings.auth.signin.sent || "ارسال شد";
+
+button.textContent = sending ? sendingText : sentText;
+```
+
+### Adding New Strings
+
+**1. Add to PHP Class**
+
+Edit `includes/class-db-conn-strings.php`:
+
+```php
+'panel' => array(
+    'page_title' => 'پنل',
+    'new_section' => array(
+        'title' => 'عنوان جدید',
+        'description' => 'توضیحات',
+    ),
+),
+```
+
+**2. Use in Template**
+
+```twig
+<h2>{{ strings.panel.new_section.title }}</h2>
+<p>{{ strings.panel.new_section.description }}</p>
+```
+
+**3. Use in JavaScript**
+
+```javascript
+const title = window.dbConnPageData.strings.panel.new_section.title;
+const description = window.dbConnPageData.strings.panel.new_section.description;
+```
+
+### Benefits
+
+- **Centralized Management** - All strings in one location
+- **Translation Ready** - Perfect structure for i18n/localization
+- **Consistency** - Same strings used across PHP and JavaScript
+- **Type Safety** - Clear structure with dot notation
+- **Maintainability** - Update once, reflected everywhere
+
+### Best Practices
+
+**✅ DO:**
+
+- Use descriptive keys that explain the string's purpose
+- Group related strings together
+- Use dot notation for nested access
+- Keep strings organized by component/feature
+
+**❌ DON'T:**
+
+- Hardcode strings in templates or JavaScript
+- Duplicate strings across different sections
+- Use generic keys like `text1`, `label2`
+- Mix different languages in the same key
+
 ## Template Customization
 
 ### Layouts
@@ -473,10 +668,27 @@ If you see CORS errors in console:
 - Node.js 14+ (for development)
 - Composer (for dependencies)
 
+## Changelog
+
+### 3.0.0 - October 31, 2025
+
+- Updated plugin version to 3.0.0
+- Added version display section to profile page
+- Updated all version footprints across the codebase
+
+### 3.0.0
+
+- Initial release
+- Custom URL routing for sign-in and panel pages
+- Twig template engine integration
+- Tailwind CSS responsive design
+- Multilingual support (English, Persian with RTL)
+- OTP-based authentication system
+
 ## License
 
 GPL v2 or later
 
 **Author:** Majid Barkhordari
 **Website:** [arsamnet.com](https://arsamnet.com)
-**Version:** 1.0.0
+**Version:** 3.0.0

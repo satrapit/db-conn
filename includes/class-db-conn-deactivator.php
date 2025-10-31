@@ -4,7 +4,7 @@
  * Fired during plugin deactivation
  *
  * @link       https://arsamnet.com
- * @since      1.0.0
+ * @since      3.0.0
  *
  * @package    Db_Conn
  * @subpackage Db_Conn/includes
@@ -15,7 +15,7 @@
  *
  * This class defines all code necessary to run during the plugin's deactivation.
  *
- * @since      1.0.0
+ * @since      3.0.0
  * @package    Db_Conn
  * @subpackage Db_Conn/includes
  * @author     Majid Barkhordari <info@arsamnet.com>
@@ -29,7 +29,7 @@ class Db_Conn_Deactivator
 	 * This method runs when the plugin is deactivated. We preserve user settings
 	 * permanently to ensure data persistence across deactivation and even uninstallation.
 	 *
-	 * @since    1.0.0
+	 * @since    3.0.0
 	 */
 	public static function deactivate()
 	{

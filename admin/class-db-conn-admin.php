@@ -4,7 +4,7 @@
  * The admin-specific functionality of the plugin.
  *
  * @link       https://arsamnet.com
- * @since      1.0.0
+ * @since      3.0.0
  *
  * @package    Db_Conn
  * @subpackage Db_Conn/admin
@@ -26,7 +26,7 @@ class Db_Conn_Admin
 	/**
 	 * The ID of this plugin.
 	 *
-	 * @since    1.0.0
+	 * @since    3.0.0
 	 * @access   private
 	 * @var      string    $plugin_name    The ID of this plugin.
 	 */
@@ -35,7 +35,7 @@ class Db_Conn_Admin
 	/**
 	 * The version of this plugin.
 	 *
-	 * @since    1.0.0
+	 * @since    3.0.0
 	 * @access   private
 	 * @var      string    $version    The current version of this plugin.
 	 */
@@ -44,7 +44,7 @@ class Db_Conn_Admin
 	/**
 	 * The settings instance.
 	 *
-	 * @since    1.0.0
+	 * @since    3.0.0
 	 * @access   private
 	 * @var      Db_Conn_Settings    $settings    The settings instance.
 	 */
@@ -53,7 +53,7 @@ class Db_Conn_Admin
 	/**
 	 * Initialize the class and set its properties.
 	 *
-	 * @since    1.0.0
+	 * @since    3.0.0
 	 * @param      string    $plugin_name       The name of this plugin.
 	 * @param      string    $version    The version of this plugin.
 	 */
@@ -70,7 +70,7 @@ class Db_Conn_Admin
 	/**
 	 * Load the settings class.
 	 *
-	 * @since    1.0.0
+	 * @since    3.0.0
 	 * @access   private
 	 */
 	private function load_settings_class()
@@ -88,7 +88,7 @@ class Db_Conn_Admin
 	/**
 	 * Add the settings menu page.
 	 *
-	 * @since    1.0.0
+	 * @since    3.0.0
 	 */
 	public function add_plugin_admin_menu()
 	{
@@ -98,7 +98,7 @@ class Db_Conn_Admin
 	/**
 	 * Register plugin settings.
 	 *
-	 * @since    1.0.0
+	 * @since    3.0.0
 	 */
 	public function register_plugin_settings()
 	{
@@ -108,7 +108,7 @@ class Db_Conn_Admin
 	/**
 	 * Register the stylesheets for the admin area.
 	 *
-	 * @since    1.0.0
+	 * @since    3.0.0
 	 */
 	public function enqueue_styles()
 	{
@@ -136,7 +136,7 @@ class Db_Conn_Admin
 	/**
 	 * Register the JavaScript for the admin area.
 	 *
-	 * @since    1.0.0
+	 * @since    3.0.0
 	 */
 	public function enqueue_scripts()
 	{
@@ -159,7 +159,7 @@ class Db_Conn_Admin
 	/**
 	 * Add settings link to the plugin actions on the plugins page.
 	 *
-	 * @since    1.0.0
+	 * @since    3.0.0
 	 * @param    array    $links    An array of plugin action links.
 	 * @return   array              Modified array of plugin action links.
 	 */

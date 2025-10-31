@@ -1,9 +1,9 @@
 <?php return array(
     'root' => array(
         'name' => 'arsamnet/db-conn',
-        'pretty_version' => 'dev-main',
-        'version' => 'dev-main',
-        'reference' => 'a1da6852f02eed9239be53090a16e64736715c47',
+        'pretty_version' => '3.0.0',
+        'version' => '3.0.0.0',
+        'reference' => null,
         'type' => 'wordpress-plugin',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
@@ -11,9 +11,9 @@
     ),
     'versions' => array(
         'arsamnet/db-conn' => array(
-            'pretty_version' => 'dev-main',
-            'version' => 'dev-main',
-            'reference' => 'a1da6852f02eed9239be53090a16e64736715c47',
+            'pretty_version' => '3.0.0',
+            'version' => '3.0.0.0',
+            'reference' => null,
             'type' => 'wordpress-plugin',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
@@ -80,9 +80,9 @@
             'dev_requirement' => false,
         ),
         'symfony/finder' => array(
-            'pretty_version' => 'v7.3.2',
-            'version' => '7.3.2.0',
-            'reference' => '2a6614966ba1074fa93dae0bc804227422df4dfe',
+            'pretty_version' => 'v7.3.5',
+            'version' => '7.3.5.0',
+            'reference' => '9f696d2f1e340484b4683f7853b273abff94421f',
             'type' => 'library',
             'install_path' => __DIR__ . '/../symfony/finder',
             'aliases' => array(),
@@ -107,9 +107,9 @@
             'dev_requirement' => false,
         ),
         'twig/twig' => array(
-            'pretty_version' => 'v3.21.1',
-            'version' => '3.21.1.0',
-            'reference' => '285123877d4dd97dd7c11842ac5fb7e86e60d81d',
+            'pretty_version' => 'v3.22.0',
+            'version' => '3.22.0.0',
+            'reference' => '4509984193026de413baf4ba80f68590a7f2c51d',
             'type' => 'library',
             'install_path' => __DIR__ . '/../twig/twig',
             'aliases' => array(),

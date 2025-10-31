@@ -4,7 +4,7 @@
  * The routing functionality of the plugin.
  *
  * @link       https://arsamnet.com
- * @since      1.0.0
+ * @since      3.0.0
  *
  * @package    Db_Conn
  * @subpackage Db_Conn/includes
@@ -26,7 +26,7 @@ class Db_Conn_Router
   /**
    * Singleton instance.
    *
-   * @since    1.0.0
+   * @since    3.0.0
    * @access   private
    * @var      Db_Conn_Router    $instance    Singleton instance.
    */
@@ -35,7 +35,7 @@ class Db_Conn_Router
   /**
    * The ID of this plugin.
    *
-   * @since    1.0.0
+   * @since    3.0.0
    * @access   private
    * @var      string    $plugin_name    The ID of this plugin.
    */
@@ -44,7 +44,7 @@ class Db_Conn_Router
   /**
    * The version of this plugin.
    *
-   * @since    1.0.0
+   * @since    3.0.0
    * @access   private
    * @var      string    $version    The current version of this plugin.
    */
@@ -53,7 +53,7 @@ class Db_Conn_Router
   /**
    * The Twig environment instance.
    *
-   * @since    1.0.0
+   * @since    3.0.0
    * @access   private
    * @var      \Twig\Environment    $twig    The Twig environment.
    */
@@ -62,7 +62,7 @@ class Db_Conn_Router
   /**
    * The options name for this plugin.
    *
-   * @since    1.0.0
+   * @since    3.0.0
    * @access   private
    * @var      string    $option_name    The option name for this plugin.
    */
@@ -71,7 +71,7 @@ class Db_Conn_Router
   /**
    * Get singleton instance.
    *
-   * @since    1.0.0
+   * @since    3.0.0
    * @param    string    $plugin_name    The name of this plugin.
    * @param    string    $version        The version of this plugin.
    * @return   Db_Conn_Router             The singleton instance.
@@ -87,7 +87,7 @@ class Db_Conn_Router
   /**
    * Initialize the class and set its properties.
    *
-   * @since    1.0.0
+   * @since    3.0.0
    * @param    string    $plugin_name    The name of this plugin.
    * @param    string    $version        The version of this plugin.
    */
@@ -103,7 +103,7 @@ class Db_Conn_Router
   /**
    * Initialize Twig environment (lazy loading).
    *
-   * @since    1.0.0
+   * @since    3.0.0
    */
   private function init_twig()
   {
@@ -148,7 +148,7 @@ class Db_Conn_Router
   /**
    * Add WordPress functions to Twig environment.
    *
-   * @since    1.0.0
+   * @since    3.0.0
    */
   private function add_wordpress_functions_to_twig()
   {
@@ -186,7 +186,7 @@ class Db_Conn_Router
   /**
    * Register rewrite rules for custom pages.
    *
-   * @since    1.0.0
+   * @since    3.0.0
    */
   public function register_rewrite_rules()
   {
@@ -239,7 +239,7 @@ class Db_Conn_Router
   /**
    * Add query vars for custom pages.
    *
-   * @since    1.0.0
+   * @since    3.0.0
    * @param    array    $vars    The query vars.
    * @return   array             The modified query vars.
    */
@@ -250,9 +250,37 @@ class Db_Conn_Router
   }
 
   /**
+   * Get base context with strings for Twig templates.
+   *
+   * @since    3.0.0
+   * @param    string    $page_title    The page title.
+   * @return   array                    The base context array.
+   */
+  private function get_base_context($page_title = '')
+  {
+    // Load strings class if not already loaded
+    if (!class_exists('DB_Conn_Strings')) {
+      require_once plugin_dir_path(dirname(__FILE__)) . 'includes/class-db-conn-strings.php';
+    }
+
+    return array(
+      'page_title' => $page_title,
+      'site_name' => get_bloginfo('name'),
+      'plugin_url' => plugin_dir_url(dirname(__FILE__)),
+      'plugin_version' => DB_CONN_VERSION,
+      'lang' => get_bloginfo('language'),
+      'direction' => is_rtl() ? 'rtl' : 'ltr',
+      'home_url' => home_url('/'),
+      'current_year' => date('Y'),
+      'page_slugs' => $this->get_all_page_slugs(),
+      'strings' => DB_Conn_Strings::get_all_strings(),
+    );
+  }
+
+  /**
    * Check if user is authenticated via cookie.
    *
-   * @since    1.0.0
+   * @since    3.0.0
    * @return   bool    True if authenticated, false otherwise.
    */
   private function is_authenticated()
@@ -263,7 +291,7 @@ class Db_Conn_Router
   /**
    * Get configured slug for a page.
    *
-   * @since    1.0.0
+   * @since    3.0.0
    * @param    string    $page    Page name ('signin' or 'panel').
    * @return   string             The configured slug.
    */
@@ -282,7 +310,7 @@ class Db_Conn_Router
   /**
    * Handle template redirect for custom pages.
    *
-   * @since    1.0.0
+   * @since    3.0.0
    */
   public function template_redirect()
   {
@@ -330,7 +358,7 @@ class Db_Conn_Router
   /**
    * Render the signin page.
    *
-   * @since    1.0.0
+   * @since    3.0.0
    */
   private function render_signin_page()
   {
@@ -350,16 +378,12 @@ class Db_Conn_Router
     }
 
     try {
-      $context = array(
-        'page_title' => __('Sign In', 'db-conn'),
-        'site_name' => get_bloginfo('name'),
-        'plugin_url' => plugin_dir_url(dirname(__FILE__)),
-        'lang' => get_bloginfo('language'),
-        'direction' => is_rtl() ? 'rtl' : 'ltr',
-        'home_url' => home_url('/'),
-        'current_year' => date('Y'),
-        'page_slugs' => $this->get_all_page_slugs(),
-      );
+      // Load strings class if not already loaded
+      if (!class_exists('DB_Conn_Strings')) {
+        require_once plugin_dir_path(dirname(__FILE__)) . 'includes/class-db-conn-strings.php';
+      }
+
+      $context = $this->get_base_context(DB_Conn_Strings::get('auth.signin.page_title'));
 
       // Add page data for JavaScript
       $this->enqueue_page_data($context['page_slugs']);
@@ -373,7 +397,7 @@ class Db_Conn_Router
   /**
    * Render the panel page.
    *
-   * @since    1.0.0
+   * @since    3.0.0
    */
   private function render_panel_page()
   {
@@ -393,16 +417,12 @@ class Db_Conn_Router
     }
 
     try {
-      $context = array(
-        'page_title' => __('Panel', 'db-conn'),
-        'site_name' => get_bloginfo('name'),
-        'plugin_url' => plugin_dir_url(dirname(__FILE__)),
-        'lang' => get_bloginfo('language'),
-        'direction' => is_rtl() ? 'rtl' : 'ltr',
-        'home_url' => home_url('/'),
-        'current_year' => date('Y'),
-        'page_slugs' => $this->get_all_page_slugs(),
-      );
+      // Load strings class if not already loaded
+      if (!class_exists('DB_Conn_Strings')) {
+        require_once plugin_dir_path(dirname(__FILE__)) . 'includes/class-db-conn-strings.php';
+      }
+
+      $context = $this->get_base_context(DB_Conn_Strings::get('panel.page_title'));
 
       // Add page data for JavaScript
       $this->enqueue_page_data($context['page_slugs']);
@@ -416,7 +436,7 @@ class Db_Conn_Router
   /**
    * Admin notice for missing Twig.
    *
-   * @since    1.0.0
+   * @since    3.0.0
    */
   public function twig_missing_notice()
   {
@@ -427,7 +447,7 @@ class Db_Conn_Router
   /**
    * Admin notice for Twig errors.
    *
-   * @since    1.0.0
+   * @since    3.0.0
    */
   public function twig_error_notice()
   {
@@ -439,7 +459,7 @@ class Db_Conn_Router
   /**
    * Flush rewrite rules.
    *
-   * @since    1.0.0
+   * @since    3.0.0
    */
   public function flush_rewrite_rules()
   {
@@ -450,7 +470,7 @@ class Db_Conn_Router
   /**
    * Validate slug against existing WordPress content.
    *
-   * @since    1.0.0
+   * @since    3.0.0
    * @param    string    $slug    The slug to validate.
    * @return   bool|WP_Error      True if valid, WP_Error if invalid.
    */
@@ -462,7 +482,7 @@ class Db_Conn_Router
   /**
    * Get the signin page slug.
    *
-   * @since    1.0.0
+   * @since    3.0.0
    * @return   string    The signin page slug.
    */
   public function get_signin_slug()
@@ -474,7 +494,7 @@ class Db_Conn_Router
   /**
    * Get the panel page slug.
    *
-   * @since    1.0.0
+   * @since    3.0.0
    * @return   string    The panel page slug.
    */
   public function get_panel_slug()
@@ -486,7 +506,7 @@ class Db_Conn_Router
   /**
    * Render the services page.
    *
-   * @since    1.0.0
+   * @since    3.0.0
    */
   private function render_services_page()
   {
@@ -505,16 +525,12 @@ class Db_Conn_Router
     }
 
     try {
-      $context = array(
-        'page_title' => __('Services', 'db-conn'),
-        'site_name' => get_bloginfo('name'),
-        'plugin_url' => plugin_dir_url(dirname(__FILE__)),
-        'lang' => get_bloginfo('language'),
-        'direction' => is_rtl() ? 'rtl' : 'ltr',
-        'home_url' => home_url('/'),
-        'current_year' => date('Y'),
-        'page_slugs' => $this->get_all_page_slugs(),
-      );
+      // Load strings class if not already loaded
+      if (!class_exists('DB_Conn_Strings')) {
+        require_once plugin_dir_path(dirname(__FILE__)) . 'includes/class-db-conn-strings.php';
+      }
+
+      $context = $this->get_base_context(DB_Conn_Strings::get('services.page_title'));
 
       $this->enqueue_page_data($context['page_slugs']);
       echo $this->twig->render('pages/services.twig', $context);
@@ -526,7 +542,7 @@ class Db_Conn_Router
   /**
    * Render the help page.
    *
-   * @since    1.0.0
+   * @since    3.0.0
    */
   private function render_help_page()
   {
@@ -545,16 +561,12 @@ class Db_Conn_Router
     }
 
     try {
-      $context = array(
-        'page_title' => __('Help', 'db-conn'),
-        'site_name' => get_bloginfo('name'),
-        'plugin_url' => plugin_dir_url(dirname(__FILE__)),
-        'lang' => get_bloginfo('language'),
-        'direction' => is_rtl() ? 'rtl' : 'ltr',
-        'home_url' => home_url('/'),
-        'current_year' => date('Y'),
-        'page_slugs' => $this->get_all_page_slugs(),
-      );
+      // Load strings class if not already loaded
+      if (!class_exists('DB_Conn_Strings')) {
+        require_once plugin_dir_path(dirname(__FILE__)) . 'includes/class-db-conn-strings.php';
+      }
+
+      $context = $this->get_base_context(DB_Conn_Strings::get('help.page_title'));
 
       $this->enqueue_page_data($context['page_slugs']);
       echo $this->twig->render('pages/help.twig', $context);
@@ -566,7 +578,7 @@ class Db_Conn_Router
   /**
    * Render the profile page.
    *
-   * @since    1.0.0
+   * @since    3.0.0
    */
   private function render_profile_page()
   {
@@ -585,16 +597,12 @@ class Db_Conn_Router
     }
 
     try {
-      $context = array(
-        'page_title' => __('Profile', 'db-conn'),
-        'site_name' => get_bloginfo('name'),
-        'plugin_url' => plugin_dir_url(dirname(__FILE__)),
-        'lang' => get_bloginfo('language'),
-        'direction' => is_rtl() ? 'rtl' : 'ltr',
-        'home_url' => home_url('/'),
-        'current_year' => date('Y'),
-        'page_slugs' => $this->get_all_page_slugs(),
-      );
+      // Load strings class if not already loaded
+      if (!class_exists('DB_Conn_Strings')) {
+        require_once plugin_dir_path(dirname(__FILE__)) . 'includes/class-db-conn-strings.php';
+      }
+
+      $context = $this->get_base_context(DB_Conn_Strings::get('profile.page_title'));
 
       $this->enqueue_page_data($context['page_slugs']);
       echo $this->twig->render('pages/profile.twig', $context);
@@ -606,7 +614,7 @@ class Db_Conn_Router
   /**
    * Render the about page.
    *
-   * @since    1.0.0
+   * @since    3.0.0
    */
   private function render_about_page()
   {
@@ -625,16 +633,12 @@ class Db_Conn_Router
     }
 
     try {
-      $context = array(
-        'page_title' => __('About', 'db-conn'),
-        'site_name' => get_bloginfo('name'),
-        'plugin_url' => plugin_dir_url(dirname(__FILE__)),
-        'lang' => get_bloginfo('language'),
-        'direction' => is_rtl() ? 'rtl' : 'ltr',
-        'home_url' => home_url('/'),
-        'current_year' => date('Y'),
-        'page_slugs' => $this->get_all_page_slugs(),
-      );
+      // Load strings class if not already loaded
+      if (!class_exists('DB_Conn_Strings')) {
+        require_once plugin_dir_path(dirname(__FILE__)) . 'includes/class-db-conn-strings.php';
+      }
+
+      $context = $this->get_base_context(DB_Conn_Strings::get('about.page_title'));
 
       $this->enqueue_page_data($context['page_slugs']);
       echo $this->twig->render('pages/about.twig', $context);
@@ -646,7 +650,7 @@ class Db_Conn_Router
   /**
    * Get all page slugs.
    *
-   * @since    1.0.0
+   * @since    3.0.0
    * @return   array    Array of all page slugs.
    */
   private function get_all_page_slugs()
@@ -665,11 +669,16 @@ class Db_Conn_Router
   /**
    * Enqueue page data for JavaScript.
    *
-   * @since    1.0.0
+   * @since    3.0.0
    * @param    array    $page_slugs    Array of page slugs.
    */
   private function enqueue_page_data($page_slugs)
   {
+    // Load strings class if not already loaded
+    if (!class_exists('DB_Conn_Strings')) {
+      require_once plugin_dir_path(dirname(__FILE__)) . 'includes/class-db-conn-strings.php';
+    }
+
     $home_url = home_url('/');
     $page_data = array(
       'signinUrl' => $home_url . $page_slugs['signin'],
@@ -679,6 +688,7 @@ class Db_Conn_Router
       'helpUrl' => $home_url . $page_slugs['help'],
       'profileUrl' => $home_url . $page_slugs['profile'],
       'aboutUrl' => $home_url . $page_slugs['about'],
+      'strings' => DB_Conn_Strings::get_all_strings(),
     );
 
     // Output JavaScript to make data available

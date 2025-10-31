@@ -1,0 +1,57 @@
+{# Page Preloader #}
+<div id="page-preloader">
+	<div class="loader"></div>
+</div>
+
+<style>
+	#page-preloader {
+		position: fixed;
+		inset: 0;
+		background-color: rgba(255, 255, 255, 0.8);
+		backdrop-filter: blur(8px);
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		z-index: 9999;
+		transition: opacity 0.3s ease;
+	}
+
+	.loader {
+		width: 50px;
+		padding: 8px;
+		aspect-ratio: 1;
+		border-radius: 50%;
+		background: #00a796;
+		--_m: conic-gradient(#0000 10%, #000), linear-gradient(#000 0 0) content-box;
+		-webkit-mask: var(--_m);
+		mask: var(--_m);
+		-webkit-mask-composite: source-out;
+		mask-composite: subtract;
+		animation: spin 1s infinite linear;
+	}
+
+	@keyframes spin {
+		to {
+			transform: rotate(1turn);
+		}
+	}
+
+	#page-preloader.hidden {
+		opacity: 0;
+		pointer-events: none;
+	}
+</style>
+
+<script>
+	// Hide preloader when fonts are loaded
+document.fonts.ready.then(() => {
+const preloader = document.getElementById('page-preloader');
+if (preloader) {
+preloader.classList.add('hidden');
+// Remove from DOM after transition
+setTimeout(() => {
+preloader.remove();
+}, 300);
+}
+});
+</script>

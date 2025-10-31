@@ -141,10 +141,22 @@ function updateActiveNav(page) {
 	const allNavLinks = document.querySelectorAll('[data-nav]');
 	allNavLinks.forEach(link => {
 		const linkPage = link.getAttribute('data-nav');
+		const icon = link.querySelector('i');
+
 		if (linkPage === page) {
 			link.classList.add('active');
+			// Switch to solid icon for active state
+			if (icon) {
+				// Replace fi-rr-* with fi-sr-*
+				icon.className = icon.className.replace(/fi-rr-/g, 'fi-sr-');
+			}
 		} else {
 			link.classList.remove('active');
+			// Switch back to regular icon for inactive state
+			if (icon) {
+				// Replace fi-sr-* with fi-rr-*
+				icon.className = icon.className.replace(/fi-sr-/g, 'fi-rr-');
+			}
 		}
 	});
 }

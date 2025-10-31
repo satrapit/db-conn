@@ -6,7 +6,7 @@
  * This file is used to markup the admin-facing aspects of the plugin.
  *
  * @link       https://arsamnet.com
- * @since      1.0.0
+ * @since    3.0.0
  *
  * @package    Db_Conn
  * @subpackage Db_Conn/admin/partials
