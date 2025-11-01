@@ -122,23 +122,14 @@ class DB_Conn_Strings
 					'email' => 'ایمیل',
 					'phone' => 'تلفن',
 					'role' => 'نقش',
-					'member_since' => 'عضویت از',
-					'default_phone' => '09124248164',
-					'default_role' => 'مدیر',
-					'default_member_date' => '1358/01/22',
 				),
 
 				// Account Settings
 				'account_settings' => array(
 					'title' => 'تنظیمات حساب',
 					'email_notifications' => 'اعلان‌های ایمیل',
-					'email_notifications_desc' => 'دریافت بروزرسانی‌های ایمیل',
-					'two_factor' => 'احراز هویت دو مرحله‌ای',
-					'two_factor_desc' => 'امنیت پیشرفته',
 					'dark_mode' => 'حالت تاریک',
-					'dark_mode_desc' => 'تغییر پوسته تاریک',
 					'marketing_emails' => 'ایمیل‌های بازاریابی',
-					'marketing_emails_desc' => 'گزینه‌ها و بروزرسانی‌های جدید',
 				),
 
 				// Danger Zone

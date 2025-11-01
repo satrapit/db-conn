@@ -1,0 +1,40 @@
+{# Modal Component - Reusable across all pages #}
+<div
+	id="app-modal" class="fixed inset-0 z-[9998] items-end justify-center opacity-0 invisible transition-all duration-300 ease-in-out hidden md:items-center md:p-8">
+	{# Modal Backdrop #}
+	<div class="absolute inset-0 bg-black/50 backdrop-blur-sm"></div>
+
+	{# Modal Container #}
+	<div
+		class="relative w-full max-w-full h-[calc(100vh-32px)] transform translate-y-full transition-transform duration-300 ease-out md:max-w-[600px] md:h-auto md:max-h-[calc(100vh-4rem)]">
+		{# Modal Box #}
+		<div
+			class="bg-gray-50 dark:bg-gray-800 rounded-t-xl h-full flex flex-col shadow-[0_-4px_20px_rgba(0,0,0,0.1)] md:rounded-3xl">
+			{# Modal Header #}
+			<div class="flex items-center justify-between px-6 py-5 shrink-0">
+				<h2 class="text-xl font-bold text-gray-800 dark:text-gray-50 m-0" id="modal-title">Modal Title</h2>
+				<button class="w-9 h-9 rounded-full flex items-center justify-center bg-transparent border-0 text-gray-500 dark:text-gray-400 cursor-pointer transition-all duration-200 hover:bg-gray-100 dark:hover:bg-gray-700 hover:text-gray-800 dark:hover:text-gray-50" id="modal-close" aria-label="Close modal">
+					<i class="fi fi-rr-cross text-xl"></i>
+				</button>
+			</div>
+
+			{# Modal Body #}
+			<div
+				class="flex-1 overflow-y-auto px-3 pb-3" id="modal-body">{# Modal content will be inserted here dynamically #}
+			</div>
+		</div>
+	</div>
+</div>
+
+<style>
+	/* Animation states that can't be done with Tailwind */
+	#app-modal.show {
+		opacity: 1;
+		visibility: visible;
+		display: flex;
+	}
+
+	#app-modal.show .relative {
+		transform: translateY(0);
+	}
+</style>

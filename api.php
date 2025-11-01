@@ -99,7 +99,7 @@ function Api_Action($app)
 		// Create or get user
 		$user = ExecuteRow("SELECT * FROM `users` WHERE `phone` = '" . AdjustSql($phone) . "'");
 		if (!$user) {
-			ExecuteStatement("INSERT INTO `users` (`phone`, `first`, `last`) VALUES ('" . AdjustSql($phone) . "', '', '')");
+			ExecuteStatement("INSERT INTO `users` (`phone`, `first_name`, `last_name`) VALUES ('" . AdjustSql($phone) . "', '', '')");
 			$user = ExecuteRow("SELECT * FROM `users` WHERE `phone` = '" . AdjustSql($phone) . "'");
 		}
 
@@ -110,7 +110,7 @@ function Api_Action($app)
 			'iat' => $issuedAt,
 			'iss' => ServerVar("SERVER_NAME"),
 			'nbf' => $issuedAt,
-			'aud' => 'http://localhost:3000',
+			'aud' => 'https://wptest.com',
 			'exp' => $exp,
 			'data' => [
 				'id' => $user['id'],
@@ -162,7 +162,7 @@ function Api_Action($app)
 				return $fail($response, "توکن معتبر نیست یا لغو شده", 401);
 			}
 
-			$user = ExecuteRow("SELECT id, first, last, phone FROM users WHERE id = '" . AdjustSql($userId) . "'");
+			$user = ExecuteRow("SELECT id, first_name, last_name, phone, email, birth_date, created_at FROM users WHERE id = '" . AdjustSql($userId) . "'");
 			if (!$user) {
 				return $fail($response, "کاربر یافت نشد", 404);
 			}

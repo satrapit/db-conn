@@ -11,29 +11,24 @@
 					<i class="fi fi-sr-circle-user text-5xl text-gray-400"></i>
 				</div>
 				<div class="flex-1">
-					<h2 class="text-base font-bold text-gray-800 dark:text-gray-100">{{ strings.profile.default_name }}</h2>
-					<p class="text-sm text-gray-500 dark:text-gray-400">{{ strings.profile.profile_info.default_phone }}</p>
+					<h2 class="text-base font-bold text-gray-800 dark:text-gray-100" data-profile-name>...</h2>
+					<p class="text-sm text-gray-500 dark:text-gray-400" data-profile-phone>...</p>
 				</div>
-				<a href="#" class="flex items-center gap-2 text-primary">
+				<a href="#" id="edit-profile-btn" class="flex items-center gap-2 text-primary">
 					<span class="text-sm font-medium">{{ strings.profile.edit_profile }}</span>
 					<i class="fi fi-rr-arrow-small-left text-lg"></i>
 				</a>
 			</div>
 		</div>
-
 		{# Navigation Links #}
 		<div class="card mb-6">
 			<h3 class="card-title">{{ strings.profile.navigation.title }}</h3>
 			<div class="bg-white dark:bg-gray-800 rounded-lg overflow-hidden">
-				<a href="{{ home_url ~ page_slugs.panel }}" data-nav="panel" class="menu-item">
+				<a href="{{ home_url ~ page_slugs.services }}" data-nav="services" class="menu-item">
 					<span class="icon-wrapper">
-						<i class="fi fi-rr-home text-xl"></i>
+						<i class="fi fi-rr-apps text-xl"></i>
 						<span class="notification-dot"></span>
 					</span>
-					<span class="text-base font-medium">{{ strings.profile.navigation.panel }}</span>
-				</a>
-				<a href="{{ home_url ~ page_slugs.services }}" data-nav="services" class="menu-item">
-					<i class="fi fi-rr-apps text-xl"></i>
 					<span class="text-base font-medium">{{ strings.profile.navigation.services }}</span>
 				</a>
 				<a href="{{ home_url ~ page_slugs.help }}" data-nav="help" class="menu-item">
@@ -53,27 +48,22 @@
 			<div class="bg-white dark:bg-gray-800 rounded-lg overflow-hidden">
 				<div class="menu-item">
 					<i class="fi fi-rr-user text-xl"></i>
-					<span class="text-base font-medium">{{ strings.profile.default_name }}</span>
+					<span class="text-base font-medium" data-detail-name>...</span>
 				</div>
 				<div class="menu-item">
 					<i class="fi fi-rr-envelope text-xl"></i>
-					<span class="text-base font-medium">{{ strings.profile.default_email }}</span>
+					<span class="text-base font-medium" data-detail-email>...</span>
 				</div>
 				<div class="menu-item">
 					<i class="fi fi-rr-phone-call text-xl"></i>
-					<span class="text-base font-medium">{{ strings.profile.profile_info.default_phone }}</span>
+					<span class="text-base font-medium" data-detail-phone>...</span>
 				</div>
 				<div class="menu-item">
-					<i class="fi fi-rr-shield-check text-xl"></i>
-					<span class="text-base font-medium">{{ strings.profile.profile_info.default_role }}</span>
-				</div>
-				<div class="menu-item">
-					<i class="fi fi-rr-calendar text-xl"></i>
-					<span class="text-base font-medium">{{ strings.profile.profile_info.default_member_date }}</span>
+					<i class="fi fi-rr-cake-birthday text-xl"></i>
+					<span class="text-base font-medium" data-detail-birth-date>...</span>
 				</div>
 			</div>
 		</div>
-
 		{# Account Settings #}
 		<div class="card mb-6">
 			<h3 class="card-title">{{ strings.profile.account_settings.title }}</h3>
@@ -83,14 +73,6 @@
 					<span class="text-base font-medium flex-1">{{ strings.profile.account_settings.email_notifications }}</span>
 					<label class="toggle-switch">
 						<input type="checkbox" checked>
-						<span class="toggle-slider"></span>
-					</label>
-				</div>
-				<div class="menu-item">
-					<i class="fi fi-rr-lock text-xl"></i>
-					<span class="text-base font-medium flex-1">{{ strings.profile.account_settings.two_factor }}</span>
-					<label class="toggle-switch">
-						<input type="checkbox">
 						<span class="toggle-slider"></span>
 					</label>
 				</div>

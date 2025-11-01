@@ -57,7 +57,7 @@
 		</style>
 	</head>
 	<body
-		class="min-h-screen bg-gradient-to-br from-primary-500 to-primary-700 flex items-center justify-center p-4 ss02">
+		class="app-body min-h-screen flex items-center justify-center p-4 ss02">
 
 		{# Preloader - First element in body #}
 		<div id="page-preloader">
@@ -66,16 +66,16 @@
 
 		<div class="w-full max-w-md">
 			<div class="text-center mb-8">
-				<h1 class="text-4xl font-bold text-white">{{ site_name|default('DB Conn') }}</h1>
+				<h1 class="text-2xl font-bold text-gray-800 dark:text-gray-100">{{ site_name|default('DB Conn') }}</h1>
 			</div>
 
-			<div class="bg-white rounded-2xl shadow-2xl p-8">
-				<h2 class="text-2xl font-bold text-gray-900 mb-6 text-center">{{ page_title }}</h2>
+			<div class="card bg-white rounded-2xl p-8">
+				<h2 class="text-2xl font-bold text-gray-900 dark:text-gray-100 mb-6 text-center">{{ page_title }}</h2>
 				{% block content %}{% endblock %}
 			</div>
 
-			<div class="mt-8 text-center text-white text-sm">
-				<p>&copy;
+			<div class="mt-8">
+				<p class="text-sm text-center text-gray-500 dark:text-gray-400">&copy;
 					{{ current_year|default('2025') }}
 					{{ site_name|default('DB Conn') }}</p>
 			</div>
