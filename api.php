@@ -179,6 +179,88 @@ function Api_Action($app)
 		}
 	});
 
+	// --------------------- UPDATE PROFILE ---------------------
+	$app->put('/profile', function ($request, $response, $args)
+	use ($json, $fail, $getBearerToken, $JWT_SECRET) {
+		$token = $getBearerToken($request);
+		if (!$token) {
+			return $fail($response, "Unauthorized", 401);
+		}
+
+		$tokenHash = hash('sha256', $token);
+
+		try {
+			$decoded = \Firebase\JWT\JWT::decode($token, new \Firebase\JWT\Key($JWT_SECRET, 'HS256'));
+			if ($decoded->exp < time()) {
+				return $fail($response, "توکن منقضی شده است", 401);
+			}
+
+			$userId = $decoded->data->id ?? null;
+			if (!$userId) {
+				return $fail($response, "اطلاعات کاربر ناقص است", 400);
+			}
+
+			$exists = ExecuteScalar("SELECT COUNT(*) FROM tokens WHERE user_id = '" . AdjustSql($userId) . "' AND token = '" . AdjustSql($tokenHash) . "'");
+			if (!$exists) {
+				return $fail($response, "توکن معتبر نیست یا لغو شده", 401);
+			}
+
+			// Get the input data
+			$data = $request->getParsedBody();
+
+			// Allowed fields for update (excluding phone/mobile number)
+			$allowedFields = ['first_name', 'last_name', 'email', 'birth_date'];
+			$updateParts = [];
+
+			foreach ($allowedFields as $field) {
+				if (isset($data[$field])) {
+					$value = trim($data[$field]);
+
+					// Validate email if provided
+					if ($field === 'email' && !empty($value)) {
+						if (!filter_var($value, FILTER_VALIDATE_EMAIL)) {
+							return $fail($response, "ایمیل نامعتبر است", 400);
+						}
+					}
+
+					// Validate birth_date if provided (Jalali format YYYY/MM/DD)
+					if ($field === 'birth_date' && !empty($value)) {
+						// Jalali date format validation (YYYY/MM/DD)
+						if (!preg_match('/^\d{4}\/\d{2}\/\d{2}$/', $value)) {
+							return $fail($response, "فرمت تاریخ تولد نامعتبر است (باید YYYY/MM/DD باشد)", 400);
+						}
+					}
+
+					$updateParts[] = "`{$field}` = '" . AdjustSql($value) . "'";
+				}
+			}
+
+			if (empty($updateParts)) {
+				return $fail($response, "هیچ فیلدی برای به‌روزرسانی ارسال نشده است", 400);
+			}
+
+			$updateQuery = "UPDATE `users` SET " . implode(', ', $updateParts) . " WHERE `id` = '" . AdjustSql($userId) . "'";
+			ExecuteStatement($updateQuery);
+
+			// Fetch updated user data
+			$user = ExecuteRow("SELECT id, first_name, last_name, phone, email, birth_date, created_at FROM users WHERE id = '" . AdjustSql($userId) . "'");
+
+			return $json($response, [
+				"success" => true,
+				"message" => "پروفایل با موفقیت به‌روزرسانی شد",
+				"user" => $user
+			]);
+		} catch (\Firebase\JWT\ExpiredException $e) {
+			return $fail($response, "توکن منقضی شده است", 401);
+		} catch (\Exception $e) {
+			return $json($response, [
+				"success" => false,
+				"message" => "خطا در به‌روزرسانی پروفایل",
+				"error" => $e->getMessage()
+			], 500);
+		}
+	});
+
 	// --------------------- VALIDATE TOKEN ---------------------
 	$app->get('/validate-token', function ($request, $response, $args)
 	use ($json, $fail, $getBearerToken, $JWT_SECRET) {

@@ -1,6 +1,21 @@
 /**
  * Dark Mode Manager
  * Handles theme switching with localStorage persistence and system preference detection
+ *
+ * @example
+ * // Import the utility functions
+ * import { initializeDarkModeToggle, isDarkMode, setThemeMode } from '../utils/darkMode.js';
+ *
+ * // Initialize a dark mode toggle checkbox
+ * initializeDarkModeToggle('darkModeToggle');
+ *
+ * // Check current dark mode state
+ * if (isDarkMode()) {
+ *   console.log('Dark mode is active');
+ * }
+ *
+ * // Programmatically set theme mode
+ * setThemeMode('dark'); // or 'light' or 'auto'
  */
 
 import { logger } from './logger.js';
@@ -317,4 +332,37 @@ export function isDarkMode() {
  */
 export function setThemeMode(mode) {
 	darkModeManager.setMode(mode);
+}
+
+/**
+ * Initialize a dark mode toggle checkbox
+ * @param {string} elementId - ID of the checkbox element
+ * @returns {boolean} True if successfully initialized
+ */
+export function initializeDarkModeToggle(elementId) {
+	const toggleElement = document.getElementById(elementId);
+
+	if (!toggleElement) {
+		logger.warn('DarkMode', `Toggle element with ID '${elementId}' not found`);
+		return false;
+	}
+
+	// Set initial state based on current theme
+	toggleElement.checked = darkModeManager.isDark();
+
+	// Listen for toggle changes
+	toggleElement.addEventListener('change', (e) => {
+		e.preventDefault();
+		darkModeManager.toggle();
+		logger.info('DarkMode', `Dark mode toggled via '${elementId}': ${darkModeManager.isDark()}`);
+	});
+
+	// Listen for dark mode changes from other sources
+	darkModeManager.addObserver((isDark) => {
+		toggleElement.checked = isDark;
+		logger.debug('DarkMode', `Toggle '${elementId}' updated: ${isDark}`);
+	});
+
+	logger.debug('DarkMode', `Dark mode toggle '${elementId}' initialized`);
+	return true;
 }

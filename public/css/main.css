@@ -3,6 +3,8 @@
  * included in this file.
  */
 
+@import 'toastify-js/src/toastify.css';
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -652,6 +654,18 @@
 		-moz-font-feature-settings: "ss02";
 		-webkit-font-feature-settings: "ss02";
 		font-feature-settings: "ss02";
+	}
+
+	/* ========================================
+	   FORM VALIDATION STYLES
+	   ======================================== */
+
+	.input-error {
+		@apply border-red-500 bg-red-50 dark:bg-red-900/20 !important;
+	}
+
+	.field-error {
+		@apply text-red-500 text-sm mt-1 px-4 animate-fade-in;
 	}
 
 	/* ========================================

@@ -20,5 +20,8 @@
 	"devDependencies": {
 		"esbuild": "^0.25.11",
 		"tailwindcss": "^3.4.1"
+	},
+	"dependencies": {
+		"toastify-js": "^1.12.0"
 	}
 }
